@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+@use "../../core/use-setting" as set;
+@use "rwd" as rwd;
+
+// Presentation:
+// 1カラムがレスポンシブするための基本的な記述
+//
+// Example:
+// @include layout-1column-fluid;
+//************************************************************************
+@mixin layout-1column-fluid($width: set.$width-content) {
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 100%;
+    padding-left: set.$gutter-content;
+    padding-right: set.$gutter-content;
+    width: $width;
+
+    @include rwd.rwd() {
+        width: auto;
+    }
+}

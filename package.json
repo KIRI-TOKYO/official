@@ -1,0 +1,27 @@
+{
+  "name": "official",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "author": "KIRI TOKYO",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "gulp",
+    "sass": "gulp compileSass"
+  },
+  "devDependencies": {
+    "autoprefixer": "9.8.6",
+    "browser-sync": "^2.26.14",
+    "css-declaration-sorter": "5.1.2",
+    "eslint": "^7.28.0",
+    "gulp": "^4.0.2",
+    "gulp-convert-encoding": "^2.1.0",
+    "gulp-dart-sass": "^1.0.2",
+    "gulp-eol": "^0.2.0",
+    "gulp-load-plugins": "^2.0.7",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^9.0.0",
+    "gulp-replace": "^1.1.3"
+  }
+}

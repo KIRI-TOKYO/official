@@ -1,0 +1,142 @@
+@charset "UTF-8";
+
+//@use "../../placeholder/pseudo-block";
+
+// Presentation:
+// '>' のアイコンを生成
+//
+// Attributes:
+// $size: アイコンの大きさ（px指定）
+// $weight: アイコンの線の太さ（px指定）
+// $color: アイコンの色
+// $direction: アイコンの方向
+//  -> [up, right, down, left] の4つからいずれかを選択（指定がなければ右向き）
+//
+// Example:
+// @include angle(8px, 1px, #fff); // 右向き
+// @include angle(8px, 1px, #fff, up); // 上向き
+//************************************************************************
+@mixin angle($size, $weight, $color, $direction: right, $x-center: false, $y-center: false) {
+    @extend %pseudo-block;
+
+    @include angle-set($size, $weight, $color, $direction, $x-center, $y-center);
+}
+
+@mixin angle-set($size, $weight, $color, $direction: right, $x-center: false, $y-center: false) {
+    $deg: "";
+    border: $weight solid $color;
+    border-bottom-color: transparent; // none の場合、ブラウザ・OS・ハードの組み合わせによって滲む場合があるので注意
+    border-left-color: transparent;
+    height: $size;
+
+    width: $size;
+
+    @if $x-center == true {
+        left: 50%;
+    }
+
+    @if $y-center == true {
+        top: 50%;
+    }
+
+    // if 文で向きを変更
+    @if $direction == up {
+        $deg: rotate(315deg);
+    }
+
+    @else if $direction == right {
+        $deg: rotate(45deg);
+    }
+
+    @else if $direction == down {
+        $deg: rotate(135deg);
+    }
+
+    @else if $direction == left {
+        $deg: rotate(225deg);
+    }
+
+    @else if $direction == false {
+        // false の場合は自由設定可能
+        // （transform に複数記述が必要な場合に使用）
+        // ex: transform: translateX(-50%) rotate(135deg);
+    }
+
+    @if $x-center == true {
+        @if $y-center == true {
+            transform: translate(-50%, -50%) $deg;
+        }
+
+        @else {
+            transform: translateX(-50%) $deg;
+        }
+    }
+
+    @else if $y-center == true {
+        transform: translateY(-50%) $deg;
+    }
+
+    @else {
+        transform: $deg;
+    }
+}
+
+// Presentation:
+// '>' のアイコンを生成（鋭角）
+//
+// Attributes:
+// $size: アイコンの大きさ（px指定）
+// $weight: アイコンの線の太さ（px指定）
+// $color: アイコンの色
+// $direction: アイコンの方向
+//  -> [up, right, down, left] の4つからいずれかを選択（指定がなければ右向き）
+//
+// Example:
+// @include angle-acute(17px, 3px, 30deg, #fff, 26px, 0, after);
+//************************************************************************
+@mixin angle-acute($size, $weight, $degree, $color, $vPos, $hPos, $pos: before, $direction: right) {
+    &::before,
+    &::after {
+        background: $color;
+        border-radius: 2px;
+        height: $weight;
+        position: absolute;
+        top: $vPos;
+        width: $size;
+
+        // if 文で向きを変更
+        @if $pos == before {
+            left: $hPos;
+        }
+
+        @else if $pos == after {
+            right: $hPos;
+        }
+    }
+
+    // 上側
+    &::before {
+        @if $vPos == "50%" {
+            transform: translateY(-50%) rotate($degree);
+        }
+
+        @else {
+            transform: rotate($degree);
+        }
+
+        transform-origin: 100% 100%;
+    }
+
+    // 下側
+    &::after {
+        @if $vPos == "50%" {
+            transform: translateY(-50%) rotate(-$degree);
+        }
+
+        @else {
+            transform: rotate(-$degree);
+        }
+
+        transform-origin: 100% 0;
+    }
+}

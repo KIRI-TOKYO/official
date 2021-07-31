@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+@use "../../core/use-setting" as set;
+
+// Presentation:
+// MediaQueries を簡易的に記述
+//
+// Example:
+// @include rwd(ss) {};
+//************************************************************************
+@mixin rwd ($media: ms, $area: below) {
+    @if $area == below {
+        @if $media == ms {
+            @media only screen and (max-width: set.$width-medium) { @content; }
+        }
+
+        @else if $media == ss {
+            @media only screen and (max-width: set.$width-small) { @content; }
+        }
+
+        @else if $media == ls {
+            @media only screen and (max-width: set.$width-content) { @content; }
+        }
+
+        @else {
+            @media only screen and (max-width: $media) { @content; }
+        }
+    }
+
+    @else if $area == above {
+        @if $media == ms {
+            @media only screen and (min-width: set.$width-medium + 1px) { @content; }
+        }
+
+        @else if $media == ss {
+            @media only screen and (min-width: set.$width-small + 1px) { @content; }
+        }
+
+        @else if $media == ls {
+            @media only screen and (min-width: set.$width-content + 1px) { @content; }
+        }
+
+        @else {
+            @media only screen and (min-width: $media) { @content; }
+        }
+    }
+}

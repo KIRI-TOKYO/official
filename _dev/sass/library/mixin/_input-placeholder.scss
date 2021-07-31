@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+// Presentation:
+// プレースホルダーのセレクタをまとめて出力
+//
+// Attributes:
+// $is-safari: safari か否かを指定
+//
+// Example:
+// @include input-placeholder(true) {};
+//************************************************************************
+@mixin input-placeholder($is-safari: false) {
+    &::-webkit-input-placeholder {
+        @content;
+    }
+
+    @if $is-safari == false {
+        &::-moz-placeholder {
+            @content;
+        }
+
+        &:-ms-input-placeholder {
+            @content;
+        }
+    }
+}

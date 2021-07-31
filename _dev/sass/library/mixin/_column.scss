@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+@use "sass:math";
+@use "../../core/use-setting" as set;
+
+// Presentation:
+// マルチカラム（2カラムとか3カラムとか）のスタイルを生成する。
+//
+// Attributes:
+// $width-parent: カラムを包容しているコンテンツの最大幅（px指定）
+// $gutter-side: 各カラム間の左マージン（px指定）
+// $gutter-top: 各カラム間の上マージン（px指定）
+// $number-col: 1行に収まる最大カラム数
+// $selector: セレクタ
+// $useAtRoot: セレクタがクラスか否か
+// $isAlignHeight: 高さを揃えるか否か
+//
+// Example:
+// @include column(745px, 10px, 3);
+//************************************************************************
+@mixin column($width-parent, $gutter-side, $gutter-top, $number-col, $selector: ".grid_col", $useAtRoot: true, $isAlignHeight: false, $margin-bottom: set.$gutter) {
+    // 変数定義
+    $grid-margin: math.div($gutter-side, $width-parent + $gutter-side) * 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    margin: (-($gutter-top)) 0 $margin-bottom (-(math.div($gutter-side, $width-parent) * 100%));
+
+    @if $useAtRoot == true {
+        @at-root {
+            @include column-style($selector, $grid-margin, $gutter-top, $number-col, $isAlignHeight);
+        }
+    }
+
+    @else {
+        @include column-style($selector, $grid-margin, $gutter-top, $number-col, $isAlignHeight);
+    }
+}
+
+// Presentation:
+// マルチカラム（2カラムとか3カラムとか）のスタイルを上書き。
+//
+// Attributes:
+// $width-parent: カラムを包容しているコンテンツの最大幅（px指定）
+// $gutter-side: 各カラム間の左マージン（px指定）
+// $gutter-top: 各カラム間の上マージン（px指定）
+// $number-col: 1行に収まる最大カラム数
+// $selector: セレクタ
+// $useAtRoot: セレクタがクラスか否か
+// $isAlignHeight: 高さを揃えるか否か
+//
+// Example:
+// @include column-override(745px, 10px, 3);
+//************************************************************************
+@mixin column-override($width-parent, $gutter-side, $gutter-top, $number-col, $selector: ".grid_col", $useAtRoot: true, $isAlignHeight: false, $margin-bottom: set.$gutter) {
+    // 変数定義
+    $grid-margin: math.div($gutter-side, $width-parent + $gutter-side) * 100%;
+
+    margin: (-($gutter-top)) 0 $margin-bottom (-(math.div($gutter-side, $width-parent) * 100%));
+
+    @if $useAtRoot == true {
+        @at-root {
+            @include column-style($selector, $grid-margin, $gutter-top, $number-col, $isAlignHeight);
+        }
+    }
+
+    @else {
+        @include column-style($selector, $grid-margin, $gutter-top, $number-col, $isAlignHeight);
+    }
+}
+
+//************************************************************************
+
+@mixin column-style($selector, $margin-left, $margin-top, $number-col, $isAlignHeight) {
+    @if $selector == false {
+        @if $isAlignHeight == true {
+            display: flex;
+            align-items: stretch;
+        }
+
+        flex-basis: calc(#{math.div(100%, $number-col)} - #{$margin-left});
+        margin: $margin-top 0 0 $margin-left;
+    }
+
+    @else {
+        #{$selector} {
+            @if $isAlignHeight == true {
+                display: flex;
+                align-items: stretch;
+            }
+
+            flex-basis: calc(#{math.div(100%, $number-col)} - #{$margin-left});
+            margin: $margin-top 0 0 $margin-left;
+        }
+    }
+}

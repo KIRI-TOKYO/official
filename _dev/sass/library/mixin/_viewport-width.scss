@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+@use "../../core/use-setting" as set;
+
+// Presentation:
+// vw の自動計算
+//
+// Example:
+// @include vw('height', 490px);
+//************************************************************************
+@mixin vw($property, $val, $vw: set.$psd-width) {
+    #{$property}: (floor(($val / $vw) * 100) + vw);
+}

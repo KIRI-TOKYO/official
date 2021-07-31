@@ -1,0 +1,170 @@
+/*
+  https://github.com/andy-piccalilli/modern-css-reset/blob/master/LICENSE
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
+  margin: 0;
+}
+
+ul[role=list], ol[role=list] {
+  list-style: none;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+}
+
+img, picture {
+  max-width: 100%;
+}
+
+picture {
+  display: block;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+@font-face {
+  src: local(YuGothic-Medium), local("Yu Gothic Medium");
+  font-family: WinYuGothic;
+  font-weight: normal;
+}
+@font-face {
+  src: local(YuGothic-Bold), local("Yu Gothic");
+  font-family: WinYuGothic;
+  font-weight: bold;
+}
+/* ----------------------------------------------------------------
+    Base
+----------------------------------------------------------------- */
+:root {
+  font-size: 62.5%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: #000;
+  font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Hiragino Kaku Gothic Pro", YuGothic, WinYuGothic, Meiryo, sans-serif;
+  font-feature-settings: "palt";
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+a {
+  color: #000;
+  text-decoration: underline;
+}
+a[class] {
+  text-decoration: none;
+}
+a:hover, a:active, a:focus {
+  color: #f00;
+  text-decoration: none;
+}
+
+button {
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+b,
+em {
+  color: #000;
+  font-style: normal;
+  font-weight: 700;
+}
+
+strong {
+  color: #f00;
+  font-style: normal;
+  font-weight: 400;
+}
+
+img {
+  height: auto;
+  vertical-align: bottom;
+}
+
+p {
+  margin: 0 0 32px;
+}
+@media only screen and (max-width: 767px) {
+  p {
+    margin-bottom: 18px;
+  }
+}
+
+ul,
+ol,
+dl {
+  margin: 0 0 40px;
+  padding: 0;
+}
+@media only screen and (max-width: 767px) {
+  ul,
+ol,
+dl {
+    margin-bottom: 32px;
+  }
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+dfn {
+  font-style: normal;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+iframe {
+  border: 0;
+}
+
+input,
+select {
+  padding: 1px;
+  font-size: 1.6rem;
+}
+
+input[type=file] {
+  width: 100%;
+}
+
+fieldset {
+  border: 0;
+}

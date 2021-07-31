@@ -1,0 +1,118 @@
+@charset "UTF-8";
+
+@use "./use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+
+/* ----------------------------------------------------------------
+    Base
+----------------------------------------------------------------- */
+:root {
+    font-size: 62.5%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: set.$color-bg-03;
+    color: set.$color-font;
+    font-family: set.$font-family;
+    font-feature-settings: "palt";
+    font-size: #{set.$font-size} + #{set.$font-unit};
+    font-weight: 400;
+    line-height: set.$design-line-height;
+}
+
+a {
+    color: set.$color-link;
+    text-decoration: underline;
+
+    &[class] {
+        text-decoration: none;
+    }
+
+    @include mx.hover() {
+        color: set.$color-link-hover;
+        text-decoration: none;
+    }
+}
+
+button {
+    padding: 0;
+    border: 0;
+    background: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+b,
+em {
+    color: set.$color-font;
+    font-style: normal;
+    font-weight: 700;
+}
+
+strong {
+    color: set.$color-important;
+    font-style: normal;
+    font-weight: 400;
+}
+
+img {
+    height: auto;
+    vertical-align: bottom;
+}
+
+p {
+    margin: 0 0 set.$gutter;
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        margin-bottom: 18px;
+    }
+}
+
+ul,
+ol,
+dl {
+    margin: 0 0 set.$gutter-list;
+    padding: 0;
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        margin-bottom: set.$gutter-list_ss;
+    }
+}
+
+ul,
+ol {
+    &[class] {
+        list-style: none;
+    }
+}
+
+dfn {
+    font-style: normal;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+iframe {
+    border: 0;
+}
+
+input,
+select {
+    font-size: 1.6rem;
+    padding: 1px;
+}
+
+input[type="file"] {
+    width: 100%;
+}
+
+fieldset {
+    border: 0;
+}
