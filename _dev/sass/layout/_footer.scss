@@ -1,0 +1,121 @@
+@charset "UTF-8";
+
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/placeholder/centering";
+@use "../library/placeholder/pseudo-block";
+
+/* ----------------------------------------------------------------
+    Footer (.footer and .f-*)
+----------------------------------------------------------------- */
+/* .footer
+----------------------------------------------- */
+.footer {
+    padding: 40px 0;
+    background: #fff;
+    color: #666;
+}
+
+/* .f-inner
+----------------------------------------------- */
+.f-inner {
+    margin: 0 auto;
+    max-width: set.$width-content;
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(set.$width-content-bp) {
+        padding-left: set.$gutter-content;
+        padding-right: set.$gutter-content;
+    }
+}
+
+/* .f-lyt
+----------------------------------------------- */
+.f-lyt {
+    display: flex;
+    justify-content: space-between;
+
+    &_col {
+        display: flex;
+        align-items: center;
+    }
+
+    &_col-02 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        flex-direction: column;
+
+        &_col {
+            margin: 0 0 39px;
+        }
+
+        &_col-02 {
+            margin: 0;
+        }
+    }
+}
+
+/* .f-logo
+----------------------------------------------- */
+.f-logo {
+    margin: 0 33px 0 0;
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+
+    }
+}
+
+/* .f-list-desc
+----------------------------------------------- */
+.f-list-desc {
+    margin: 0;
+
+    &_name {
+        font-size: 2.4rem;
+    }
+
+    &_address {
+        > address {
+            font-style: normal;
+        }
+    }
+}
+
+/* .f-list-sns
+----------------------------------------------- */
+.f-list-sns {
+    display: flex;
+    align-items: center;
+    margin: 0 0 24px;
+
+    &_item {
+        &:not(:last-child) {
+            margin: 0 36px 0 0;
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        &_item {
+            &:not(:last-child) {
+                margin-right: 24px;
+            }
+        }
+    }
+}
+
+/* .f-copyright
+----------------------------------------------- */
+.f-copyright {
+    font-size: 1.4rem;
+}

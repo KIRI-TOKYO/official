@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+@use "../library/placeholder/centering";
+@use "../library/placeholder/pseudo-block";
+
+/* ----------------------------------------------------------------
+    Header (.header and .h-*)
+----------------------------------------------------------------- */
+/* .header
+----------------------------------------------- */
+.header {
+    padding: 30px 0;
+    background: #fff;
+}
+
+/* .h-inner
+----------------------------------------------- */
+.h-inner {
+    display: flex;
+    max-width: set.$width-max;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* .h-menu
+----------------------------------------------- */
+.h-menu {
+    display: flex;
+    align-items: center;
+}
+
+/* .h-btn
+----------------------------------------------- */
+.h-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px;
+    min-width: 160px;
+    color: #fff;
+    font-size: 1.4rem;
+    transition: all .3s var.$ease-standard-curve;
+
+    @include mx.hover() {
+        color: #fff;
+    }
+
+    &.-login {
+        border-bottom-left-radius: 6px;
+        background: #000;
+    }
+
+    &.-mypage {
+        color: set.$color-font;
+        border: 1px solid #000;
+    }
+
+    &.-cv {
+        background: set.$color-main;
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss, above) {
+        // コンパクトヘッダー
+        .is-shrink & {
+            min-height: 45px;
+            min-width: 145px;
+
+            &.-login {
+                border-top-left-radius: 6px;
+            }
+
+            &.-mypage {
+                border-top-left-radius: 6px;
+                border-bottom-left-radius: 6px;
+            }
+
+            &.-cv {
+                border-top-right-radius: 6px;
+                border-bottom-right-radius: 6px;
+            }
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        min-height: 0;
+        min-width: 0;
+
+        &.-login {
+            position: relative;
+            padding: 25px 0 0;
+            background: none;
+            color: set.$color-font;
+            font-size: 1rem;
+
+            &::before {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                width: 18px;
+                height: 18px;
+                margin-left: -9px;
+                content: url("/asset/img/icon/login-bk.svg");
+            }
+        }
+
+        &.-mypage {
+            position: relative;
+            padding: 25px 0 0;
+            border: 0;
+            background: none;
+            color: set.$color-font;
+            font-size: 1rem;
+
+            &::before {
+                position: absolute;
+                top: -2px;
+                left: 50%;
+                width: 24px;
+                height: 24px;
+                margin-left: -12px;
+                content: url("/asset/img/icon/mypage-bk.svg");
+            }
+        }
+
+        &.-cv {
+            min-width: 85px;
+            padding: 5px;
+            border-radius: 100vh;
+            border: 1px solid set.$color-main;
+            color: set.$color-main;
+            background: #fff;
+            font-size: 1.1rem;
+            visibility: hidden;
+        }
+
+        // コンパクトヘッダー
+        .is-shrink & {
+            &.-cv {
+                visibility: visible;
+            }
+        }
+    }
+}

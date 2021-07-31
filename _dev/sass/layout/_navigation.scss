@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+@use "sass:math";
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+@use "../library/placeholder/centering";
+@use "../library/placeholder/pseudo-block";
+
+/* ----------------------------------------------------------------
+    Navigation (.n[-*])
+----------------------------------------------------------------- */
+/* .n-global
+----------------------------------------------- */
+.n-global {
+
+    &_inner {
+        display: flex;
+        margin: 0;
+    }
+
+    &_item {
+        &:not(:last-child) {
+            margin: 0 32px 0 0;
+        }
+    }
+
+    &_link {
+        position: relative;
+        display: block;
+        padding: 0 0 14px;
+
+        // ボーダー
+        &::before {
+            @extend %pseudo-block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 0;
+            width: 100%;
+            background: set.$color-main;
+            transition: height .1s linear;
+        }
+
+        &:hover,
+        &:active,
+        &:focus,
+        &[aria-expanded="true"] {
+            // ボーダー
+            &::before {
+                height: 2px;
+            }
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        align-items: center;
+        padding: 19px 0 25px;
+        width: 100%;
+        font-size: 1.2rem;
+
+        &_item {
+            flex: 1;
+
+            &:not(:last-child) {
+                margin: 0;
+            }
+
+            &:not(.h-ss-hidden) {
+                & + & {
+                    border-left: 1px solid #000;
+                }
+            }
+        }
+
+        &_link {
+            padding: 0;
+            text-align: center;
+
+            &::before,
+            &::after {
+                display: none;
+            }
+        }
+    }
+}

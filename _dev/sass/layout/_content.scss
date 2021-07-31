@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/placeholder/centering";
+@use "../library/placeholder/pseudo-block";
+
+/* ----------------------------------------------------------------
+    Content (.content[-*])
+----------------------------------------------------------------- */
+/* .content-main
+----------------------------------------------- */
+.content-main {
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        padding-top: 0;
+    }
+}
+
+/* .content-inner
+----------------------------------------------- */
+.content-inner {
+    max-width: set.$width-content;
+    margin: 0 auto;
+}

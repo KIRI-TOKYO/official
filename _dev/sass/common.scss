@@ -8,6 +8,10 @@
 @use "core/base";
 
 // レイアウト
+@use "layout/header";
+@use "layout/navigation";
+@use "layout/content";
+@use "layout/footer";
 
 // モジュール
 
