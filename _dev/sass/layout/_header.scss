@@ -25,9 +25,16 @@
     margin: 0 auto;
 }
 
+/* .h-logo
+----------------------------------------------- */
+.h-logo {
+    margin: 0 48px 0 0;
+}
+
 /* .h-menu
 ----------------------------------------------- */
 .h-menu {
+    flex-grow: 1;
     display: flex;
     align-items: center;
 }

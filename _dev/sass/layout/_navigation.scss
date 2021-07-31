@@ -13,6 +13,10 @@
 /* .n-global
 ----------------------------------------------- */
 .n-global {
+    width: 100%;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: calc(22 / 18);
 
     &_inner {
         display: flex;
@@ -20,15 +24,10 @@
     }
 
     &_item {
-        &:not(:last-child) {
-            margin: 0 32px 0 0;
-        }
-    }
-
-    &_link {
-        position: relative;
-        display: block;
-        padding: 0 0 14px;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         // ボーダー
         &::before {
@@ -39,17 +38,14 @@
             height: 0;
             width: 100%;
             background: set.$color-main;
-            transition: height .1s linear;
         }
+    }
 
-        &:hover,
-        &:active,
-        &:focus,
-        &[aria-expanded="true"] {
-            // ボーダー
-            &::before {
-                height: 2px;
-            }
+    &_link {
+        text-align: center;
+
+        > span {
+            display: block;
         }
     }
 

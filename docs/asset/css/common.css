@@ -175,7 +175,7 @@ fieldset {
 /* ----------------------------------------------------------------
     Pseudo element (Block)
 ----------------------------------------------------------------- */
-.n-global_link::before {
+.n-global_item::before {
   display: block;
   content: "";
 }
@@ -195,14 +195,21 @@ fieldset {
 .h-inner {
   display: flex;
   width: 100%;
-  max-width: 1280px;
+  max-width: 1500px;
   margin: 0 auto;
+}
+
+/* .h-logo
+----------------------------------------------- */
+.h-logo {
+  margin: 0 48px 0 0;
 }
 
 /* .h-menu
 ----------------------------------------------- */
 .h-menu {
   display: flex;
+  flex-grow: 1;
   align-items: center;
 }
 
@@ -307,29 +314,35 @@ fieldset {
 ----------------------------------------------------------------- */
 /* .n-global
 ----------------------------------------------- */
+.n-global {
+  width: 100%;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: calc(22 / 18);
+}
 .n-global_inner {
   display: flex;
   margin: 0;
 }
-.n-global_item:not(:last-child) {
-  margin: 0 32px 0 0;
+.n-global_item {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
 }
-.n-global_link {
-  display: block;
-  position: relative;
-  padding: 0 0 14px;
-}
-.n-global_link::before {
+.n-global_item::before {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 0;
   background: #f00;
-  transition: height 0.1s linear;
 }
-.n-global_link:hover::before, .n-global_link:active::before, .n-global_link:focus::before, .n-global_link[aria-expanded=true]::before {
-  height: 2px;
+.n-global_link {
+  text-align: center;
+}
+.n-global_link > span {
+  display: block;
 }
 @media only screen and (max-width: 767px) {
   .n-global {
