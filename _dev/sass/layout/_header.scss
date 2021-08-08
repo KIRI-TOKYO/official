@@ -17,7 +17,11 @@
 
     //===== Media Queries =====
     @include mx.rwd(ss) {
-        padding: 16px 0;
+        padding: 16px 0 8px;
+
+        &.is-menu-show {
+            background: #f4f0e7;
+        }
     }
 }
 
@@ -34,11 +38,18 @@
         padding-right: set.$gutter-content;
         padding-left: set.$gutter-content;
     }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        display: block;
+    }
 }
 
 /* .h-logo
 ----------------------------------------------- */
 .h-logo {
+    position: relative;
+    z-index: 1;
     margin: 0 48px 0 0;
 
     //===== Media Queries =====
@@ -51,7 +62,55 @@
 /* .h-menu
 ----------------------------------------------- */
 .h-menu {
+    position: relative;
     flex-grow: 1;
     display: flex;
     align-items: center;
+
+    &_btn {
+        position: absolute;
+        top: -48px;
+        right: 24px;
+        display: block;
+        width: 35px;
+        height: 28px;
+        color: transparent;
+        overflow: hidden;
+    }
+
+    &_btn::before,
+    &_btn::after,
+    &_btn > span::before {
+        @extend %pseudo-block;
+        position: absolute;
+        left: 0;
+        width: 35px;
+        height: 4px;
+        background: #505050;
+        border-radius: 100vh;
+    }
+
+    &_btn::before {
+        top: 0;
+    }
+
+    &_btn::after {
+        top: 24px;
+    }
+
+    &_btn > span::before {
+        top: 12px;
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        margin: 0 (-(set.$gutter-content));
+
+        &_content {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+        }
+    }
 }

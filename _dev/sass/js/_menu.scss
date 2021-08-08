@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+@use "../library/placeholder/centering";
+@use "../library/placeholder/pseudo-block";
+
+/* ----------------------------------------------------------------
+    Menu
+----------------------------------------------------------------- */
+/* .fn-menu
+----------------------------------------------- */
+.fn-menu {
+    &_btn {
+        &_alt {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: transparent;
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        &_content {
+            visibility: hidden;
+            transform: translateY(-10px);
+            opacity: 0;
+
+            &.is-animate {
+                transition: all .35s var.$ease-standard-curve;
+                will-change: transform, opacity;
+            }
+
+            &.is-show {
+                visibility: visible;
+            }
+
+            [aria-expanded=true] + & {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    }
+}

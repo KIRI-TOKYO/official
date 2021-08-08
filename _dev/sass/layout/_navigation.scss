@@ -59,6 +59,10 @@
         > span {
             display: block;
         }
+
+        > b {
+            display: none;
+        }
     }
 
     &_btn {
@@ -75,6 +79,51 @@
 
     //===== Media Queries =====
     @include mx.rwd(ss) {
-        display: none;
+        overflow-y: auto;
+        height: calc(100vh - 80px);
+        padding: 27px 0;
+        background: #f4f0e7;
+        font-size: 2.2rem;
+
+        &_inner {
+            flex-direction: column;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+
+        &_item {
+            justify-content: flex-start;
+            margin: 0 0 18px;
+            padding: 0;
+
+            &:not(:last-child) {
+                // ボーダー
+                &::before {
+                    display: none;
+                }
+            }
+        }
+
+        &_link {
+            text-align: left;
+
+            > span {
+                display: inline;
+            }
+
+            > b {
+                display: block;
+                margin: 10px 0 0;
+                font-size: 1.2rem;
+                font-weight: 400;
+                color: #999;
+                text-transform: uppercase;
+            }
+        }
+
+        &_btn {
+            width: 100%;
+            margin: 7px 0 0;
+        }
     }
 }

@@ -166,7 +166,7 @@ fieldset {
 /* ----------------------------------------------------------------
     Pseudo element (Block)
 ----------------------------------------------------------------- */
-.n-global_item:not(:last-child)::before {
+.n-global_item:not(:last-child)::before, .h-menu_btn::before, .h-menu_btn::after, .h-menu_btn > span::before {
   display: block;
   content: "";
 }
@@ -182,7 +182,10 @@ fieldset {
 }
 @media only screen and (max-width: 767px) {
   .header {
-    padding: 16px 0;
+    padding: 16px 0 8px;
+  }
+  .header.is-menu-show {
+    background: #f4f0e7;
   }
 }
 
@@ -200,10 +203,17 @@ fieldset {
     padding-left: 20px;
   }
 }
+@media only screen and (max-width: 767px) {
+  .h-inner {
+    display: block;
+  }
+}
 
 /* .h-logo
 ----------------------------------------------- */
 .h-logo {
+  z-index: 1;
+  position: relative;
   margin: 0 48px 0 0;
 }
 @media only screen and (max-width: 767px) {
@@ -217,8 +227,47 @@ fieldset {
 ----------------------------------------------- */
 .h-menu {
   display: flex;
+  position: relative;
   flex-grow: 1;
   align-items: center;
+}
+.h-menu_btn {
+  display: block;
+  position: absolute;
+  top: -48px;
+  right: 24px;
+  width: 35px;
+  height: 28px;
+  overflow: hidden;
+  color: transparent;
+}
+.h-menu_btn::before, .h-menu_btn::after, .h-menu_btn > span::before {
+  position: absolute;
+  left: 0;
+  width: 35px;
+  height: 4px;
+  border-radius: 100vh;
+  background: #505050;
+}
+.h-menu_btn::before {
+  top: 0;
+}
+.h-menu_btn::after {
+  top: 24px;
+}
+.h-menu_btn > span::before {
+  top: 12px;
+}
+@media only screen and (max-width: 767px) {
+  .h-menu {
+    margin: 0 -20px;
+  }
+  .h-menu_content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
 }
 
 /* ----------------------------------------------------------------
@@ -264,6 +313,9 @@ fieldset {
 .n-global_link > span {
   display: block;
 }
+.n-global_link > b {
+  display: none;
+}
 .n-global_btn {
   display: flex;
   align-items: center;
@@ -277,7 +329,42 @@ fieldset {
 }
 @media only screen and (max-width: 767px) {
   .n-global {
+    height: calc(100vh - 80px);
+    padding: 27px 0;
+    overflow-y: auto;
+    background: #f4f0e7;
+    font-size: 2.2rem;
+  }
+  .n-global_inner {
+    flex-direction: column;
+    max-width: 250px;
+    margin: 0 auto;
+  }
+  .n-global_item {
+    justify-content: flex-start;
+    margin: 0 0 18px;
+    padding: 0;
+  }
+  .n-global_item:not(:last-child)::before {
     display: none;
+  }
+  .n-global_link {
+    text-align: left;
+  }
+  .n-global_link > span {
+    display: inline;
+  }
+  .n-global_link > b {
+    display: block;
+    margin: 10px 0 0;
+    color: #999;
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  .n-global_btn {
+    width: 100%;
+    margin: 7px 0 0;
   }
 }
 
@@ -434,5 +521,35 @@ fieldset {
 @media only screen and (max-width: 767px) {
   .f-copyright {
     font-size: 1.2rem;
+  }
+}
+
+/* ----------------------------------------------------------------
+    Menu
+----------------------------------------------------------------- */
+/* .fn-menu
+----------------------------------------------- */
+.fn-menu_btn_alt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: transparent;
+}
+@media only screen and (max-width: 767px) {
+  .fn-menu_content {
+    visibility: hidden;
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  .fn-menu_content.is-animate {
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+  }
+  .fn-menu_content.is-show {
+    visibility: visible;
+  }
+  [aria-expanded=true] + .fn-menu_content {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
