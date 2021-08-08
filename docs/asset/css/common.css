@@ -241,6 +241,18 @@ fieldset {
   overflow: hidden;
   color: transparent;
 }
+.h-menu_btn[aria-expanded=true]::before, .h-menu_btn[aria-expanded=true]::after {
+  top: 13px;
+}
+.h-menu_btn[aria-expanded=true]::before {
+  transform: rotate(45deg);
+}
+.h-menu_btn[aria-expanded=true]::after {
+  transform: rotate(-45deg);
+}
+.h-menu_btn[aria-expanded=true] > span::before {
+  display: none;
+}
 .h-menu_btn::before, .h-menu_btn::after, .h-menu_btn > span::before {
   position: absolute;
   left: 0;
@@ -248,6 +260,7 @@ fieldset {
   height: 4px;
   border-radius: 100vh;
   background: #505050;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .h-menu_btn::before {
   top: 0;
@@ -365,6 +378,7 @@ fieldset {
   .n-global_btn {
     width: 100%;
     margin: 7px 0 0;
+    font-size: 1.8rem;
   }
 }
 

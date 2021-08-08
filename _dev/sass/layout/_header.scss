@@ -76,6 +76,27 @@
         height: 28px;
         color: transparent;
         overflow: hidden;
+
+        &[aria-expanded=true] {
+            &::before,
+            &::after {
+                top: 13px;
+            }
+
+            &::before {
+                transform: rotate(45deg);
+            }
+
+            &::after {
+                transform: rotate(-45deg);
+            }
+
+            > span {
+                &::before {
+                    display: none;
+                }
+            }
+        }
     }
 
     &_btn::before,
@@ -88,6 +109,7 @@
         height: 4px;
         background: #505050;
         border-radius: 100vh;
+        transition: transform .2s var.$ease-standard-curve;
     }
 
     &_btn::before {
