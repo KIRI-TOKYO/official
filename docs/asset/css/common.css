@@ -166,7 +166,7 @@ fieldset {
 /* ----------------------------------------------------------------
     Pseudo element (Block)
 ----------------------------------------------------------------- */
-.n-global_item:not(:last-child)::before, .h-menu_btn::before, .h-menu_btn::after, .h-menu_btn > span::before {
+.hdg-l2::before, .hdg-l2::after, .hdg-l2_inner::before, .n-global_item:not(:last-child)::before, .h-menu_btn::before, .h-menu_btn::after, .h-menu_btn > span::before {
   display: block;
   content: "";
 }
@@ -414,6 +414,7 @@ fieldset {
 /* .content-fluid-02
 ----------------------------------------------- */
 .content-fluid-02 {
+  padding: 88px 0 104px;
   background: #f4f0e7;
 }
 
@@ -554,6 +555,47 @@ fieldset {
   .f-copyright {
     font-size: 1.2rem;
   }
+}
+
+/* ----------------------------------------------------------------
+    Heading (.hdg[-*])
+----------------------------------------------------------------- */
+/* .hdg-l2
+----------------------------------------------- */
+.hdg-l2 {
+  position: relative;
+  margin: 0 0 32px;
+  padding: 0 0 27px;
+  font-size: 5rem;
+  text-align: center;
+}
+.hdg-l2::before, .hdg-l2::after, .hdg-l2_inner::before {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+.hdg-l2::before {
+  transform: translateX(calc(-50% - 10px));
+  background: #9d4551;
+}
+.hdg-l2::after {
+  transform: translateX(-50%);
+  background: #5b7e45;
+}
+.hdg-l2_inner::before {
+  transform: translateX(calc(-50% + 10px));
+  background: #1c5a90;
+}
+.hdg-l2_sub {
+  display: block;
+  color: #999;
+  font-size: 2.4rem;
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
 /* ----------------------------------------------------------------

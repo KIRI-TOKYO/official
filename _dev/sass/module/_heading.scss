@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+@use "../library/placeholder/pseudo-block";
+
+/* ----------------------------------------------------------------
+    Heading (.hdg[-*])
+----------------------------------------------------------------- */
+/* .hdg-l2
+----------------------------------------------- */
+.hdg-l2 {
+    position: relative;
+    margin: 0 0 32px;
+    padding: 0 0 27px;
+    font-size: 5rem;
+    text-align: center;
+
+    // ●
+    &::before,
+    &::after,
+    &_inner::before {
+        @extend %pseudo-block;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        opacity: .8;
+    }
+
+    &::before {
+        background: #9d4551;
+        transform: translateX(calc(-50% - 10px));
+    }
+
+    &::after {
+        background: #5b7e45;
+        transform: translateX(-50%);
+    }
+
+    &_inner::before {
+        background: #1c5a90;
+        transform: translateX(calc(-50% + 10px));
+    }
+
+    &_sub {
+        display: block;
+        font-size: 2.4rem;
+        font-weight: 400;
+        color: #999;
+        text-transform: uppercase;
+    }
+}
