@@ -23,4 +23,9 @@
 .content-inner {
     max-width: set.$width-content;
     margin: 0 auto;
+
+    //===== Media Queries =====
+    @include mx.rwd(set.$width-content-bp) {
+        padding: 0 set.$gutter-content;
+    }
 }

@@ -75,33 +75,6 @@
 
     //===== Media Queries =====
     @include mx.rwd(ss) {
-        align-items: center;
-        padding: 19px 0 25px;
-        width: 100%;
-        font-size: 1.2rem;
-
-        &_item {
-            flex: 1;
-
-            &:not(:last-child) {
-                margin: 0;
-            }
-
-            &:not(.h-ss-hidden) {
-                & + & {
-                    border-left: 1px solid #000;
-                }
-            }
-        }
-
-        &_link {
-            padding: 0;
-            text-align: center;
-
-            &::before,
-            &::after {
-                display: none;
-            }
-        }
+        display: none;
     }
 }

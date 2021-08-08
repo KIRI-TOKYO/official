@@ -180,6 +180,11 @@ fieldset {
   padding: 30px 0;
   background: #fff;
 }
+@media only screen and (max-width: 767px) {
+  .header {
+    padding: 16px 0;
+  }
+}
 
 /* .h-inner
 ----------------------------------------------- */
@@ -189,11 +194,23 @@ fieldset {
   max-width: 1500px;
   margin: 0 auto;
 }
+@media only screen and (max-width: 1240px) {
+  .h-inner {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}
 
 /* .h-logo
 ----------------------------------------------- */
 .h-logo {
   margin: 0 48px 0 0;
+}
+@media only screen and (max-width: 767px) {
+  .h-logo {
+    width: 80px;
+    margin: 0 0 0 4px;
+  }
 }
 
 /* .h-menu
@@ -202,102 +219,6 @@ fieldset {
   display: flex;
   flex-grow: 1;
   align-items: center;
-}
-
-/* .h-btn
------------------------------------------------ */
-.h-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 160px;
-  min-height: 60px;
-  color: #fff;
-  font-size: 1.4rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.h-btn:hover, .h-btn:active, .h-btn:focus {
-  color: #fff;
-}
-.h-btn.-login {
-  border-bottom-left-radius: 6px;
-  background: #000;
-}
-.h-btn.-mypage {
-  border: 1px solid #000;
-  color: #000;
-}
-.h-btn.-cv {
-  background: #f00;
-}
-@media only screen and (min-width: 768px) {
-  .is-shrink .h-btn {
-    min-width: 145px;
-    min-height: 45px;
-  }
-  .is-shrink .h-btn.-login {
-    border-top-left-radius: 6px;
-  }
-  .is-shrink .h-btn.-mypage {
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
-  }
-  .is-shrink .h-btn.-cv {
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .h-btn {
-    min-width: 0;
-    min-height: 0;
-  }
-  .h-btn.-login {
-    position: relative;
-    padding: 25px 0 0;
-    background: none;
-    color: #000;
-    font-size: 1rem;
-  }
-  .h-btn.-login::before {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 18px;
-    height: 18px;
-    margin-left: -9px;
-    content: url("/asset/img/icon/login-bk.svg");
-  }
-  .h-btn.-mypage {
-    position: relative;
-    padding: 25px 0 0;
-    border: 0;
-    background: none;
-    color: #000;
-    font-size: 1rem;
-  }
-  .h-btn.-mypage::before {
-    position: absolute;
-    top: -2px;
-    left: 50%;
-    width: 24px;
-    height: 24px;
-    margin-left: -12px;
-    content: url("/asset/img/icon/mypage-bk.svg");
-  }
-  .h-btn.-cv {
-    visibility: hidden;
-    min-width: 85px;
-    padding: 5px;
-    border: 1px solid #f00;
-    border-radius: 100vh;
-    background: #fff;
-    color: #f00;
-    font-size: 1.1rem;
-  }
-  .is-shrink .h-btn.-cv {
-    visibility: visible;
-  }
 }
 
 /* ----------------------------------------------------------------
@@ -356,25 +277,6 @@ fieldset {
 }
 @media only screen and (max-width: 767px) {
   .n-global {
-    align-items: center;
-    width: 100%;
-    padding: 19px 0 25px;
-    font-size: 1.2rem;
-  }
-  .n-global_item {
-    flex: 1;
-  }
-  .n-global_item:not(:last-child) {
-    margin: 0;
-  }
-  .n-global_item:not(.h-ss-hidden) + .n-global_item:not(.h-ss-hidden) {
-    border-left: 1px solid #000;
-  }
-  .n-global_link {
-    padding: 0;
-    text-align: center;
-  }
-  .n-global_link::before, .n-global_link::after {
     display: none;
   }
 }
@@ -396,6 +298,11 @@ fieldset {
   max-width: 1200px;
   margin: 0 auto;
 }
+@media only screen and (max-width: 1240px) {
+  .content-inner {
+    padding: 0 20px;
+  }
+}
 
 /* ----------------------------------------------------------------
     Footer (.footer and .f-*)
@@ -407,6 +314,11 @@ fieldset {
   background: #fff;
   color: #666;
 }
+@media only screen and (max-width: 767px) {
+  .footer {
+    padding: 33px 0;
+  }
+}
 
 /* .f-inner
 ----------------------------------------------- */
@@ -417,10 +329,10 @@ fieldset {
 .f-inner > :last-child {
   margin-bottom: 0;
 }
-@media only screen and (max-width: 1246px) {
+@media only screen and (max-width: 1240px) {
   .f-inner {
-    padding-right: 23px;
-    padding-left: 23px;
+    padding-right: 20px;
+    padding-left: 20px;
   }
 }
 
@@ -444,9 +356,11 @@ fieldset {
     flex-direction: column;
   }
   .f-lyt_col {
+    flex-direction: column;
     margin: 0 0 39px;
   }
   .f-lyt_col-02 {
+    align-items: center;
     margin: 0;
   }
 }
@@ -456,6 +370,20 @@ fieldset {
 .f-logo {
   margin: 0 33px 0 0;
 }
+@media only screen and (max-width: 767px) {
+  .f-logo {
+    margin: 0 0 27px;
+  }
+}
+
+/* .f-info
+----------------------------------------------- */
+@media only screen and (max-width: 767px) {
+  .f-info {
+    text-align: center;
+  }
+}
+
 /* .f-list-desc
 ----------------------------------------------- */
 .f-list-desc {
@@ -466,6 +394,14 @@ fieldset {
 }
 .f-list-desc_address > address {
   font-style: normal;
+}
+@media only screen and (max-width: 767px) {
+  .f-list-desc_name {
+    font-size: 2.2rem;
+  }
+  .f-list-desc_address {
+    font-size: 1.4rem;
+  }
 }
 
 /* .f-list-sns
@@ -479,6 +415,12 @@ fieldset {
   margin: 0 36px 0 0;
 }
 @media only screen and (max-width: 767px) {
+  .f-list-sns {
+    margin: 0 0 40px;
+  }
+  .f-list-sns_item {
+    max-width: 42px;
+  }
   .f-list-sns_item:not(:last-child) {
     margin-right: 24px;
   }
@@ -488,4 +430,9 @@ fieldset {
 ----------------------------------------------- */
 .f-copyright {
   font-size: 1.4rem;
+}
+@media only screen and (max-width: 767px) {
+  .f-copyright {
+    font-size: 1.2rem;
+  }
 }
