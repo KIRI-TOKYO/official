@@ -1,3 +1,4 @@
+@import url("//fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap&subset=japanese");
 /*
   https://github.com/andy-piccalilli/modern-css-reset/blob/master/LICENSE
 */
@@ -47,16 +48,6 @@ input, button, textarea, select {
     transition-duration: 0.01ms !important;
   }
 }
-@font-face {
-  src: local(YuGothic-Medium), local("Yu Gothic Medium");
-  font-family: WinYuGothic;
-  font-weight: normal;
-}
-@font-face {
-  src: local(YuGothic-Bold), local("Yu Gothic");
-  font-family: WinYuGothic;
-  font-weight: bold;
-}
 /* ----------------------------------------------------------------
     Base
 ----------------------------------------------------------------- */
@@ -69,7 +60,7 @@ body {
   flex-direction: column;
   background: #fff;
   color: #000;
-  font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Hiragino Kaku Gothic Pro", YuGothic, WinYuGothic, Meiryo, sans-serif;
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic Pro", Meiryo, sans-serif;
   font-feature-settings: "palt";
   font-size: 1.6rem;
   font-weight: 400;
