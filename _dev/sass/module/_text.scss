@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+@use "../library/placeholder/pseudo-block";
+
+/* ----------------------------------------------------------------
+    Text (.txt[-*])
+----------------------------------------------------------------- */
+/* .txt-lead
+----------------------------------------------- */
+.txt-lead {
+    font-size: 1.8rem;
+    text-align: center;
+
+    > b {
+        font-weight: inherit;
+    }
+}

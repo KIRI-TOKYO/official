@@ -24,6 +24,10 @@
     max-width: set.$width-content;
     margin: 0 auto;
 
+    > :last-child {
+        margin-bottom: 0;
+    }
+
     //===== Media Queries =====
     @include mx.rwd(set.$width-content-bp) {
         padding: 0 set.$gutter-content;

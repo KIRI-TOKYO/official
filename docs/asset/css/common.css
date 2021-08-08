@@ -399,6 +399,9 @@ fieldset {
   max-width: 1200px;
   margin: 0 auto;
 }
+.content-inner > :last-child {
+  margin-bottom: 0;
+}
 @media only screen and (max-width: 1240px) {
   .content-inner {
     padding: 0 20px;
@@ -598,6 +601,46 @@ fieldset {
   font-size: 2.4rem;
   font-weight: 400;
   text-transform: uppercase;
+}
+
+/* ----------------------------------------------------------------
+    Text (.txt[-*])
+----------------------------------------------------------------- */
+/* .txt-lead
+----------------------------------------------- */
+.txt-lead {
+  font-size: 1.8rem;
+  text-align: center;
+}
+.txt-lead > b {
+  font-weight: inherit;
+}
+
+/* ----------------------------------------------------------------
+    Button (.btn[-*])
+----------------------------------------------------------------- */
+/* .btn-cv
+----------------------------------------------- */
+.btn-cv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 420px;
+  min-height: 90px;
+  border-radius: 100vh;
+  background: #505050;
+  color: #fff;
+  font-size: 2.8rem;
+  font-weight: 700;
+}
+
+/* .btn-lyt
+----------------------------------------------- */
+.btn-lyt {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
 }
 
 /* ----------------------------------------------------------------
