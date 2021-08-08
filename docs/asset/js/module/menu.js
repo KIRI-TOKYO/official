@@ -1,3 +1,4 @@
+import {mediaQuery} from "../config/mediaQuery.js";
 import {setAttributes} from '../helper/setAttributes.js';
 import {setTabindex} from '../helper/setTabindex.js';
 
@@ -37,7 +38,8 @@ export class Menu {
      * @returns {void}
      */
     init() {
-        this.createBtn();
+        this.switch();
+        this.onMatch();
     }
 
     /**
@@ -122,5 +124,42 @@ export class Menu {
         }, {
             once: true,
         });
+    }
+
+    /**
+     * 機能停止
+     * @returns {void}
+     */
+    destroy() {
+        this.btn.remove();
+        this.btn = null;
+
+        this.content.removeAttribute('id');
+        this.content.classList.remove(this.o.showClass);
+        this.header.classList.remove(this.o.menuShowClass);
+    }
+
+    /**
+     * メディアクエリの監視
+     * @returns {void}
+     */
+    onMatch() {
+        mediaQuery[0].addListener(() => {
+            this.switch();
+        })
+    }
+
+    /**
+     * 機能の切り替え
+     * @returns {void}
+     */
+    switch() {
+        const isMatch = mediaQuery[0].matches;
+
+        if (isMatch && !this.btn) {
+            this.createBtn()
+        } else if (!isMatch && this.btn) {
+            this.destroy();
+        }
     }
 }
