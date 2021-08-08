@@ -24,20 +24,32 @@
     }
 
     &_item {
-        flex: 1;
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 0 40px;
 
-        // ボーダー
-        &::before {
-            @extend %pseudo-block;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 0;
-            width: 100%;
-            background: set.$color-main;
+        &:first-child {
+            padding-left: 0;
+        }
+
+        &:last-child {
+            padding-right: 0;
+        }
+
+        &:not(:last-child) {
+            // ボーダー
+            &::before {
+                @extend %pseudo-block;
+                position: absolute;
+                top: 50%;
+                right: 0;
+                height: 20px;
+                width: 1px;
+                margin-top: -10px;
+                background: #ccc;
+            }
         }
     }
 
@@ -47,6 +59,18 @@
         > span {
             display: block;
         }
+    }
+
+    &_btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100vh;
+        min-width: 200px;
+        min-height: 60px;
+        background: #505050;
+        color: #fff;
+        font-weight: 400;
     }
 
     //===== Media Queries =====
