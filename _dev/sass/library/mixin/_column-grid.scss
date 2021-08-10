@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+// Presentation:
+// カラム数、カラム幅の自動計算
+//
+// Example:
+// @include column-grid("24px", 2);
+//************************************************************************
+@mixin column-grid($gutter, $col-num: 1) {
+    grid-template-columns: repeat($col-num, calc((100% - (#{$gutter} * (#{$col-num} - 1))) / #{$col-num}));
+}
