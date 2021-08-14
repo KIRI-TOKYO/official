@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+@use "sass:math";
 @use "core/use-setting" as set;
 @use "library/use-import-mixin" as mx;
 @use "library/placeholder/pseudo-block";
@@ -88,5 +89,52 @@
     //===== Media Queries =====
     @include mx.rwd(ss) {
         padding-top: 0;
+    }
+}
+
+/* .t-lyt
+----------------------------------------------- */
+.t-lyt {
+    $root: &;
+
+    position: relative;
+    display: flex;
+    margin: 0 0 72px;
+    padding: 0 0 49px;
+
+    &_content {
+        width: math.div(660px, set.$width-content) * 100%;
+        padding: 80px 50px 72px;
+        border-radius: 15px;
+        background: #f4f0e7;
+        box-shadow: 5px 5px 8px rgba(51, 51, 51, .1);
+    }
+
+    &_img {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 1;
+        overflow: hidden;
+        width: math.div(580px, set.$width-content) * 100%;
+        border-radius: 15px;
+        box-shadow: 5px 5px 8px rgba(51, 51, 51, .15);
+    }
+
+    &_btn {
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    &.-lyt-02 {
+        justify-content: flex-end;
+        padding: 64px 0 0;
+
+        > #{$root}_img {
+            top: 0;
+            right: auto;
+            bottom: auto;
+            left: 0;
+        }
     }
 }

@@ -18,17 +18,27 @@
     max-width: 420px;
     width: 100%;
     min-height: 70px;
-    border: 1px solid #9d4551;
-    background: #9d4551;
+    border: 1px solid #505050;
+    background: #505050;
     font-size: 2.2rem;
     color: #fff;
 
     @include mx.hover() {
-        color: #9d4551;
+        color: #505050;
         background: #fff;
     }
 
     &.-color-a {
+        border-color: #9d4551;
+        background: #9d4551;
+
+        @include mx.hover() {
+            color: #9d4551;
+            background: #fff;
+        }
+    }
+
+    &.-color-b {
         border-color: #5b7e45;
         background: #5b7e45;
 
@@ -38,7 +48,7 @@
         }
     }
 
-    &.-color-b {
+    &.-color-c {
         border-color: #1c5a90;
         background: #1c5a90;
 

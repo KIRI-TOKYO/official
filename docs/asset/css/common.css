@@ -628,29 +628,37 @@ fieldset {
   width: 100%;
   max-width: 420px;
   min-height: 70px;
-  border: 1px solid #9d4551;
+  border: 1px solid #505050;
   border-radius: 100vh;
-  background: #9d4551;
+  background: #505050;
   color: #fff;
   font-size: 2.2rem;
 }
 .btn:hover, .btn:active, .btn:focus {
   background: #fff;
-  color: #9d4551;
+  color: #505050;
 }
 .btn.-color-a {
-  border-color: #5b7e45;
-  background: #5b7e45;
+  border-color: #9d4551;
+  background: #9d4551;
 }
 .btn.-color-a:hover, .btn.-color-a:active, .btn.-color-a:focus {
   background: #fff;
-  color: #5b7e45;
+  color: #9d4551;
 }
 .btn.-color-b {
+  border-color: #5b7e45;
+  background: #5b7e45;
+}
+.btn.-color-b:hover, .btn.-color-b:active, .btn.-color-b:focus {
+  background: #fff;
+  color: #5b7e45;
+}
+.btn.-color-c {
   border-color: #1c5a90;
   background: #1c5a90;
 }
-.btn.-color-b:hover, .btn.-color-b:active, .btn.-color-b:focus {
+.btn.-color-c:hover, .btn.-color-c:active, .btn.-color-c:focus {
   background: #fff;
   color: #1c5a90;
 }
@@ -703,7 +711,7 @@ fieldset {
 }
 .panel_hdg {
   margin: 0 0 16px;
-  color: #9d4551;
+  color: #505050;
   font-size: 3rem;
   line-height: calc(36 / 30);
   text-align: center;
@@ -712,9 +720,12 @@ fieldset {
   display: block;
 }
 .panel_hdg.-color-a {
-  color: #5b7e45;
+  color: #9d4551;
 }
 .panel_hdg.-color-b {
+  color: #5b7e45;
+}
+.panel_hdg.-color-c {
   color: #1c5a90;
 }
 .panel_list {

@@ -79,3 +79,43 @@
     padding-top: 0;
   }
 }
+
+/* .t-lyt
+----------------------------------------------- */
+.t-lyt {
+  display: flex;
+  position: relative;
+  margin: 0 0 72px;
+  padding: 0 0 49px;
+}
+.t-lyt_content {
+  width: 55%;
+  padding: 80px 50px 72px;
+  border-radius: 15px;
+  background: #f4f0e7;
+  box-shadow: 5px 5px 8px rgba(51, 51, 51, 0.1);
+}
+.t-lyt_img {
+  z-index: 1;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 48.3333333333%;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 5px 5px 8px rgba(51, 51, 51, 0.15);
+}
+.t-lyt_btn {
+  max-width: 280px;
+  margin: 0 auto;
+}
+.t-lyt.-lyt-02 {
+  justify-content: flex-end;
+  padding: 64px 0 0;
+}
+.t-lyt.-lyt-02 > .t-lyt_img {
+  top: 0;
+  right: auto;
+  bottom: auto;
+  left: 0;
+}
