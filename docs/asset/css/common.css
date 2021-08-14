@@ -619,6 +619,42 @@ fieldset {
 /* ----------------------------------------------------------------
     Button (.btn[-*])
 ----------------------------------------------------------------- */
+/* .btn
+----------------------------------------------- */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 420px;
+  min-height: 70px;
+  border: 1px solid #9d4551;
+  border-radius: 100vh;
+  background: #9d4551;
+  color: #fff;
+  font-size: 2.2rem;
+}
+.btn:hover, .btn:active, .btn:focus {
+  background: #fff;
+  color: #9d4551;
+}
+.btn.-color-a {
+  border-color: #5b7e45;
+  background: #5b7e45;
+}
+.btn.-color-a:hover, .btn.-color-a:active, .btn.-color-a:focus {
+  background: #fff;
+  color: #5b7e45;
+}
+.btn.-color-b {
+  border-color: #1c5a90;
+  background: #1c5a90;
+}
+.btn.-color-b:hover, .btn.-color-b:active, .btn.-color-b:focus {
+  background: #fff;
+  color: #1c5a90;
+}
+
 /* .btn-cv
 ----------------------------------------------- */
 .btn-cv {
@@ -641,6 +677,75 @@ fieldset {
   display: flex;
   justify-content: center;
   margin: 50px 0;
+}
+
+/* ----------------------------------------------------------------
+    Panel (.panel[-*])
+----------------------------------------------------------------- */
+/* .panel
+----------------------------------------------- */
+.panel {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: stretch;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 15px;
+  background: #fff;
+}
+.panel_content {
+  display: flex;
+  flex-basis: 0;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 0;
+  padding: 40px 50px;
+}
+.panel_hdg {
+  margin: 0 0 16px;
+  color: #9d4551;
+  font-size: 3rem;
+  line-height: calc(36 / 30);
+  text-align: center;
+}
+.panel_hdg > span {
+  display: block;
+}
+.panel_hdg.-color-a {
+  color: #5b7e45;
+}
+.panel_hdg.-color-b {
+  color: #1c5a90;
+}
+.panel_list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  color: #666;
+  font-size: 1.8rem;
+}
+.panel_btn {
+  display: flex;
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 0;
+  align-items: flex-end;
+  margin: 30px 0 0;
+}
+
+/* ----------------------------------------------------------------
+    Grid (.grid[-*])
+----------------------------------------------------------------- */
+/* .grid
+----------------------------------------------- */
+.grid {
+  grid-gap: 24px 2.5%;
+  display: grid;
+  margin: 0 0 24px;
+}
+.grid.-col3 {
+  grid-template-columns: repeat(3, calc((100% - (30px * (3 - 1))) / 3));
 }
 
 /* ----------------------------------------------------------------

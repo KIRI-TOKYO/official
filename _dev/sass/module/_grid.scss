@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+@use "sass:math";
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+
+/* ----------------------------------------------------------------
+    Grid (.grid[-*])
+----------------------------------------------------------------- */
+/* .grid
+----------------------------------------------- */
+.grid {
+    $grid-gutter: math.div(30px, set.$width-content) * 100%;
+
+    display: grid;
+    grid-gap: 24px $grid-gutter;
+    margin: 0 0 24px;
+
+    &.-col3 {
+        @include mx.column-grid("30px", 3);
+    }
+}

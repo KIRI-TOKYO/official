@@ -8,6 +8,47 @@
 /* ----------------------------------------------------------------
     Button (.btn[-*])
 ----------------------------------------------------------------- */
+/* .btn
+----------------------------------------------- */
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100vh;
+    max-width: 420px;
+    width: 100%;
+    min-height: 70px;
+    border: 1px solid #9d4551;
+    background: #9d4551;
+    font-size: 2.2rem;
+    color: #fff;
+
+    @include mx.hover() {
+        color: #9d4551;
+        background: #fff;
+    }
+
+    &.-color-a {
+        border-color: #5b7e45;
+        background: #5b7e45;
+
+        @include mx.hover() {
+            color: #5b7e45;
+            background: #fff;
+        }
+    }
+
+    &.-color-b {
+        border-color: #1c5a90;
+        background: #1c5a90;
+
+        @include mx.hover() {
+            color: #1c5a90;
+            background: #fff;
+        }
+    }
+}
+
 /* .btn-cv
 ----------------------------------------------- */
 .btn-cv {
