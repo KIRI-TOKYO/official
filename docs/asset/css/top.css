@@ -177,6 +177,7 @@
   }
   .t-lyt_img {
     position: static;
+    width: 335px;
     margin: 0 0 -120px;
   }
 }
