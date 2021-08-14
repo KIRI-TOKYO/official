@@ -17,6 +17,8 @@
 
     //===== Media Queries =====
     @include mx.rwd(ss) {
+        position: relative;
+        z-index: 10;
         padding: 16px 0 8px;
 
         &.is-menu-show {
