@@ -39,6 +39,11 @@
 .content-fluid {
     padding: 128px 0 136px;
     background: #fff;
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        padding: 88px 0;
+    }
 }
 
 /* .content-fluid-02
@@ -46,6 +51,11 @@
 .content-fluid-02 {
     padding: 88px 0 104px;
     background: #f4f0e7;
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        padding: 56px 0 64px;
+    }
 }
 
 /* .content-fluid-03
@@ -53,4 +63,9 @@
 .content-fluid-03 {
     padding: 72px 0;
     background: #f7f7f7;
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        padding: 56px 0;
+    }
 }

@@ -20,4 +20,12 @@
     &.-col3 {
         @include mx.column-grid("30px", 3);
     }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        &.-ss-col1 {
+            grid-gap: 40px 0;
+            grid-template-columns: repeat(1, 100%);
+        }
+    }
 }

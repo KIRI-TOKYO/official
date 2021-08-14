@@ -68,4 +68,18 @@
         align-items: flex-end;
         margin: 30px 0 0;
     }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        max-width: 335px;
+        margin: 0 auto;
+
+        &_hdg {
+            font-size: 2.4rem;
+        }
+
+        &_list {
+            font-size: 1.6rem;
+        }
+    }
 }

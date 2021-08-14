@@ -414,6 +414,11 @@ fieldset {
   padding: 128px 0 136px;
   background: #fff;
 }
+@media only screen and (max-width: 767px) {
+  .content-fluid {
+    padding: 88px 0;
+  }
+}
 
 /* .content-fluid-02
 ----------------------------------------------- */
@@ -421,12 +426,22 @@ fieldset {
   padding: 88px 0 104px;
   background: #f4f0e7;
 }
+@media only screen and (max-width: 767px) {
+  .content-fluid-02 {
+    padding: 56px 0 64px;
+  }
+}
 
 /* .content-fluid-03
 ----------------------------------------------- */
 .content-fluid-03 {
   padding: 72px 0;
   background: #f7f7f7;
+}
+@media only screen and (max-width: 767px) {
+  .content-fluid-03 {
+    padding: 56px 0;
+  }
 }
 
 /* ----------------------------------------------------------------
@@ -602,6 +617,14 @@ fieldset {
   font-weight: 400;
   text-transform: uppercase;
 }
+@media only screen and (max-width: 767px) {
+  .hdg-l2 {
+    font-size: 2.8rem;
+  }
+  .hdg-l2_sub {
+    font-size: 1.8rem;
+  }
+}
 
 /* ----------------------------------------------------------------
     Text (.txt[-*])
@@ -630,17 +653,18 @@ fieldset {
   min-height: 70px;
   border: 1px solid #505050;
   border-radius: 100vh;
-  background: #505050;
-  color: #fff;
+  background: #fff;
+  color: #505050;
   font-size: 2.2rem;
 }
 .btn:hover, .btn:active, .btn:focus {
-  background: #fff;
-  color: #505050;
+  background: #505050;
+  color: #fff;
 }
 .btn.-color-a {
   border-color: #9d4551;
   background: #9d4551;
+  color: #fff;
 }
 .btn.-color-a:hover, .btn.-color-a:active, .btn.-color-a:focus {
   background: #fff;
@@ -649,6 +673,7 @@ fieldset {
 .btn.-color-b {
   border-color: #5b7e45;
   background: #5b7e45;
+  color: #fff;
 }
 .btn.-color-b:hover, .btn.-color-b:active, .btn.-color-b:focus {
   background: #fff;
@@ -657,10 +682,17 @@ fieldset {
 .btn.-color-c {
   border-color: #1c5a90;
   background: #1c5a90;
+  color: #fff;
 }
 .btn.-color-c:hover, .btn.-color-c:active, .btn.-color-c:focus {
   background: #fff;
   color: #1c5a90;
+}
+@media only screen and (max-width: 767px) {
+  .btn {
+    min-height: 60px;
+    font-size: 1.8rem;
+  }
 }
 
 /* .btn-cv
@@ -672,11 +704,22 @@ fieldset {
   width: 100%;
   max-width: 420px;
   min-height: 90px;
+  border: 2px solid #505050;
   border-radius: 100vh;
   background: #505050;
   color: #fff;
   font-size: 2.8rem;
   font-weight: 700;
+}
+.btn-cv:hover, .btn-cv:active, .btn-cv:focus {
+  background: #fff;
+  color: #505050;
+}
+@media only screen and (max-width: 767px) {
+  .btn-cv {
+    min-height: 64px;
+    font-size: 1.8rem;
+  }
 }
 
 /* .btn-lyt
@@ -685,6 +728,11 @@ fieldset {
   display: flex;
   justify-content: center;
   margin: 50px 0;
+}
+@media only screen and (max-width: 767px) {
+  .btn-lyt {
+    margin: 32px 0;
+  }
 }
 
 /* ----------------------------------------------------------------
@@ -744,6 +792,18 @@ fieldset {
   align-items: flex-end;
   margin: 30px 0 0;
 }
+@media only screen and (max-width: 767px) {
+  .panel {
+    max-width: 335px;
+    margin: 0 auto;
+  }
+  .panel_hdg {
+    font-size: 2.4rem;
+  }
+  .panel_list {
+    font-size: 1.6rem;
+  }
+}
 
 /* ----------------------------------------------------------------
     Grid (.grid[-*])
@@ -757,6 +817,12 @@ fieldset {
 }
 .grid.-col3 {
   grid-template-columns: repeat(3, calc((100% - (30px * (3 - 1))) / 3));
+}
+@media only screen and (max-width: 767px) {
+  .grid.-ss-col1 {
+    grid-gap: 40px 0;
+    grid-template-columns: repeat(1, 100%);
+  }
 }
 
 /* ----------------------------------------------------------------

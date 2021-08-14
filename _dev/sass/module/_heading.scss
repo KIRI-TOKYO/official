@@ -53,4 +53,13 @@
         color: #999;
         text-transform: uppercase;
     }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        font-size: 2.8rem;
+
+        &_sub {
+            font-size: 1.8rem;
+        }
+    }
 }
