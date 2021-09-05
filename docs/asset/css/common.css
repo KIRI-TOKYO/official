@@ -622,9 +622,14 @@ fieldset {
 @media only screen and (max-width: 767px) {
   .hdg-l2 {
     font-size: 2.8rem;
+    line-height: calc(34 / 28);
   }
   .hdg-l2_sub {
+    margin: 8px 0 0;
     font-size: 1.8rem;
+  }
+  .hdg-l2_break {
+    display: block;
   }
 }
 
@@ -750,6 +755,7 @@ fieldset {
   overflow: hidden;
   border-radius: 15px;
   background: #fff;
+  box-shadow: 5px 5px 8px rgba(51, 51, 51, 0.1);
 }
 .panel_content {
   display: flex;

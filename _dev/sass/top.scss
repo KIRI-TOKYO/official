@@ -13,6 +13,8 @@
 .t-hero {
     position: relative;
     overflow-x: hidden;
+    max-width: 1600px;
+    width: 100%;
     margin: 0 0 88px -40px;
     padding: 0 0 92px;
 
@@ -89,16 +91,19 @@
 
     //===== Media Queries =====
     @include mx.rwd(ss) {
-        margin: 0 0 0 -26px;
+        margin: 0;
         padding: 17px 0 245px;
 
         &_txt {
             bottom: 64px;
+            left: -26px;
             min-width: 300px;
             min-height: 300px;
         }
 
         &_txt-main {
+            padding: 0 0 16px;
+            margin: 0 0 10px;
             font-size: 3.2rem;
 
             // ボーダー
@@ -113,7 +118,7 @@
 
         &_img {
             position: relative;
-            margin: 0 -100px 0 0;
+            margin: 0 -100px 0 set.$gutter-content;
 
             &::before {
                 position: absolute;
@@ -172,7 +177,7 @@
         overflow: hidden;
         width: math.div(580px, set.$width-content) * 100%;
         border-radius: 15px;
-        box-shadow: 5px 5px 8px rgba(51, 51, 51, .15);
+        box-shadow: 5px 5px 8px rgba(51, 51, 51, .10);
     }
 
     &_btn {

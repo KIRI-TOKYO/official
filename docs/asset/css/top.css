@@ -13,6 +13,8 @@
 ----------------------------------------------- */
 .t-hero {
   position: relative;
+  width: 100%;
+  max-width: 1600px;
   margin: 0 0 88px -40px;
   padding: 0 0 92px;
   overflow-x: hidden;
@@ -77,15 +79,18 @@
 }
 @media only screen and (max-width: 767px) {
   .t-hero {
-    margin: 0 0 0 -26px;
+    margin: 0;
     padding: 17px 0 245px;
   }
   .t-hero_txt {
     bottom: 64px;
+    left: -26px;
     min-width: 300px;
     min-height: 300px;
   }
   .t-hero_txt-main {
+    margin: 0 0 10px;
+    padding: 0 0 16px;
     font-size: 3.2rem;
   }
   .t-hero_txt-main::before {
@@ -96,7 +101,7 @@
   }
   .t-hero_img {
     position: relative;
-    margin: 0 -100px 0 0;
+    margin: 0 -100px 0 20px;
   }
   .t-hero_img::before {
     position: absolute;
@@ -148,7 +153,7 @@
   width: 48.3333333333%;
   overflow: hidden;
   border-radius: 15px;
-  box-shadow: 5px 5px 8px rgba(51, 51, 51, 0.15);
+  box-shadow: 5px 5px 8px rgba(51, 51, 51, 0.1);
 }
 .t-lyt_btn {
   max-width: 280px;

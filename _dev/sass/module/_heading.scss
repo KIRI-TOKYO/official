@@ -57,9 +57,15 @@
     //===== Media Queries =====
     @include mx.rwd(ss) {
         font-size: 2.8rem;
+        line-height: calc(34 / 28);
 
         &_sub {
+            margin: 8px 0 0;
             font-size: 1.8rem;
+        }
+
+        &_break {
+            display: block;
         }
     }
 }
