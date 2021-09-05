@@ -446,6 +446,17 @@ fieldset {
   }
 }
 
+/* .content-fluid-hdg
+----------------------------------------------- */
+.content-fluid-hdg {
+  padding: 24px 0 88px;
+}
+@media only screen and (max-width: 767px) {
+  .content-fluid-hdg {
+    padding: 16px 0 72px;
+  }
+}
+
 /* ----------------------------------------------------------------
     Footer (.footer and .f-*)
 ----------------------------------------------------------------- */
@@ -582,6 +593,64 @@ fieldset {
 /* ----------------------------------------------------------------
     Heading (.hdg[-*])
 ----------------------------------------------------------------- */
+/* .hdg-l1
+----------------------------------------------- */
+.hdg-l1 {
+  display: flex;
+  align-items: center;
+}
+.hdg-l1_txt {
+  display: flex;
+  z-index: 1;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 360px;
+  min-height: 360px;
+  margin: 0 -160px 0 0;
+  border-radius: 50%;
+  background: rgba(244, 240, 231, 0.85);
+  font-size: 4.5rem;
+  line-height: calc(55 / 45);
+  filter: drop-shadow(5px 5px 8px rgba(51, 51, 51, 0.15));
+}
+.hdg-l1_txt > span {
+  display: block;
+}
+.hdg-l1_img {
+  overflow: hidden;
+  border-radius: 15px;
+}
+@media only screen and (max-width: 767px) {
+  .hdg-l1 {
+    align-items: flex-end;
+    margin: 0 -20px;
+  }
+  .hdg-l1_txt {
+    left: -10px;
+    min-width: 200px;
+    min-height: 200px;
+    font-size: 2.5rem;
+    line-height: calc(37 / 25);
+  }
+  .hdg-l1_img {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    margin: 0 0 48px;
+    border-radius: 15px 0 0 15px;
+  }
+  .hdg-l1_img > img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    max-width: none;
+    height: 100%;
+  }
+}
+
 /* .hdg-l2
 ----------------------------------------------- */
 .hdg-l2 {
@@ -646,6 +715,22 @@ fieldset {
   font-weight: inherit;
 }
 
+/* ----------------------------------------------------------------
+    Table (.tbl[-*])
+----------------------------------------------------------------- */
+/* .tbl
+----------------------------------------------- */
+.tbl {
+  width: 100%;
+}
+.tbl tr {
+  border-bottom: 1px solid #707070;
+}
+.tbl th, .tbl td {
+  padding: 33px 12px;
+  text-align: left;
+  vertical-align: top;
+}
 /* ----------------------------------------------------------------
     Button (.btn[-*])
 ----------------------------------------------------------------- */

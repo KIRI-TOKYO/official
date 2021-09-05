@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+@use "../library/placeholder/pseudo-block";
+
+/* ----------------------------------------------------------------
+    Table (.tbl[-*])
+----------------------------------------------------------------- */
+/* .tbl
+----------------------------------------------- */
+.tbl {
+    width: 100%;
+
+    tr {
+        border-bottom: 1px solid #707070;
+    }
+
+    th, td {
+        padding: 33px 12px;
+        vertical-align: top;
+        text-align: left;
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        //
+    }
+}

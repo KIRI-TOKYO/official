@@ -69,3 +69,14 @@
         padding: 56px 0;
     }
 }
+
+/* .content-fluid-hdg
+----------------------------------------------- */
+.content-fluid-hdg {
+    padding: 24px 0 88px;
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        padding: 16px 0 72px;
+    }
+}

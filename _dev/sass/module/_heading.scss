@@ -8,6 +8,70 @@
 /* ----------------------------------------------------------------
     Heading (.hdg[-*])
 ----------------------------------------------------------------- */
+/* .hdg-l1
+----------------------------------------------- */
+.hdg-l1 {
+    display: flex;
+    align-items: center;
+
+    &_txt {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 -160px 0 0;
+        min-height: 360px;
+        min-width: 360px;
+        border-radius: 50%;
+        background: rgba(244, 240, 231, 0.85);
+        filter: drop-shadow(5px 5px 8px rgba(51, 51, 51, 0.15));
+        font-size: 4.5rem;
+        line-height: calc(55 / 45);
+
+        > span {
+            display: block;
+        }
+    }
+
+    &_img {
+        overflow: hidden;
+        border-radius: 15px;
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        margin: 0 (-(set.$gutter-content));
+        align-items: flex-end;
+
+        &_txt {
+            left: -10px;
+            min-height: 200px;
+            min-width: 200px;
+            font-size: 2.5rem;
+            line-height: calc(37 / 25);
+        }
+
+        &_img {
+            position: relative;
+            margin: 0 0 48px;
+            height: 240px;
+            width: 100%;
+            border-radius: 15px 0 0 15px;
+
+            > img {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                max-width: none;
+                width: auto;
+                height: 100%;
+            }
+        }
+    }
+}
+
 /* .hdg-l2
 ----------------------------------------------- */
 .hdg-l2 {
