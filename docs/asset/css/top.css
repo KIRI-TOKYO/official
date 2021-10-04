@@ -15,9 +15,12 @@
   position: relative;
   width: 100%;
   max-width: 1600px;
-  margin: 0 0 88px -40px;
+  margin: 0 auto 88px;
   padding: 0 0 92px;
-  overflow-x: hidden;
+}
+.t-hero_inner {
+  position: relative;
+  left: -40px;
 }
 .t-hero_txt {
   display: flex;
@@ -81,6 +84,9 @@
   .t-hero {
     margin: 0;
     padding: 17px 0 245px;
+  }
+  .t-hero_inner {
+    position: static;
   }
   .t-hero_txt {
     bottom: 64px;

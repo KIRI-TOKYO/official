@@ -12,11 +12,15 @@
 ----------------------------------------------- */
 .t-hero {
     position: relative;
-    overflow-x: hidden;
     max-width: 1600px;
     width: 100%;
-    margin: 0 0 88px -40px;
+    margin: 0 auto 88px;
     padding: 0 0 92px;
+
+    &_inner {
+        position: relative;
+        left: -40px;
+    }
 
     &_txt {
         position: absolute;
@@ -93,6 +97,10 @@
     @include mx.rwd(ss) {
         margin: 0;
         padding: 17px 0 245px;
+
+        &_inner {
+            position: static;
+        }
 
         &_txt {
             bottom: 64px;
