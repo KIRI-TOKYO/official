@@ -3,6 +3,8 @@
 @use "../core/use-setting" as set;
 @use "../library/use-import-mixin" as mx;
 @use "../library/use-import-variable" as var;
+@use "../library/placeholder/pseudo-block";
+@use "sass:math";
 
 /* ----------------------------------------------------------------
     Panel (.panel[-*])
@@ -80,6 +82,113 @@
 
         &_list {
             font-size: 1.6rem;
+        }
+    }
+}
+
+/* .panel-02
+----------------------------------------------- */
+.panel-02 {
+    padding: 64px;
+    border-radius: 15px;
+    background: #f4f0e7;
+    box-shadow: 5px 8px 8px rgba(51, 51, 51, .1);
+
+    &_hdg {
+        display: flex;
+        justify-content: center;
+        margin: 0 0 60px;
+        font-size: 4.8rem;
+
+        > span {
+            position: relative;
+            z-index: 1;
+            padding: 0 44px;
+
+            &::before {
+                @extend %pseudo-block;
+                position: absolute;
+                bottom: -14px;
+                left: 50%;
+                z-index: -1;
+                width: 100%;
+                height: 52px;
+                border-radius: 100vh;
+                background: #fff;
+                transform: translateX(-50%);
+            }
+        }
+    }
+
+    &_hdg-02 {
+        margin: 0 0 32px;
+        padding: 0 16px 16px;
+        border-bottom: 1px solid #707070;
+        font-size: 3.2rem;
+    }
+
+    &_lyt {
+        display: flex;
+
+        &_col,
+        &_col-02 {
+            > :last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        &_col {
+            flex-basis: percentage(math.div(485px, 1072px));
+        }
+
+        &_col-02 {
+            margin: 0 0 0 62px;
+        }
+    }
+
+    &_media {
+        width: 100%;
+    }
+
+    &_list {
+        padding: 0 0 0 16px;
+
+        > dt {
+            margin: 0 0 8px;
+            font-size: 2.4rem;
+            font-weight: 700;
+        }
+
+        > dd {
+            margin: 0 0 21px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &_msg {
+        position: relative;
+        margin: 56px 0 0;
+        padding: 40px 64px;
+        border-radius: 15px;
+        background: #fff;
+
+        &::before {
+            @extend %pseudo-block;
+            @include mx.triangle(44px 32px, #fff, up);
+            position: absolute;
+            top: -32px;
+            left: 64px;
+        }
+
+        &_inner {
+            padding: 0 16px;
+
+            > :last-child {
+                margin-bottom: 0;
+            }
         }
     }
 }

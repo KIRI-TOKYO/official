@@ -65,7 +65,7 @@ $width-content-bp: $width-content + ($gutter-content * 2); // コンテンツ幅
 //    Other
 //----------------------------------------------------------------- *
 $design-font-size: $font-size * 10;
-$design-line-space: 28;
+$design-line-space: 30;
 $design-width: 1366px;
 $design-small-width: 375px;
 $design-line-height: math.div($design-line-space, $design-font-size);

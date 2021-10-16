@@ -64,7 +64,7 @@ body {
   font-feature-settings: "palt";
   font-size: 1.8rem;
   font-weight: 400;
-  line-height: 1.5555555556;
+  line-height: 1.6666666667;
 }
 
 a {
@@ -166,7 +166,7 @@ fieldset {
 /* ----------------------------------------------------------------
     Pseudo element (Block)
 ----------------------------------------------------------------- */
-.link-bnr_link::before, .hdg-l2::before, .hdg-l2::after, .hdg-l2_inner::before, .n-global_item:not(:last-child)::before, .h-menu_btn::before, .h-menu_btn::after, .h-menu_btn > span::before {
+.panel-02_hdg > span::before, .panel-02_msg::before, .link-bnr_link::before, .hdg-l2::before, .hdg-l2::after, .hdg-l2_inner::before, .n-global_item:not(:last-child)::before, .h-menu_btn::before, .h-menu_btn::after, .h-menu_btn > span::before {
   display: block;
   content: "";
 }
@@ -1077,6 +1077,95 @@ fieldset {
   .panel_list {
     font-size: 1.6rem;
   }
+}
+
+/* .panel-02
+----------------------------------------------- */
+.panel-02 {
+  padding: 64px;
+  border-radius: 15px;
+  background: #f4f0e7;
+  box-shadow: 5px 8px 8px rgba(51, 51, 51, 0.1);
+}
+.panel-02_hdg {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 60px;
+  font-size: 4.8rem;
+}
+.panel-02_hdg > span {
+  z-index: 1;
+  position: relative;
+  padding: 0 44px;
+}
+.panel-02_hdg > span::before {
+  z-index: -1;
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  width: 100%;
+  height: 52px;
+  transform: translateX(-50%);
+  border-radius: 100vh;
+  background: #fff;
+}
+.panel-02_hdg-02 {
+  margin: 0 0 32px;
+  padding: 0 16px 16px;
+  border-bottom: 1px solid #707070;
+  font-size: 3.2rem;
+}
+.panel-02_lyt {
+  display: flex;
+}
+.panel-02_lyt_col > :last-child, .panel-02_lyt_col-02 > :last-child {
+  margin-bottom: 0;
+}
+.panel-02_lyt_col {
+  flex-basis: 45.2425373134%;
+}
+.panel-02_lyt_col-02 {
+  margin: 0 0 0 62px;
+}
+.panel-02_media {
+  width: 100%;
+}
+.panel-02_list {
+  padding: 0 0 0 16px;
+}
+.panel-02_list > dt {
+  margin: 0 0 8px;
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+.panel-02_list > dd {
+  margin: 0 0 21px;
+}
+.panel-02_list > dd:last-child {
+  margin-bottom: 0;
+}
+.panel-02_msg {
+  position: relative;
+  margin: 56px 0 0;
+  padding: 40px 64px;
+  border-radius: 15px;
+  background: #fff;
+}
+.panel-02_msg::before {
+  position: absolute;
+  top: -32px;
+  left: 64px;
+  width: 0;
+  height: 0;
+  border-right: 22px solid transparent;
+  border-bottom: 32px solid #fff;
+  border-left: 22px solid transparent;
+}
+.panel-02_msg_inner {
+  padding: 0 16px;
+}
+.panel-02_msg_inner > :last-child {
+  margin-bottom: 0;
 }
 
 /* ----------------------------------------------------------------
