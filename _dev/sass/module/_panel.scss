@@ -89,6 +89,7 @@
 /* .panel-02
 ----------------------------------------------- */
 .panel-02 {
+    margin: 88px 0;
     padding: 64px;
     border-radius: 15px;
     background: #f4f0e7;
@@ -188,6 +189,73 @@
 
             > :last-child {
                 margin-bottom: 0;
+            }
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        margin: 56px 0;
+        padding: 40px 12px;
+
+        &_hdg {
+            margin: 0 0 40px;
+            font-size: 2.8rem;
+
+            > span {
+                padding: 0 32px;
+
+                &::before {
+                    bottom: -8px;
+                    height: 32px;
+                }
+            }
+        }
+
+        &_hdg-02 {
+            margin: 0 0 24px;
+            padding: 0 8px 8px;
+            font-size: 2.4rem;
+        }
+
+        &_lyt {
+            flex-direction: column;
+
+            &_col {
+                margin: 0 0 24px;
+            }
+
+            &_col-02 {
+                margin: 0;
+            }
+        }
+
+        &_list {
+            padding: 0 8px;
+
+            > dt {
+                margin-bottom: 8px;
+                font-size: 2rem;
+            }
+
+            > dd {
+                margin-bottom: 24px;
+            }
+        }
+
+        &_msg {
+            margin-top: 44px;
+            padding: 32px 24px;
+
+            &::before {
+                top: -20px;
+                border-right-width: 14px;
+                border-bottom-width: 20px;
+                border-left-width: 14px;
+            }
+
+            &_inner {
+                padding: 0 8px;
             }
         }
     }

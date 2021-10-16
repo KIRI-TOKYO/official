@@ -66,6 +66,11 @@ body {
   font-weight: 400;
   line-height: 1.6666666667;
 }
+@media only screen and (max-width: 767px) {
+  body {
+    font-size: 1.6rem;
+  }
+}
 
 a {
   color: #000;
@@ -1082,6 +1087,7 @@ fieldset {
 /* .panel-02
 ----------------------------------------------- */
 .panel-02 {
+  margin: 88px 0;
   padding: 64px;
   border-radius: 15px;
   background: #f4f0e7;
@@ -1166,6 +1172,60 @@ fieldset {
 }
 .panel-02_msg_inner > :last-child {
   margin-bottom: 0;
+}
+@media only screen and (max-width: 767px) {
+  .panel-02 {
+    margin: 56px 0;
+    padding: 40px 12px;
+  }
+  .panel-02_hdg {
+    margin: 0 0 40px;
+    font-size: 2.8rem;
+  }
+  .panel-02_hdg > span {
+    padding: 0 32px;
+  }
+  .panel-02_hdg > span::before {
+    bottom: -8px;
+    height: 32px;
+  }
+  .panel-02_hdg-02 {
+    margin: 0 0 24px;
+    padding: 0 8px 8px;
+    font-size: 2.4rem;
+  }
+  .panel-02_lyt {
+    flex-direction: column;
+  }
+  .panel-02_lyt_col {
+    margin: 0 0 24px;
+  }
+  .panel-02_lyt_col-02 {
+    margin: 0;
+  }
+  .panel-02_list {
+    padding: 0 8px;
+  }
+  .panel-02_list > dt {
+    margin-bottom: 8px;
+    font-size: 2rem;
+  }
+  .panel-02_list > dd {
+    margin-bottom: 24px;
+  }
+  .panel-02_msg {
+    margin-top: 44px;
+    padding: 32px 24px;
+  }
+  .panel-02_msg::before {
+    top: -20px;
+    border-right-width: 14px;
+    border-bottom-width: 20px;
+    border-left-width: 14px;
+  }
+  .panel-02_msg_inner {
+    padding: 0 8px;
+  }
 }
 
 /* ----------------------------------------------------------------

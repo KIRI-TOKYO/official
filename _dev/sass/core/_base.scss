@@ -21,6 +21,11 @@ body {
     font-size: #{set.$font-size} + #{set.$font-unit};
     font-weight: 400;
     line-height: set.$design-line-height;
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        font-size: 1.6rem;
+    }
 }
 
 a {
