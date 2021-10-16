@@ -40,9 +40,17 @@
     padding: 128px 0 136px;
     background: #fff;
 
+    .content-fluid-msg + & {
+        padding-top: 0;
+    }
+
     //===== Media Queries =====
     @include mx.rwd(ss) {
         padding: 88px 0;
+
+        .content-fluid-msg + & {
+            padding-top: 47px;
+        }
     }
 }
 
@@ -78,5 +86,18 @@
     //===== Media Queries =====
     @include mx.rwd(ss) {
         padding: 16px 0 72px;
+    }
+}
+
+/* .content-fluid-msg
+----------------------------------------------- */
+.content-fluid-msg {
+    padding: 0 0 144px;
+    background: url("/about/img/index-bg-01.png") no-repeat 50% calc(50% + 22px);
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        padding: 47px 12px;
+        background-attachment: fixed;
     }
 }

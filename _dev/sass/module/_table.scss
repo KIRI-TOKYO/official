@@ -12,6 +12,8 @@
 ----------------------------------------------- */
 .tbl {
     width: 100%;
+    max-width: 800px;
+    margin: 0 auto set.$gutter;
 
     tr {
         border-bottom: 1px solid #707070;

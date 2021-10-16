@@ -416,9 +416,15 @@ fieldset {
   padding: 128px 0 136px;
   background: #fff;
 }
+.content-fluid-msg + .content-fluid {
+  padding-top: 0;
+}
 @media only screen and (max-width: 767px) {
   .content-fluid {
     padding: 88px 0;
+  }
+  .content-fluid-msg + .content-fluid {
+    padding-top: 47px;
   }
 }
 
@@ -454,6 +460,19 @@ fieldset {
 @media only screen and (max-width: 767px) {
   .content-fluid-hdg {
     padding: 16px 0 72px;
+  }
+}
+
+/* .content-fluid-msg
+----------------------------------------------- */
+.content-fluid-msg {
+  padding: 0 0 144px;
+  background: url("/about/img/index-bg-01.png") no-repeat 50% calc(50% + 22px);
+}
+@media only screen and (max-width: 767px) {
+  .content-fluid-msg {
+    padding: 47px 12px;
+    background-attachment: fixed;
   }
 }
 
@@ -715,6 +734,46 @@ fieldset {
   font-weight: inherit;
 }
 
+/* .txt-catch
+----------------------------------------------- */
+.txt-catch {
+  margin: 0 0 72px;
+  font-size: 4.8rem;
+  line-height: calc(72 / 48);
+  text-align: center;
+}
+.txt-catch_inner {
+  font-weight: 500;
+}
+.txt-catch_inner > span {
+  display: block;
+}
+@media only screen and (max-width: 767px) {
+  .txt-catch {
+    font-size: 2.4rem;
+  }
+}
+
+/* .txt-lyt
+----------------------------------------------- */
+.txt-lyt {
+  font-size: 1.8rem;
+  line-height: calc(38 / 18);
+  text-align: center;
+}
+.txt-lyt > :last-child {
+  margin-bottom: 0;
+}
+@media only screen and (max-width: 767px) {
+  .txt-lyt {
+    font-size: 1.6rem;
+    line-height: calc(32 / 16);
+  }
+  .txt-lyt > * {
+    margin-bottom: 50px;
+  }
+}
+
 /* ----------------------------------------------------------------
     Table (.tbl[-*])
 ----------------------------------------------------------------- */
@@ -722,6 +781,8 @@ fieldset {
 ----------------------------------------------- */
 .tbl {
   width: 100%;
+  max-width: 800px;
+  margin: 0 auto 32px;
 }
 .tbl tr {
   border-bottom: 1px solid #707070;
