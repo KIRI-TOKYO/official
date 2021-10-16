@@ -62,9 +62,9 @@ body {
   color: #000;
   font-family: "Noto Sans JP", "Hiragino Kaku Gothic Pro", Meiryo, sans-serif;
   font-feature-settings: "palt";
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 400;
-  line-height: 1.75;
+  line-height: 1.5555555556;
 }
 
 a {
@@ -292,7 +292,6 @@ fieldset {
 ----------------------------------------------- */
 .n-global {
   width: 100%;
-  font-size: 1.8rem;
   font-weight: 700;
   line-height: calc(22 / 18);
 }
@@ -416,7 +415,7 @@ fieldset {
   padding: 128px 0 136px;
   background: #fff;
 }
-.content-fluid-msg + .content-fluid {
+.content-fluid-hdg + .content-fluid, .content-fluid-msg + .content-fluid {
   padding-top: 0;
 }
 @media only screen and (max-width: 767px) {
@@ -563,6 +562,9 @@ fieldset {
 }
 .f-list-desc_name {
   font-size: 2.4rem;
+}
+.f-list-desc_address {
+  font-size: 1.6rem;
 }
 .f-list-desc_address > address {
   font-style: normal;
@@ -727,7 +729,6 @@ fieldset {
 /* .txt-lead
 ----------------------------------------------- */
 .txt-lead {
-  font-size: 1.8rem;
   text-align: center;
 }
 .txt-lead > b {
@@ -757,7 +758,6 @@ fieldset {
 /* .txt-lyt
 ----------------------------------------------- */
 .txt-lyt {
-  font-size: 1.8rem;
   line-height: calc(38 / 18);
   text-align: center;
 }
@@ -841,7 +841,6 @@ fieldset {
   font-weight: 700;
 }
 .link-bnr_list > dd {
-  font-size: 1.8rem;
   line-height: calc(30 / 18);
 }
 .link-bnr_img {
@@ -1058,7 +1057,6 @@ fieldset {
   align-items: center;
   margin: 0;
   color: #666;
-  font-size: 1.8rem;
 }
 .panel_btn {
   display: flex;
