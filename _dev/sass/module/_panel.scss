@@ -95,39 +95,6 @@
     background: #f4f0e7;
     box-shadow: 5px 8px 8px rgba(51, 51, 51, .1);
 
-    &_hdg {
-        display: flex;
-        justify-content: center;
-        margin: 0 0 60px;
-        font-size: 4.8rem;
-
-        > span {
-            position: relative;
-            z-index: 1;
-            padding: 0 44px;
-
-            &::before {
-                @extend %pseudo-block;
-                position: absolute;
-                bottom: -14px;
-                left: 50%;
-                z-index: -1;
-                width: 100%;
-                height: 52px;
-                border-radius: 100vh;
-                background: #fff;
-                transform: translateX(-50%);
-            }
-        }
-    }
-
-    &_hdg-02 {
-        margin: 0 0 32px;
-        padding: 0 16px 16px;
-        border-bottom: 1px solid #707070;
-        font-size: 3.2rem;
-    }
-
     &_lyt {
         display: flex;
 
@@ -197,26 +164,6 @@
     @include mx.rwd(ss) {
         margin: 56px 0;
         padding: 40px 12px;
-
-        &_hdg {
-            margin: 0 0 40px;
-            font-size: 2.8rem;
-
-            > span {
-                padding: 0 32px;
-
-                &::before {
-                    bottom: -8px;
-                    height: 32px;
-                }
-            }
-        }
-
-        &_hdg-02 {
-            margin: 0 0 24px;
-            padding: 0 8px 8px;
-            font-size: 2.4rem;
-        }
 
         &_lyt {
             flex-direction: column;
