@@ -11,6 +11,8 @@
 /* .hdg-l1
 ----------------------------------------------- */
 .hdg-l1 {
+    $root: &;
+
     display: flex;
     align-items: center;
 
@@ -38,6 +40,14 @@
     &_img {
         overflow: hidden;
         border-radius: 15px;
+    }
+
+    &.-color-b {
+        color: #fff;
+
+        #{$root}_txt {
+            background: #5b7e45;
+        }
     }
 
     //===== Media Queries =====
@@ -190,5 +200,33 @@
         margin: 0 0 24px;
         padding: 0 8px 8px;
         font-size: 2.4rem;
+    }
+}
+
+/* .hdg-soon
+----------------------------------------------- */
+.hdg-soon {
+    font-size: 1.6rem;
+    font-weight: 400;
+    text-align: center;
+
+    > span {
+        display: block;
+        font-size: 3rem;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    &.-color-b {
+        color: #5b7e45;
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        font-size: 1.2rem;
+
+        > span {
+            font-size: 1.8rem;
+        }
     }
 }

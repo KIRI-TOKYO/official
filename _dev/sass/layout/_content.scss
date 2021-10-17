@@ -102,3 +102,41 @@
         background-attachment: fixed;
     }
 }
+
+/* .content-fluid-soon
+----------------------------------------------- */
+.content-fluid-soon {
+    overflow: hidden;
+    background: #f4f0e7;
+
+    &_inner {
+        padding: 50px 0 53px;
+        background-image: linear-gradient(to right, transparent, transparent 22.5%, #f7f4ee 22.5%, #f7f4ee 45%, transparent 45%, transparent);
+        background-size: 310px auto;
+        transform: skew(-47deg, 0);
+    }
+
+    &_body {
+        max-width: set.$width-content;
+        margin: 0 auto;
+        transform: skew(47deg, 0);
+
+        > :last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(set.$width-content-bp) {
+        &_body {
+            padding: 0 set.$gutter-content;
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        &_inner {
+            padding: 36px 0;
+        }
+    }
+}
