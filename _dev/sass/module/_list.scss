@@ -30,4 +30,21 @@
             margin-bottom: 16px;
         }
     }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        &_item {
+            padding: 0 0 0 31px;
+
+            &::before {
+                left: 12px;
+                width: 4px;
+                height: 4px;
+            }
+
+            &:not(:last-child) {
+                margin-bottom: 12px;
+            }
+        }
+    }
 }

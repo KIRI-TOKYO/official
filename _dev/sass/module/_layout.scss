@@ -13,4 +13,9 @@
 .lyt-constrict {
     max-width: 800px;
     margin: 0 auto;
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        padding: 0 12px;
+    }
 }

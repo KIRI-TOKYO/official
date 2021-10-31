@@ -16,9 +16,13 @@
     &_list {
         display: flex;
         justify-content: center;
+        margin: 0;
         padding: 0 set.$gutter-content;
+        font-size: 2.4rem;
 
         &_item {
+            margin: 0;
+            padding: 0 0 49px;
             max-width: 302px;
             width: 100%;
             align-items: stretch;
@@ -34,7 +38,7 @@
                     @extend %pseudo-block;
                     @include mx.triangle(45px 25px, #f4f0e7, up);
                     position: absolute;
-                    bottom: -40px;
+                    bottom: 0;
                     left: 50%;
                     transform: translateX(-50%);
                 }
@@ -100,11 +104,21 @@
     @include mx.rwd(ss) {
 
         &_list {
-            margin-bottom: 16px;
+            overflow-x: auto;
+            font-size: 1.4rem;
+
+            &_item {
+                min-width: 156px;
+
+                &:not(:last-child) {
+                    margin-right: 8px;
+                }
+            }
         }
 
         &_content {
-            padding: 0 set.$gutter-content;
+            padding-top: 56px;
+            padding-bottom: 60px;
         }
     }
 }

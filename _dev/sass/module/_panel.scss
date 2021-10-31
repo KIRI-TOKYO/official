@@ -295,4 +295,10 @@
     > :last-child {
         margin-bottom: 0;
     }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        margin: 40px 0;
+        padding: 40px 36px;
+    }
 }

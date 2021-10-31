@@ -813,7 +813,6 @@ fieldset {
   }
   .hdg-l3 > span::before {
     bottom: -8px;
-    height: 32px;
   }
 }
 
@@ -827,7 +826,7 @@ fieldset {
 }
 @media only screen and (max-width: 767px) {
   .hdg-l4 {
-    margin: 0 0 24px;
+    margin: 32px 0 24px;
     padding: 0 8px 8px;
     font-size: 2.4rem;
   }
@@ -1394,6 +1393,12 @@ fieldset {
 .panel-contact > :last-child {
   margin-bottom: 0;
 }
+@media only screen and (max-width: 767px) {
+  .panel-contact {
+    margin: 40px 0;
+    padding: 40px 36px;
+  }
+}
 
 /* ----------------------------------------------------------------
     Grid (.grid[-*])
@@ -1424,6 +1429,11 @@ fieldset {
   max-width: 800px;
   margin: 0 auto;
 }
+@media only screen and (max-width: 767px) {
+  .lyt-constrict {
+    padding: 0 12px;
+  }
+}
 
 /* ----------------------------------------------------------------
     List (.list[-*])
@@ -1445,6 +1455,19 @@ fieldset {
 }
 .list_item:not(:last-child) {
   margin-bottom: 16px;
+}
+@media only screen and (max-width: 767px) {
+  .list_item {
+    padding: 0 0 0 31px;
+  }
+  .list_item::before {
+    left: 12px;
+    width: 4px;
+    height: 4px;
+  }
+  .list_item:not(:last-child) {
+    margin-bottom: 12px;
+  }
 }
 
 /* ----------------------------------------------------------------
@@ -1486,12 +1509,16 @@ fieldset {
 .tab_list {
   display: flex;
   justify-content: center;
+  margin: 0;
   padding: 0 20px;
+  font-size: 2.4rem;
 }
 .tab_list_item {
   align-items: stretch;
   width: 100%;
   max-width: 302px;
+  margin: 0;
+  padding: 0 0 49px;
 }
 .tab_list_item:not(:last-child) {
   margin-right: 11px;
@@ -1501,7 +1528,7 @@ fieldset {
 }
 .tab_list_item.is-select::before {
   position: absolute;
-  bottom: -40px;
+  bottom: 0;
   left: 50%;
   width: 0;
   height: 0;
@@ -1555,10 +1582,18 @@ fieldset {
 }
 @media only screen and (max-width: 767px) {
   .tab_list {
-    margin-bottom: 16px;
+    overflow-x: auto;
+    font-size: 1.4rem;
+  }
+  .tab_list_item {
+    min-width: 156px;
+  }
+  .tab_list_item:not(:last-child) {
+    margin-right: 8px;
   }
   .tab_content {
-    padding: 0 20px;
+    padding-top: 56px;
+    padding-bottom: 60px;
   }
 }
 
