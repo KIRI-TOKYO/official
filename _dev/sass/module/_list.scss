@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+@use "../library/placeholder/pseudo-block";
+
+/* ----------------------------------------------------------------
+    List (.list[-*])
+----------------------------------------------------------------- */
+/* .list
+----------------------------------------------- */
+.list {
+    &_item {
+        position: relative;
+        padding: 0 0 0 56px;
+
+        &::before {
+            @extend %pseudo-block;
+            position: absolute;
+            top: .7em;
+            left: 24px;
+            width: 8px;
+            height: 8px;
+            border-radius: 8px;
+            background: #505050;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 16px;
+        }
+    }
+}

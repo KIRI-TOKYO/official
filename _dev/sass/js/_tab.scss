@@ -1,0 +1,119 @@
+@charset "UTF-8";
+
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+
+/* ----------------------------------------------------------------
+    Tab (.tab[-*])
+----------------------------------------------------------------- */
+.tab {
+    $root: &;
+
+    margin: 40px 0 set.$gutter;
+
+    &_list {
+        display: flex;
+        justify-content: center;
+        padding: 0 set.$gutter-content;
+
+        &_item {
+            max-width: 302px;
+            width: 100%;
+            align-items: stretch;
+
+            &:not(:last-child) {
+                margin-right: 11px;
+            }
+        }
+    }
+
+    &_btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        border-radius: 10px;
+        padding: 12px 10px 13px;
+        width: 100%;
+        background: #f4f0e7;
+        transition: all .2s var.$ease-standard-curve;
+        text-align: center;
+        font-weight: 700;
+
+        &[aria-selected="true"] {
+            background: #000;
+            color: #fff;
+            border-color: #000;
+            font-weight: 700;
+        }
+    }
+
+    &_content {
+        padding: 112px 0 135px;
+        background: #f4f0e7;
+    }
+
+    &_panel {
+        max-width: set.$width-content;
+        margin: 0 auto;
+
+        > :last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &.-color-c {
+        #{$root}_btn {
+            color: #1c5a90;
+
+            &[aria-selected="true"] {
+                color: #fff;
+                background: #1c5a90;
+            }
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(set.$width-content-bp) {
+        &_content {
+            padding-right: set.$gutter-content;
+            padding-left: set.$gutter-content;
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+
+        &_list {
+            margin-bottom: 16px;
+        }
+
+        &_content {
+            padding: 0 set.$gutter-content;
+        }
+    }
+}
+
+/* ----------------------------------------------------------------
+    Function Tab (.fn-tab[-*])
+----------------------------------------------------------------- */
+/* .fn-tab
+----------------------------------------------- */
+.fn-tab {
+    @at-root {
+        #{&}_panel {
+            opacity: 1;
+            transition: all .3s var.$ease-standard-curve;
+
+            &[hidden] {
+                overflow: hidden;
+                display: block;
+                height: 0;
+                visibility: hidden;
+                opacity: 0;
+                transform: translateX(5px);
+            }
+        }
+    }
+}

@@ -21,9 +21,12 @@
 @use "module/button";
 @use "module/panel";
 @use "module/grid";
+@use "module/layout";
+@use "module/list";
 
 // JavaScript
 @use "js/menu";
+@use "js/tab";
 
 // コンテンツ
 

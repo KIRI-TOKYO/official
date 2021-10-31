@@ -282,3 +282,17 @@
         }
     }
 }
+
+/* .panel-contact
+----------------------------------------------- */
+.panel-contact {
+    margin: 64px 0;
+    padding: 72px;
+    border-radius: 15px;
+    background: #fff;
+    text-align: center;
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+}

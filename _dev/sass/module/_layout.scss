@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+@use "../library/placeholder/pseudo-block";
+
+/* ----------------------------------------------------------------
+    Layout (.lyt[-*])
+----------------------------------------------------------------- */
+/* .lyt-constrict
+----------------------------------------------- */
+.lyt-constrict {
+    max-width: 800px;
+    margin: 0 auto;
+}
