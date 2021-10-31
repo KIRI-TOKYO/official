@@ -171,7 +171,7 @@ fieldset {
 /* ----------------------------------------------------------------
     Pseudo element (Block)
 ----------------------------------------------------------------- */
-.list_item::before, .panel-02_msg::before, .link-bnr_link::before, .hdg-l2::before, .hdg-l2::after, .hdg-l2_inner::before, .hdg-l3 > span::before, .n-global_item:not(:last-child)::before, .h-menu_btn::before, .h-menu_btn::after, .h-menu_btn > span::before {
+.tab_list_item.is-select::before, .list_item::before, .panel-02_msg::before, .link-bnr_link::before, .hdg-l2::before, .hdg-l2::after, .hdg-l2_inner::before, .hdg-l3 > span::before, .n-global_item:not(:last-child)::before, .h-menu_btn::before, .h-menu_btn::after, .h-menu_btn > span::before {
   display: block;
   content: "";
 }
@@ -1495,6 +1495,20 @@ fieldset {
 }
 .tab_list_item:not(:last-child) {
   margin-right: 11px;
+}
+.tab_list_item.is-select {
+  position: relative;
+}
+.tab_list_item.is-select::before {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: translateX(-50%);
+  border-right: 22.5px solid transparent;
+  border-bottom: 25px solid #f4f0e7;
+  border-left: 22.5px solid transparent;
 }
 .tab_btn {
   display: flex;

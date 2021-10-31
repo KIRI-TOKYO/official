@@ -3,6 +3,7 @@
 @use "../core/use-setting" as set;
 @use "../library/use-import-mixin" as mx;
 @use "../library/use-import-variable" as var;
+@use "../library/placeholder/pseudo-block";
 
 /* ----------------------------------------------------------------
     Tab (.tab[-*])
@@ -24,6 +25,19 @@
 
             &:not(:last-child) {
                 margin-right: 11px;
+            }
+
+            &.is-select {
+                position: relative;
+
+                &::before {
+                    @extend %pseudo-block;
+                    @include mx.triangle(45px 25px, #f4f0e7, up);
+                    position: absolute;
+                    bottom: -40px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
             }
         }
     }
