@@ -50,6 +50,14 @@
         }
     }
 
+    &.-color-c {
+        color: #fff;
+
+        #{$root}_txt {
+            background: #1c5a90;
+        }
+    }
+
     //===== Media Queries =====
     @include mx.rwd(ss) {
         margin: 0 (-(set.$gutter-content));

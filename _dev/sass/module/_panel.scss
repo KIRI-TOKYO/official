@@ -249,6 +249,15 @@
         }
     }
 
+    &.-color-c {
+        border-color: #004678;
+        color: #004678;
+
+        #{$root}_logo {
+            fill: #004678;
+        }
+    }
+
     //===== Media Queries =====
     @include mx.rwd(ss) {
         margin: 88px auto 0;

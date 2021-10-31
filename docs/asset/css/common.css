@@ -685,6 +685,12 @@ fieldset {
 .hdg-l1.-color-b .hdg-l1_txt {
   background: #5b7e45;
 }
+.hdg-l1.-color-c {
+  color: #fff;
+}
+.hdg-l1.-color-c .hdg-l1_txt {
+  background: #1c5a90;
+}
 @media only screen and (max-width: 767px) {
   .hdg-l1 {
     align-items: flex-end;
@@ -1340,6 +1346,13 @@ fieldset {
 }
 .panel-about.-color-b .panel-about_logo {
   fill: #5b7e45;
+}
+.panel-about.-color-c {
+  border-color: #004678;
+  color: #004678;
+}
+.panel-about.-color-c .panel-about_logo {
+  fill: #004678;
 }
 @media only screen and (max-width: 767px) {
   .panel-about {
