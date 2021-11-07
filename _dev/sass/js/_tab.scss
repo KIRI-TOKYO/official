@@ -81,6 +81,17 @@
         }
     }
 
+    &.-color-a {
+        #{$root}_btn {
+            color: #9d4551;
+
+            &[aria-selected="true"] {
+                color: #fff;
+                background: #9d4551;
+            }
+        }
+    }
+
     &.-color-c {
         #{$root}_btn {
             color: #1c5a90;

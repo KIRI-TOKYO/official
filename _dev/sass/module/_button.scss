@@ -19,8 +19,10 @@
     width: 100%;
     min-height: 70px;
     border: 1px solid #505050;
+    padding: 18px;
     background: #fff;
     font-size: 2.2rem;
+    line-height: calc(33 / 22);
     color: #505050;
 
     @include mx.hover() {

@@ -42,6 +42,14 @@
         border-radius: 15px;
     }
 
+    &.-color-a {
+        color: #fff;
+
+        #{$root}_txt {
+            background: #9d4551;
+        }
+    }
+
     &.-color-b {
         color: #fff;
 
@@ -181,11 +189,15 @@
         }
     }
 
+    &.-color-a {
+        color: #9d4551;
+    }
+
     &.-color-c {
         color: #1c5a90;
     }
 
-    //===== Media Queries =====
+    //===== Media ｇりQueries =====
     @include mx.rwd(ss) {
         margin: 0 0 40px;
         font-size: 2.8rem;

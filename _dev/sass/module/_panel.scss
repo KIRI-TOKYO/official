@@ -208,6 +208,35 @@
     }
 }
 
+/* .panel-03
+----------------------------------------------- */
+.panel-03 {
+    padding: 80px 72px 96px;
+    border-radius: 15px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 5px 5px 8px rgba(51, 51, 51, .1);
+
+    &_hdg {
+        margin: 0 0 40px;
+        font-size: 4rem;
+    }
+
+    &_list-price {
+        margin: 63px 0 41px;
+
+        > dt {
+            margin: 0 0 8px;
+            font-size: 2.4rem;
+            font-weight: 700;
+        }
+    }
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+}
+
 /* .panel-about
 ----------------------------------------------- */
 .panel-about {

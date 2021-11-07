@@ -11,14 +11,19 @@
 /* .grid
 ----------------------------------------------- */
 .grid {
-    $grid-gutter: math.div(30px, set.$width-content) * 100%;
-
     display: grid;
-    grid-gap: 24px $grid-gutter;
     margin: 0 0 24px;
+
+    &.-col2 {
+        @include mx.column-grid("44px", 2);
+        $grid-gutter: math.div(44px, set.$width-content) * 100%;
+        grid-gap: 24px $grid-gutter;
+    }
 
     &.-col3 {
         @include mx.column-grid("30px", 3);
+        $grid-gutter: math.div(30px, set.$width-content) * 100%;
+        grid-gap: 24px $grid-gutter;
     }
 
     //===== Media Queries =====
