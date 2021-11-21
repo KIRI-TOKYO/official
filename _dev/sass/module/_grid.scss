@@ -26,6 +26,12 @@
         grid-gap: 24px $grid-gutter;
     }
 
+    &_col {
+        > :last-child {
+            margin-bottom: 0;
+        }
+    }
+
     //===== Media Queries =====
     @include mx.rwd(ss) {
         &.-ss-col1 {

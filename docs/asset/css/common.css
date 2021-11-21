@@ -1453,6 +1453,9 @@ fieldset {
   grid-gap: 24px 2.5%;
   grid-template-columns: repeat(3, calc((100% - (30px * (3 - 1))) / 3));
 }
+.grid_col > :last-child {
+  margin-bottom: 0;
+}
 @media only screen and (max-width: 767px) {
   .grid.-ss-col1 {
     grid-gap: 40px 0;
