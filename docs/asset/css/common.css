@@ -1511,6 +1511,105 @@ fieldset {
 }
 
 /* ----------------------------------------------------------------
+    Media (.media[-*])
+----------------------------------------------------------------- */
+/* .media
+----------------------------------------------- */
+.media {
+  margin: 0 0 54px;
+  text-align: center;
+}
+.media_item {
+  margin: 0 auto;
+  line-height: 1;
+}
+.media.-iframe .media_item > iframe {
+  aspect-ratio: 16/9;
+  width: 100%;
+}
+@media only screen and (max-width: 767px) {
+  .media {
+    margin: 0 0 32px;
+  }
+}
+
+/* .media-caption
+----------------------------------------------- */
+.media-caption {
+  margin: 17px 0 0;
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+@media only screen and (max-width: 767px) {
+  .media-caption {
+    margin-top: 14px;
+    font-size: 2rem;
+  }
+}
+
+/* .media-lyt
+----------------------------------------------- */
+.media-lyt {
+  display: flex;
+  margin: 0 0 32px;
+}
+.media-lyt_col > :first-child, .media-lyt_item > :first-child {
+  margin-top: 0;
+}
+.media-lyt_col > :last-child, .media-lyt_item > :last-child {
+  margin-bottom: 0;
+}
+.media-lyt_col {
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+@media only screen and (min-width: 768px) {
+  .media-lyt.-left {
+    flex-direction: row-reverse;
+  }
+  .media-lyt.-left > .media-lyt_item {
+    margin-right: 24px;
+  }
+  .media-lyt.-right > .media-lyt_item {
+    margin-left: 24px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .media-lyt {
+    flex-direction: column-reverse;
+    margin: 0 0 24px;
+  }
+  .media-lyt_col, .media-lyt_item {
+    flex: 0 0 auto;
+  }
+  .media-lyt_item {
+    margin: 0 0 32px;
+    text-align: center;
+  }
+  .media-lyt.-reverse-ss {
+    flex-direction: column;
+  }
+  .media-lyt.-reverse-ss .media-lyt_item {
+    margin: 32px 0 0;
+  }
+}
+
+/* .media-lyt
+----------------------------------------------- */
+.media-full {
+  margin: 80px calc(50% - 50vw);
+}
+.media-full img {
+  width: 100%;
+}
+@media only screen and (max-width: 767px) {
+  .media-full {
+    margin: 40px calc(50% - 50vw);
+  }
+}
+
+/* ----------------------------------------------------------------
     Menu
 ----------------------------------------------------------------- */
 /* .fn-menu

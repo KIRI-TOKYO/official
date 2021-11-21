@@ -1,0 +1,138 @@
+@charset "UTF-8";
+
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+@use "../library/placeholder/pseudo-block";
+
+/* ----------------------------------------------------------------
+    Media (.media[-*])
+----------------------------------------------------------------- */
+/* .media
+----------------------------------------------- */
+.media {
+    $root: &;
+
+    margin: 0 0 54px;
+    text-align: center;
+
+    &_item {
+        margin: 0 auto;
+        line-height: 1;
+    }
+
+    // iframe用
+    &.-iframe {
+        #{$root}_item {
+            > iframe {
+                aspect-ratio: 16 / 9;
+                width: 100%;
+            }
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        margin: 0 0 32px;
+    }
+}
+
+/* .media-caption
+----------------------------------------------- */
+.media-caption {
+    margin: 17px 0 0;
+    font-size: 2.4rem;
+    font-weight: 700;
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        margin-top: 14px;
+        font-size: 2rem;
+    }
+}
+
+/* .media-lyt
+----------------------------------------------- */
+.media-lyt {
+    $root: &;
+
+    display: flex;
+    margin: 0 0 32px;
+
+    &_col,
+    &_item {
+        > :first-child {
+            margin-top: 0;
+        }
+
+        > :last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    // カラム
+    &_col {
+        flex-basis: 0;
+        flex-grow: 1;
+        flex-shrink: 0;
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss, above) {
+        // 画像左
+        &.-left {
+            flex-direction: row-reverse;
+
+            > #{$root}_item {
+                margin-right: 24px;
+            }
+        }
+
+        &.-right {
+            > #{$root}_item {
+                margin-left: 24px;
+            }
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        margin: 0 0 24px;
+        flex-direction: column-reverse;
+
+        &_col,
+        &_item {
+            flex: 0 0 auto;
+        }
+
+        // 画像
+        &_item {
+            margin: 0 0 set.$gutter;
+            text-align: center;
+        }
+
+        // SP時表示交換
+        &.-reverse-ss {
+            flex-direction: column;
+
+            #{$root}_item {
+                margin: set.$gutter 0 0;
+            }
+        }
+    }
+}
+
+/* .media-lyt
+----------------------------------------------- */
+.media-full {
+    margin: 80px calc(50% - 50vw);
+
+    img {
+        width: 100%;
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        margin: 40px calc(50% - 50vw);
+    }
+}
