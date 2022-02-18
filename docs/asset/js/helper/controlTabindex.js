@@ -3,7 +3,7 @@ import {focusable} from '../config/focusable.js';
 /**
  * tabindexの操作
  */
-export class setTabindex {
+export class ControlTabindex {
     constructor() {
         this.focusable = document.querySelectorAll(focusable);
         this.tabindexClass = 'was-tabindex';

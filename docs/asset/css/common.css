@@ -171,7 +171,7 @@ fieldset {
 /* ----------------------------------------------------------------
     Pseudo element (Block)
 ----------------------------------------------------------------- */
-.tab_list_item.is-select::before, .list_item::before, .panel-02_msg::before, .panel-voice_col::before, .link-bnr_link::before, .hdg-l2::before, .hdg-l2::after, .hdg-l2_inner::before, .hdg-l3 > span::before, .n-global_item:not(:last-child)::before, .h-menu_btn::before, .h-menu_btn::after, .h-menu_btn > span::before {
+.modal_btn-close > button::before, .modal_btn-close > button::after, .tab_list_item.is-select::before, .list_item::before, .panel-02_msg::before, .panel-voice_col::before, .link-bnr_link::before, .hdg-l2::before, .hdg-l2::after, .hdg-l2_inner::before, .hdg-l3 > span::before, .n-global_item:not(:last-child)::before, .h-menu_btn::before, .h-menu_btn::after, .h-menu_btn > span::before {
   display: block;
   content: "";
 }
@@ -1841,4 +1841,183 @@ fieldset {
   overflow: hidden;
   transform: translateX(5px);
   opacity: 0;
+}
+
+/* ----------------------------------------------------------------
+    JavaScript (Modal)
+----------------------------------------------------------------- */
+/* .modal
+----------------------------------------------- */
+.modal_inner {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  min-height: calc(100vh - (40px * 2));
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.modal_content {
+  position: relative;
+  transform: translateY(80px);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+}
+.is-animate .modal_content {
+  will-change: transform;
+}
+.is-show .modal_content {
+  transform: translateY(0);
+}
+.is-hide .modal_content {
+  transition-delay: 0s;
+}
+
+.modal_hdg {
+  position: relative;
+  margin: 0;
+}
+.modal_hdg_txt {
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  right: -30px;
+  min-width: 400px;
+  padding: 50px 25px;
+  transform: translateY(-50%);
+  background: #0057a5;
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.modal_hdg_img {
+  overflow: hidden;
+  border-radius: 6px 6px 0 0;
+  background: #fff;
+}
+
+.modal_content {
+  padding: 50px 60px;
+  background: #fff;
+  text-align: left;
+}
+.modal_content > :last-child {
+  margin-bottom: 0;
+}
+
+.modal_btn-close {
+  z-index: 2;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+}
+.modal_btn-close > button {
+  box-sizing: border-box;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border: 0;
+  background: #0057a5;
+  color: transparent;
+  transition: opacity 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.modal_btn-close > button::before, .modal_btn-close > button::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 2px;
+  background: #fff;
+}
+.modal_btn-close > button::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.modal_btn-close > button::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.modal_btn-close > button:hover, .modal_btn-close > button:active, .modal_btn-close > button:focus {
+  opacity: 0.6;
+}
+
+.modal_overlay {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width: 640px) {
+  .modal_inner {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .modal_hdg_txt {
+    top: 40px;
+    right: 0;
+    min-width: 230px;
+    padding: 20px 10px;
+    transform: none;
+    font-size: 2.4rem;
+  }
+
+  .modal_content {
+    padding: 30px 20px;
+  }
+
+  .modal_btn-close {
+    width: 40px;
+    height: 40px;
+  }
+  .modal_btn-close > button {
+    width: 40px;
+    height: 40px;
+  }
+  .modal_btn-close > button::before, .modal_btn-close > button::after {
+    width: 25px;
+  }
+}
+
+/* .fn-modal
+----------------------------------------------- */
+.fn-modal {
+  display: none;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+}
+.fn-modal.is-show {
+  opacity: 1;
+}
+.fn-modal.is-render {
+  display: flex;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.fn-modal.is-animate {
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fn-modal_overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+}
+.fn-modal_overlay.is-overlay-animate {
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fn-modal_overlay.is-overlay-show {
+  z-index: 150;
+  opacity: 1;
+}
+
+html.is-modal-open {
+  overflow: hidden;
 }

@@ -1,6 +1,6 @@
 import {mediaQuery} from "../config/mediaQuery.js";
 import {setAttributes} from '../helper/setAttributes.js';
-import {setTabindex} from '../helper/setTabindex.js';
+import {ControlTabindex} from '../helper/controlTabindex.js';
 
 /**
  * メニュー
@@ -93,7 +93,7 @@ export class Menu {
      * @returns {void}
      */
     expand() {
-        const tabindex = new setTabindex();
+        const tabindex = new ControlTabindex();
 
         this.btn.setAttribute('aria-expanded', 'true');
         this.content.classList.add(this.o.animateClass, this.o.showClass);
@@ -117,7 +117,7 @@ export class Menu {
         this.header.classList.remove(this.o.menuShowClass);
 
         this.content.addEventListener('transitionend', () => {
-            const tabindex = new setTabindex();
+            const tabindex = new ControlTabindex();
 
             tabindex.revert();
             this.content.classList.remove(this.o.animateClass, this.o.showClass);
