@@ -17,14 +17,22 @@
             padding: 40px 20px;
             margin: 0 auto;
             min-height: calc(100vh - (40px * 2));
-            max-width: 1000px;
+            max-width: 1200px;
             width: 100%;
         }
 
         &_content {
             position: relative;
+            border-radius: 30px;
+            padding: 140px 10px;
+            background: #fff;
+            text-align: left;
             transform: translateY(80px);
             transition: transform .5s var.$ease-standard-curve .2s;
+
+            > :last-child {
+                margin-bottom: 0;
+            }
 
             .is-animate & {
                 will-change: transform;
@@ -39,88 +47,36 @@
             }
         }
 
-        // 見出し
-        &_hdg {
-            position: relative;
-            margin: 0;
-
-            @at-root {
-                &_txt {
-                    position: absolute;
-                    top: 50%;
-                    right: -30px;
-                    box-sizing: border-box;
-                    min-width: 400px;
-                    padding: 50px 25px;
-                    background: #0057a5;
-                    color: #fff;
-                    font-size: 3rem;
-                    font-weight: 500;
-                    text-align: left;
-                    transform: translateY(-50%);
-                }
-
-                &_img {
-                    overflow: hidden;
-                    border-radius: 6px 6px 0 0;
-                    background: #fff; // スクロール時に画像のチラツキを防止
-                }
-            }
-        }
-
-        &_content {
-            padding: 50px 60px;
-            background: #fff;
-            text-align: left;
-
-            > :last-child {
-                margin-bottom: 0;
-            }
+        &_body {
+            margin: 0 auto;
+            max-width: 800px;
+            width: 100%;
         }
 
         // 閉じるボタン
         &_btn-close {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 2;
-            width: 50px;
-            height: 50px;
+            display: flex;
+            justify-content: center;
+            margin: 57px 0 0;
+        }
 
-            > button {
-                position: relative;
-                box-sizing: border-box;
-                padding: 0;
-                border: 0;
-                width: 50px;
-                height: 50px;
-                background: #0057a5;
-                color: transparent;
-                transition: opacity .1s var.$ease-standard-curve;
+        &_btn-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100vh;
+            max-width: 280px;
+            width: 100%;
+            border: 2px solid #505050;
+            min-height: 70px;
+            color: #505050;
+            background: #fff;
+            font-size: 2.2rem;
+            font-weight: 700;
 
-                //×
-                &::before,
-                &::after {
-                    @extend %pseudo-block;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    width: 32px;
-                    height: 2px;
-                    background: #fff;
-                }
-
-                &::before {
-                    transform: translate(-50%, -50%) rotate(45deg);
-                }
-
-                &::after {
-                    transform: translate(-50%, -50%) rotate(-45deg);
-                }
-
-                @include mx.hover () {
-                    opacity: .6;
-                }
+            @include mx.hover() {
+                background: #505050;
+                color: #fff;
             }
         }
 

@@ -171,7 +171,7 @@ fieldset {
 /* ----------------------------------------------------------------
     Pseudo element (Block)
 ----------------------------------------------------------------- */
-.modal_btn-close > button::before, .modal_btn-close > button::after, .tab_list_item.is-select::before, .list_item::before, .panel-02_msg::before, .panel-voice_col::before, .link-bnr_link::before, .hdg-l2::before, .hdg-l2::after, .hdg-l2_inner::before, .hdg-l3 > span::before, .n-global_item:not(:last-child)::before, .h-menu_btn::before, .h-menu_btn::after, .h-menu_btn > span::before {
+.tab_list_item.is-select::before, .list_item::before, .panel-02_msg::before, .panel-voice_col::before, .link-bnr_link::before, .hdg-l2::before, .hdg-l2::after, .hdg-l2_inner::before, .hdg-l3 > span::before, .n-global_item:not(:last-child)::before, .h-menu_btn::before, .h-menu_btn::after, .h-menu_btn > span::before {
   display: block;
   content: "";
 }
@@ -1851,7 +1851,7 @@ fieldset {
 .modal_inner {
   position: relative;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   min-height: calc(100vh - (40px * 2));
   margin: 0 auto;
   padding: 40px 20px;
@@ -1859,8 +1859,15 @@ fieldset {
 
 .modal_content {
   position: relative;
+  padding: 140px 10px;
   transform: translateY(80px);
+  border-radius: 30px;
+  background: #fff;
+  text-align: left;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+}
+.modal_content > :last-child {
+  margin-bottom: 0;
 }
 .is-animate .modal_content {
   will-change: transform;
@@ -1872,75 +1879,35 @@ fieldset {
   transition-delay: 0s;
 }
 
-.modal_hdg {
-  position: relative;
-  margin: 0;
-}
-.modal_hdg_txt {
-  box-sizing: border-box;
-  position: absolute;
-  top: 50%;
-  right: -30px;
-  min-width: 400px;
-  padding: 50px 25px;
-  transform: translateY(-50%);
-  background: #0057a5;
-  color: #fff;
-  font-size: 3rem;
-  font-weight: 500;
-  text-align: left;
-}
-
-.modal_hdg_img {
-  overflow: hidden;
-  border-radius: 6px 6px 0 0;
-  background: #fff;
-}
-
-.modal_content {
-  padding: 50px 60px;
-  background: #fff;
-  text-align: left;
-}
-.modal_content > :last-child {
-  margin-bottom: 0;
+.modal_body {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .modal_btn-close {
-  z-index: 2;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 50px;
-  height: 50px;
+  display: flex;
+  justify-content: center;
+  margin: 57px 0 0;
 }
-.modal_btn-close > button {
-  box-sizing: border-box;
-  position: relative;
-  width: 50px;
-  height: 50px;
-  padding: 0;
-  border: 0;
-  background: #0057a5;
-  color: transparent;
-  transition: opacity 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.modal_btn-close > button::before, .modal_btn-close > button::after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 32px;
-  height: 2px;
+
+.modal_btn-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 280px;
+  min-height: 70px;
+  border: 2px solid #505050;
+  border-radius: 100vh;
   background: #fff;
+  color: #505050;
+  font-size: 2.2rem;
+  font-weight: 700;
 }
-.modal_btn-close > button::before {
-  transform: translate(-50%, -50%) rotate(45deg);
-}
-.modal_btn-close > button::after {
-  transform: translate(-50%, -50%) rotate(-45deg);
-}
-.modal_btn-close > button:hover, .modal_btn-close > button:active, .modal_btn-close > button:focus {
-  opacity: 0.6;
+.modal_btn-item:hover, .modal_btn-item:active, .modal_btn-item:focus {
+  background: #505050;
+  color: #fff;
 }
 
 .modal_overlay {
