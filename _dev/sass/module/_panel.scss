@@ -161,6 +161,17 @@
     }
 
     //===== Media Queries =====
+    @include mx.rwd(ss, above) {
+        &_lyt {
+            &_col-02 {
+                > :first-child {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+
+    //===== Media Queries =====
     @include mx.rwd(ss) {
         margin: 56px 0;
         padding: 40px 12px;
@@ -266,6 +277,15 @@
         > b {
             color: inherit;
             letter-spacing: .5rem;
+        }
+    }
+
+    &.-color-a {
+        border-color: #9d4551;
+        color: #9d4551;
+
+        #{$root}_logo {
+            fill: #9d4551;
         }
     }
 

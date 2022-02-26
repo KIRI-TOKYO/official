@@ -733,7 +733,7 @@ fieldset {
 ----------------------------------------------- */
 .hdg-l2 {
   position: relative;
-  margin: 0 0 32px;
+  margin: 144px 0 32px;
   padding: 0 0 27px;
   font-size: 5rem;
   text-align: center;
@@ -768,6 +768,7 @@ fieldset {
 }
 @media only screen and (max-width: 767px) {
   .hdg-l2 {
+    margin-top: 88px;
     font-size: 2.8rem;
     line-height: calc(34 / 28);
   }
@@ -1295,6 +1296,11 @@ fieldset {
 .panel-02_msg_inner > :last-child {
   margin-bottom: 0;
 }
+@media only screen and (min-width: 768px) {
+  .panel-02_lyt_col-02 > :first-child {
+    margin-top: 0;
+  }
+}
 @media only screen and (max-width: 767px) {
   .panel-02 {
     margin: 56px 0;
@@ -1382,6 +1388,13 @@ fieldset {
 .panel-about_txt > b {
   color: inherit;
   letter-spacing: 0.5rem;
+}
+.panel-about.-color-a {
+  border-color: #9d4551;
+  color: #9d4551;
+}
+.panel-about.-color-a .panel-about_logo {
+  fill: #9d4551;
 }
 .panel-about.-color-b {
   border-color: #5b7e45;
@@ -1818,6 +1831,14 @@ fieldset {
 /* ----------------------------------------------------------------
     Tab (.tab[-*])
 ----------------------------------------------------------------- */
+/* .tab-content-inner
+----------------------------------------------- */
+.tab-content-inner > :first-child {
+  margin-top: 0;
+}
+
+/* .tab
+----------------------------------------------- */
 .tab {
   margin: 40px 0 32px;
 }
