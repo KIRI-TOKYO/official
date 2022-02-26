@@ -19,3 +19,129 @@
         padding: 0 12px;
     }
 }
+
+/* .lyt-voice
+----------------------------------------------- */
+.lyt-voice {
+    &_header {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        margin: 0 0 64px;
+    }
+
+    &_col,
+    &_img {
+        > :first-child {
+            margin-top: 0;
+        }
+
+        > :last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &_col {
+        margin: 0 0 0 40px;
+        flex-basis: 0;
+        flex-grow: 1;
+        flex-shrink: 0;
+    }
+
+    &_hdg {
+        margin: 0 0 26px;
+        font-size: 3.2rem;
+    }
+
+    &_list-desc {
+        > :last-child {
+            margin-bottom: 0;
+        }
+
+        &_inner {
+            display: flex;
+            align-items: center;
+            margin: 0 0 20px;
+        }
+
+        &_title {
+            margin: 0 8px 0 0;
+        }
+    }
+
+    &_label {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0 20px;
+        border-radius: 4px;
+        background: #f4f0e7;
+        font-size: 1.8rem;
+
+        &.-color-a {
+            background: #9d4551;
+            color: #fff;
+        }
+
+        &.-color-b {
+            background: #5b7e45;
+            color: #fff;
+        }
+
+        &.-color-c {
+            background: #1c5a90;
+            color: #fff;
+        }
+    }
+
+    &_body {
+        text-align: center;
+
+        > :last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &_txt-lead {
+        font-size: 4.8rem;
+        line-height: 1.5;
+
+        > b {
+            font-weight: 400;
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        &_header {
+            flex-direction: column-reverse;
+            margin: 0 0 48px;
+        }
+
+        &_col {
+            margin: 0;
+        }
+
+        &_img {
+            margin: 0 0 24px;
+        }
+
+        &_hdg {
+            font-size: 2.6rem;
+        }
+
+        &_list-desc {
+            &_inner {
+                margin: 0 0 16px;
+            }
+        }
+
+        &_label {
+            padding: 0 12px;
+        }
+
+        &_txt-lead {
+            font-size: 2.4rem;
+        }
+    }
+}

@@ -1557,6 +1557,100 @@ fieldset {
   }
 }
 
+/* .lyt-voice
+----------------------------------------------- */
+.lyt-voice_header {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  margin: 0 0 64px;
+}
+.lyt-voice_col > :first-child, .lyt-voice_img > :first-child {
+  margin-top: 0;
+}
+.lyt-voice_col > :last-child, .lyt-voice_img > :last-child {
+  margin-bottom: 0;
+}
+.lyt-voice_col {
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 0;
+  margin: 0 0 0 40px;
+}
+.lyt-voice_hdg {
+  margin: 0 0 26px;
+  font-size: 3.2rem;
+}
+.lyt-voice_list-desc > :last-child {
+  margin-bottom: 0;
+}
+.lyt-voice_list-desc_inner {
+  display: flex;
+  align-items: center;
+  margin: 0 0 20px;
+}
+.lyt-voice_list-desc_title {
+  margin: 0 8px 0 0;
+}
+.lyt-voice_label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 20px;
+  border-radius: 4px;
+  background: #f4f0e7;
+  font-size: 1.8rem;
+}
+.lyt-voice_label.-color-a {
+  background: #9d4551;
+  color: #fff;
+}
+.lyt-voice_label.-color-b {
+  background: #5b7e45;
+  color: #fff;
+}
+.lyt-voice_label.-color-c {
+  background: #1c5a90;
+  color: #fff;
+}
+.lyt-voice_body {
+  text-align: center;
+}
+.lyt-voice_body > :last-child {
+  margin-bottom: 0;
+}
+.lyt-voice_txt-lead {
+  font-size: 4.8rem;
+  line-height: 1.5;
+}
+.lyt-voice_txt-lead > b {
+  font-weight: 400;
+}
+@media only screen and (max-width: 767px) {
+  .lyt-voice_header {
+    flex-direction: column-reverse;
+    margin: 0 0 48px;
+  }
+  .lyt-voice_col {
+    margin: 0;
+  }
+  .lyt-voice_img {
+    margin: 0 0 24px;
+  }
+  .lyt-voice_hdg {
+    font-size: 2.6rem;
+  }
+  .lyt-voice_list-desc_inner {
+    margin: 0 0 16px;
+  }
+  .lyt-voice_label {
+    padding: 0 12px;
+  }
+  .lyt-voice_txt-lead {
+    font-size: 2.4rem;
+  }
+}
+
 /* ----------------------------------------------------------------
     List (.list[-*])
 ----------------------------------------------------------------- */
@@ -1849,16 +1943,14 @@ fieldset {
 /* .modal
 ----------------------------------------------- */
 .modal_inner {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
   min-height: calc(100vh - (40px * 2));
-  margin: 0 auto;
   padding: 40px 20px;
 }
 
 .modal_content {
   position: relative;
+  width: 100%;
+  max-width: 1200px;
   padding: 140px 10px;
   transform: translateY(80px);
   border-radius: 30px;
@@ -1916,33 +2008,22 @@ fieldset {
 
 @media only screen and (max-width: 640px) {
   .modal_inner {
-    padding-right: 0;
-    padding-left: 0;
-  }
-
-  .modal_hdg_txt {
-    top: 40px;
-    right: 0;
-    min-width: 230px;
-    padding: 20px 10px;
-    transform: none;
-    font-size: 2.4rem;
+    padding-right: 20px;
+    padding-left: 20px;
   }
 
   .modal_content {
-    padding: 30px 20px;
+    padding: 50px 22px;
   }
 
   .modal_btn-close {
-    width: 40px;
-    height: 40px;
+    margin: 40px 0 0;
   }
-  .modal_btn-close > button {
-    width: 40px;
-    height: 40px;
-  }
-  .modal_btn-close > button::before, .modal_btn-close > button::after {
-    width: 25px;
+
+  .modal_btn-item {
+    width: 100%;
+    min-height: 60px;
+    font-size: 1.8rem;
   }
 }
 
@@ -1962,12 +2043,20 @@ fieldset {
   opacity: 1;
 }
 .fn-modal.is-render {
-  display: flex;
+  display: block;
   overflow-x: hidden;
   overflow-y: auto;
 }
 .fn-modal.is-animate {
   transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fn-modal_inner {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  margin-right: auto;
+  margin-left: auto;
 }
 .fn-modal_overlay {
   position: fixed;

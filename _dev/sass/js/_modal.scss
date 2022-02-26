@@ -13,18 +13,16 @@
 .modal {
     @at-root {
         &_inner {
-            position: relative;
             padding: 40px 20px;
-            margin: 0 auto;
             min-height: calc(100vh - (40px * 2));
-            max-width: 1200px;
-            width: 100%;
         }
 
         &_content {
             position: relative;
             border-radius: 30px;
             padding: 140px 10px;
+            max-width: 1200px;
+            width: 100%;
             background: #fff;
             text-align: left;
             transform: translateY(80px);
@@ -90,42 +88,23 @@
     @include mx.rwd(set.$width-extra-small) {
         @at-root {
             &_inner {
-                padding-right: 0;
-                padding-left: 0;
-            }
-
-            // 見出し
-            &_hdg {
-                @at-root {
-                    &_txt {
-                        top: 40px;
-                        right: 0;
-                        padding: 20px 10px;
-                        min-width: 230px;
-                        font-size: 2.4rem;
-                        transform: none;
-                    }
-                }
+                padding-right: set.$gutter-content;
+                padding-left: set.$gutter-content;
             }
 
             &_content {
-                padding: 30px 20px;
+                padding: 50px 22px;
             }
 
             // 閉じるボタン
             &_btn-close {
-                width: 40px;
-                height: 40px;
+                margin: 40px 0 0;
+            }
 
-                > button {
-                    width: 40px;
-                    height: 40px;
-
-                    &::before,
-                    &::after {
-                        width: 25px;
-                    }
-                }
+            &_btn-item {
+                width: 100%;
+                min-height: 60px;
+                font-size: 1.8rem;
             }
         }
     }
@@ -148,13 +127,22 @@
     }
 
     &.is-render {
-        display: flex;
+        display: block;
         overflow-x: hidden;
         overflow-y: auto;
     }
 
     &.is-animate {
         transition: opacity .5s var.$ease-standard-curve;
+    }
+
+    &_inner {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: auto;
+        margin-left: auto;
     }
 
     &_overlay {
