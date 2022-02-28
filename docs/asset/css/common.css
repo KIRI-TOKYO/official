@@ -1165,6 +1165,33 @@ fieldset {
   }
 }
 
+/* .btn-list
+----------------------------------------------- */
+.btn-list {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0 32px -30px;
+}
+.btn-list_item {
+  flex: 1;
+  margin: 0 0 0 30px;
+}
+@media only screen and (max-width: 767px) {
+  .btn-list {
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 32px 0 32px;
+  }
+  .btn-list_item {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 24px;
+  }
+  .btn-list_item:last-child {
+    margin-bottom: 0;
+  }
+}
+
 /* ----------------------------------------------------------------
     Panel (.panel[-*])
 ----------------------------------------------------------------- */
