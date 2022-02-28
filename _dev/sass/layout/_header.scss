@@ -16,7 +16,7 @@
     background: #fff;
 
     //===== Media Queries =====
-    @include mx.rwd(ss) {
+    @include mx.rwd(set.$width-content-bp) {
         position: relative;
         z-index: 10;
         padding: 20px 0;
@@ -37,13 +37,9 @@
 
     //===== Media Queries =====
     @include mx.rwd(set.$width-content-bp) {
+        display: block;
         padding-right: set.$gutter-content;
         padding-left: set.$gutter-content;
-    }
-
-    //===== Media Queries =====
-    @include mx.rwd(ss) {
-        display: block;
     }
 }
 
@@ -52,10 +48,11 @@
 .h-logo {
     position: relative;
     z-index: 1;
+    flex: 0 0 1;
     margin: 0 48px 0 0;
 
     //===== Media Queries =====
-    @include mx.rwd(ss) {
+    @include mx.rwd(set.$width-content-bp) {
         margin: 0;
         width: 96px;
     }
@@ -127,7 +124,7 @@
     }
 
     //===== Media Queries =====
-    @include mx.rwd(ss) {
+    @include mx.rwd(set.$width-content-bp) {
         margin: 0 (-(set.$gutter-content));
 
         &_content {

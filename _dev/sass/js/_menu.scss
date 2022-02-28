@@ -22,7 +22,7 @@
     }
 
     //===== Media Queries =====
-    @include mx.rwd(ss) {
+    @include mx.rwd(set.$width-content-bp) {
         &_content {
             visibility: hidden;
             transform: translateY(-10px);

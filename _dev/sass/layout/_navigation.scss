@@ -77,7 +77,7 @@
     }
 
     //===== Media Queries =====
-    @include mx.rwd(ss) {
+    @include mx.rwd(set.$width-content-bp) {
         overflow-y: auto;
         height: calc(100vh - 80px);
         padding: 27px 0;

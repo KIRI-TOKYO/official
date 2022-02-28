@@ -185,7 +185,7 @@ fieldset {
   padding: 30px 0;
   background: #fff;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1240px) {
   .header {
     z-index: 10;
     position: relative;
@@ -206,13 +206,9 @@ fieldset {
 }
 @media only screen and (max-width: 1240px) {
   .h-inner {
+    display: block;
     padding-right: 20px;
     padding-left: 20px;
-  }
-}
-@media only screen and (max-width: 767px) {
-  .h-inner {
-    display: block;
   }
 }
 
@@ -221,9 +217,10 @@ fieldset {
 .h-logo {
   z-index: 1;
   position: relative;
+  flex: 0 0 1;
   margin: 0 48px 0 0;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1240px) {
   .h-logo {
     width: 96px;
     margin: 0;
@@ -278,7 +275,7 @@ fieldset {
 .h-menu_btn > span::before {
   top: 12px;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1240px) {
   .h-menu {
     margin: 0 -20px;
   }
@@ -346,7 +343,7 @@ fieldset {
   color: #fff;
   font-weight: 400;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1240px) {
   .n-global {
     height: calc(100vh - 80px);
     padding: 27px 0;
@@ -1895,7 +1892,7 @@ fieldset {
   left: 0;
   color: transparent;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1240px) {
   .fn-menu_content {
     visibility: hidden;
     transform: translateY(-10px);
