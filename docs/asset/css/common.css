@@ -171,7 +171,7 @@ fieldset {
 /* ----------------------------------------------------------------
     Pseudo element (Block)
 ----------------------------------------------------------------- */
-.tab_list_item.is-select::before, .list_item::before, .panel-02_msg::before, .panel-voice_col::before, .link-bnr_link::before, .hdg-l2::before, .hdg-l2::after, .hdg-l2_inner::before, .hdg-l3 > span::before, .n-global_item:not(:last-child)::before, .h-menu_btn::before, .h-menu_btn::after, .h-menu_btn > span::before {
+.tab_list_item.is-select::before, .list_item::before, .list-flow_item:not(:last-child)::after, .panel-02_msg::before, .panel-voice_col::before, .link-bnr_link::before, .hdg-l2::before, .hdg-l2::after, .hdg-l2_inner::before, .hdg-l3 > span::before, .n-global_item:not(:last-child)::before, .h-menu_btn::before, .h-menu_btn::after, .h-menu_btn > span::before {
   display: block;
   content: "";
 }
@@ -1726,6 +1726,65 @@ fieldset {
   }
 }
 
+/* .list-flow
+----------------------------------------------- */
+.list-flow {
+  display: flex;
+}
+.list-flow_item {
+  position: relative;
+  flex: 1;
+  padding: 48px 35px 57px;
+  border-radius: 15px;
+  background: #f4f0e7;
+  text-align: center;
+}
+.list-flow_item:not(:last-child) {
+  margin: 0 69px 0 0;
+}
+.list-flow_item:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  right: -47px;
+  width: 0;
+  height: 0;
+  transform: translateY(-50%);
+  border-top: 22.5px solid transparent;
+  border-bottom: 22.5px solid transparent;
+  border-left: 25px solid #9d4551;
+}
+.list-flow_title {
+  display: block;
+  margin: 0 0 33px;
+  color: #9d4551;
+  font-size: 2.4rem;
+  line-height: 1.58;
+}
+@media only screen and (max-width: 767px) {
+  .list-flow {
+    flex-direction: column;
+  }
+  .list-flow_item {
+    padding: 32px 36px 36px;
+  }
+  .list-flow_item:not(:last-child) {
+    margin: 0 0 47px;
+  }
+  .list-flow_item:not(:last-child)::after {
+    top: auto;
+    bottom: -57px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top: 20px solid #9d4551;
+    border-right: 17.5px solid transparent;
+    border-left: 17.5px solid transparent;
+  }
+  .list-flow_title {
+    margin: 0 0 17px;
+    font-size: 2rem;
+  }
+}
+
 /* ----------------------------------------------------------------
     Media (.media[-*])
 ----------------------------------------------------------------- */
@@ -1952,6 +2011,7 @@ fieldset {
 }
 @media only screen and (max-width: 767px) {
   .tab_list {
+    justify-content: flex-start;
     overflow-x: auto;
     font-size: 1.4rem;
   }

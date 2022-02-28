@@ -125,6 +125,7 @@
     @include mx.rwd(ss) {
 
         &_list {
+            justify-content: flex-start;
             overflow-x: auto;
             font-size: 1.4rem;
 
