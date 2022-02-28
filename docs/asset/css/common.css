@@ -1278,9 +1278,11 @@ fieldset {
   flex-basis: 45.2425373134%;
 }
 .panel-02_lyt_col-02 {
+  flex: 1;
   margin: 0 0 0 62px;
 }
 .panel-02_media {
+  aspect-ratio: 16/9;
   width: 100%;
 }
 .panel-02_list {
