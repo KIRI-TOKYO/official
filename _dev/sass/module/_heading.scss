@@ -144,6 +144,10 @@
         text-transform: uppercase;
     }
 
+    .t-lyt_content & {
+        margin-top: 0;
+    }
+
     //===== Media Queries =====
     @include mx.rwd(ss) {
         margin-top: 88px;
@@ -220,6 +224,10 @@
     padding: 0 16px 16px;
     border-bottom: 1px solid #707070;
     font-size: 3.2rem;
+
+    .panel-02_msg & {
+        margin-top: 0;
+    }
 
     //===== Media Queries =====
     @include mx.rwd(ss) {

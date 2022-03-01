@@ -84,6 +84,7 @@
   .t-hero {
     margin: 0;
     padding: 17px 0 245px;
+    overflow-x: hidden;
   }
   .t-hero_inner {
     position: static;
@@ -135,6 +136,11 @@
     height: 276px;
   }
 }
+@media only screen and (max-width: 490px) {
+  .t-hero_img > img {
+    height: auto;
+  }
+}
 
 /* .t-lyt
 ----------------------------------------------- */
@@ -181,6 +187,9 @@
     align-items: center;
     margin: 0 -20px 88px;
     padding: 0;
+  }
+  .t-lyt:first-child {
+    margin-bottom: 0;
   }
   .t-lyt_content {
     width: 100%;

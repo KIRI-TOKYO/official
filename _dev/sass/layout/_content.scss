@@ -102,8 +102,8 @@
 
     //===== Media Queries =====
     @include mx.rwd(ss) {
-        padding: 47px 12px;
-        background-attachment: fixed;
+        padding: 0 12px 47px;
+        background-image: none;
     }
 }
 

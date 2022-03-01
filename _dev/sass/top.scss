@@ -95,6 +95,7 @@
 
     //===== Media Queries =====
     @include mx.rwd(ss) {
+        overflow-x: hidden;
         margin: 0;
         padding: 17px 0 245px;
 
@@ -157,6 +158,15 @@
             }
         }
     }
+
+    //===== Media Queries =====
+    @include mx.rwd(490px) {
+        &_img {
+            > img {
+                height: auto;
+            }
+        }
+    }
 }
 
 /* .t-lyt
@@ -211,6 +221,10 @@
         align-items: center;
         margin: 0 (-(set.$gutter-content)) 88px;
         padding: 0;
+
+        &:first-child {
+            margin-bottom: 0;
+        }
 
         &_content {
             width: 100%;

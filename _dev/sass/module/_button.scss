@@ -24,6 +24,7 @@
     font-size: 2.2rem;
     line-height: calc(33 / 22);
     color: #505050;
+    transition: .2s var.$ease-standard-curve;
 
     @include mx.hover() {
         color: #fff;
@@ -85,6 +86,7 @@
     font-size: 2.8rem;
     font-weight: 700;
     color: #fff;
+    transition: .2s var.$ease-standard-curve;
 
     @include mx.hover() {
         color: #505050;

@@ -54,6 +54,7 @@
 
     &_link {
         text-align: center;
+        transition: opacity .2s var.$ease-standard-curve;
 
         > span {
             display: block;
@@ -61,6 +62,11 @@
 
         > b {
             display: none;
+        }
+
+        @include mx.hover() {
+            color: set.$color-font;
+            opacity: .3;
         }
     }
 
@@ -71,9 +77,16 @@
         border-radius: 100vh;
         min-width: 200px;
         min-height: 60px;
+        border: 2px solid #505050;
         background: #505050;
         color: #fff;
         font-weight: 400;
+        transition: .2s var.$ease-standard-curve;
+
+        @include mx.hover() {
+            color: #505050;
+            background: #fff;
+        }
     }
 
     //===== Media Queries =====

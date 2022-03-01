@@ -2,6 +2,7 @@
 
 @use "../core/use-setting" as set;
 @use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
 @use "../library/placeholder/centering";
 @use "../library/placeholder/pseudo-block";
 
@@ -130,6 +131,14 @@
     &_item {
         &:not(:last-child) {
             margin: 0 36px 0 0;
+        }
+
+        > a {
+            transition: opacity .2s var.$ease-standard-curve;
+
+            @include mx.hover() {
+                opacity: .3;
+            }
         }
     }
 

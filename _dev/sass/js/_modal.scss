@@ -85,7 +85,7 @@
     }
 
     //===== Media Queries =====
-    @include mx.rwd(set.$width-extra-small) {
+    @include mx.rwd(ss) {
         @at-root {
             &_inner {
                 padding-right: set.$gutter-content;
