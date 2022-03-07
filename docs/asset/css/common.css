@@ -700,19 +700,19 @@ fieldset {
   color: #fff;
 }
 .hdg-l1.-color-a .hdg-l1_txt {
-  background: #9d4551;
+  background: rgba(157, 69, 81, 0.85);
 }
 .hdg-l1.-color-b {
   color: #fff;
 }
 .hdg-l1.-color-b .hdg-l1_txt {
-  background: #5b7e45;
+  background: rgba(91, 126, 69, 0.85);
 }
 .hdg-l1.-color-c {
   color: #fff;
 }
 .hdg-l1.-color-c .hdg-l1_txt {
-  background: #1c5a90;
+  background: rgba(28, 90, 144, 0.85);
 }
 @media only screen and (max-width: 767px) {
   .hdg-l1 {
