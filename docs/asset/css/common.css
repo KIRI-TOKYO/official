@@ -75,12 +75,13 @@ body {
 a {
   color: #000;
   text-decoration: underline;
+  transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 a[class] {
   text-decoration: none;
 }
 a:hover, a:active, a:focus {
-  color: #f00;
+  color: #b3b3b3;
   text-decoration: none;
 }
 
