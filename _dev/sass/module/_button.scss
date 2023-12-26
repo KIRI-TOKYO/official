@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+@use "../library/placeholder/pseudo-block";
+
+/* ----------------------------------------------------------------
+    Button (.btn[-*])
+----------------------------------------------------------------- */
+/* .btn
+----------------------------------------------- */
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100vh;
+    max-width: 420px;
+    width: 100%;
+    min-height: 70px;
+    border: 1px solid #505050;
+    padding: 18px;
+    background: #fff;
+    font-size: 2.2rem;
+    line-height: calc(33 / 22);
+    color: #505050;
+    transition: .2s var.$ease-standard-curve;
+
+    @include mx.hover() {
+        color: #fff;
+        background: #505050;
+    }
+
+    &.-color-a {
+        border-color: #9d4551;
+        background: #9d4551;
+        color: #fff;
+
+        @include mx.hover() {
+            color: #9d4551;
+            background: #fff;
+        }
+    }
+
+    &.-color-b {
+        border-color: #5b7e45;
+        background: #5b7e45;
+        color: #fff;
+
+        @include mx.hover() {
+            color: #5b7e45;
+            background: #fff;
+        }
+    }
+
+    &.-color-c {
+        border-color: #1c5a90;
+        background: #1c5a90;
+        color: #fff;
+
+        @include mx.hover() {
+            color: #1c5a90;
+            background: #fff;
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        min-height: 60px;
+        font-size: 1.8rem;
+    }
+}
+
+/* .btn-cv
+----------------------------------------------- */
+.btn-cv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100vh;
+    max-width: 420px;
+    width: 100%;
+    border: 2px solid #505050;
+    min-height: 90px;
+    background: #505050;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #fff;
+    transition: .2s var.$ease-standard-curve;
+
+    @include mx.hover() {
+        color: #505050;
+        background: #fff;
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        min-height: 64px;
+        font-size: 1.8rem;
+    }
+}
+
+/* .btn-lyt
+----------------------------------------------- */
+.btn-lyt {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        margin: 32px 0;
+    }
+}
+
+/* .btn-list
+----------------------------------------------- */
+.btn-list {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 0 set.$gutter -30px;
+
+    &_item {
+        flex: 1;
+        margin: 0 0 0 30px;
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        margin: 32px 0 set.$gutter;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        &_item {
+            display: flex;
+            justify-content: center;
+            margin: 0 0 24px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

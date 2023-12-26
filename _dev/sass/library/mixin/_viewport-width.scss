@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+@use "sass:math";
 @use "../../core/use-setting" as set;
 
 // Presentation:
@@ -8,6 +9,6 @@
 // Example:
 // @include vw('height', 490px);
 //************************************************************************
-@mixin vw($property, $val, $vw: set.$psd-width) {
-    #{$property}: (floor(($val / $vw) * 100) + vw);
+@mixin vw($property, $val, $vw: set.$design-width) {
+    #{$property}: (floor(math.div($val, $vw) * 100) + vw);
 }

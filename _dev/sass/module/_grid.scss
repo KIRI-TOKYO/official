@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+@use "sass:math";
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+
+/* ----------------------------------------------------------------
+    Grid (.grid[-*])
+----------------------------------------------------------------- */
+/* .grid
+----------------------------------------------- */
+.grid {
+    display: grid;
+    margin: 0 0 24px;
+
+    &.-col2 {
+        @include mx.column-grid("44px", 2);
+        $grid-gutter: math.div(44px, set.$width-content) * 100%;
+        grid-gap: 60px $grid-gutter;
+    }
+
+    &.-col3 {
+        @include mx.column-grid("30px", 3);
+        $grid-gutter: math.div(30px, set.$width-content) * 100%;
+        grid-gap: 60px $grid-gutter;
+    }
+
+    &_col {
+        > :last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        &.-ss-col1 {
+            grid-gap: 40px 0;
+            grid-template-columns: repeat(1, 100%);
+        }
+
+        .txt-lead + & {
+            margin-top: 32px;
+        }
+    }
+}

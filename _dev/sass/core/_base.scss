@@ -21,11 +21,17 @@ body {
     font-size: #{set.$font-size} + #{set.$font-unit};
     font-weight: 400;
     line-height: set.$design-line-height;
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        font-size: 1.6rem;
+    }
 }
 
 a {
     color: set.$color-link;
     text-decoration: underline;
+    transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
     &[class] {
         text-decoration: none;

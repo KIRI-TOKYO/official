@@ -1,0 +1,266 @@
+@charset "UTF-8";
+
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+@use "../library/placeholder/pseudo-block";
+
+/* ----------------------------------------------------------------
+    Heading (.hdg[-*])
+----------------------------------------------------------------- */
+/* .hdg-l1
+----------------------------------------------- */
+.hdg-l1 {
+    $root: &;
+
+    display: flex;
+    align-items: center;
+
+    &_txt {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 -160px 0 0;
+        min-height: 360px;
+        min-width: 360px;
+        border-radius: 50%;
+        background: rgba(244, 240, 231, 0.85);
+        filter: drop-shadow(5px 5px 8px rgba(51, 51, 51, 0.15));
+        font-size: 4.5rem;
+        line-height: calc(55 / 45);
+
+        > span {
+            display: block;
+        }
+    }
+
+    &_img {
+        overflow: hidden;
+        border-radius: 15px;
+    }
+
+    &.-color-a {
+        color: #fff;
+
+        #{$root}_txt {
+            background: rgba(157, 69, 81, 0.85);
+        }
+    }
+
+    &.-color-b {
+        color: #fff;
+
+        #{$root}_txt {
+            background: rgb(91, 126, 69, 0.85);
+        }
+    }
+
+    &.-color-c {
+        color: #fff;
+
+        #{$root}_txt {
+            background: rgb(28, 90, 144, 0.85);
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        margin: 0 (-(set.$gutter-content));
+        align-items: flex-end;
+
+        &_txt {
+            left: -10px;
+            min-height: 200px;
+            min-width: 200px;
+            font-size: 2.5rem;
+            line-height: calc(37 / 25);
+        }
+
+        &_img {
+            position: relative;
+            margin: 0 0 48px;
+            height: 240px;
+            width: 100%;
+            border-radius: 15px 0 0 15px;
+
+            > img {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                max-width: none;
+                width: auto;
+                height: 100%;
+            }
+        }
+    }
+}
+
+/* .hdg-l2
+----------------------------------------------- */
+.hdg-l2 {
+    position: relative;
+    margin: 144px 0 32px;
+    padding: 0 0 27px;
+    font-size: 5rem;
+    text-align: center;
+
+    // ●
+    &::before,
+    &::after,
+    &_inner::before {
+        @extend %pseudo-block;
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        opacity: .8;
+    }
+
+    &::before {
+        background: #9d4551;
+        transform: translateX(calc(-50% - 10px));
+    }
+
+    &::after {
+        background: #5b7e45;
+        transform: translateX(-50%);
+    }
+
+    &_inner::before {
+        background: #1c5a90;
+        transform: translateX(calc(-50% + 10px));
+    }
+
+    &_sub {
+        display: block;
+        font-size: 2.4rem;
+        font-weight: 400;
+        color: #999;
+        text-transform: uppercase;
+    }
+
+    .t-lyt_content & {
+        margin-top: 0;
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        margin-top: 88px;
+        font-size: 2.8rem;
+        line-height: calc(34 / 28);
+
+        &_sub {
+            margin: 8px 0 0;
+            font-size: 1.8rem;
+        }
+
+        &_break {
+            display: block;
+        }
+    }
+}
+
+/* .hdg-l3
+----------------------------------------------- */
+.hdg-l3 {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 60px;
+    font-size: 4.8rem;
+    line-height: calc(72 / 48);
+    text-align: center;
+
+    > span {
+        position: relative;
+        z-index: 1;
+        padding: 0 44px;
+
+        &::before {
+            @extend %pseudo-block;
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            z-index: -1;
+            width: 100%;
+            height: 72%;
+            border-radius: 100vh;
+            background: #fff;
+            transform: translateX(-50%);
+        }
+    }
+
+    &.-color-a {
+        color: #9d4551;
+    }
+
+    &.-color-c {
+        color: #1c5a90;
+    }
+
+    //===== Media ｇりQueries =====
+    @include mx.rwd(ss) {
+        margin: 0 0 40px;
+        font-size: 2.8rem;
+
+        > span {
+            padding: 0 32px;
+
+            &::before {
+                bottom: -8px;
+            }
+        }
+    }
+}
+
+/* .hdg-l4
+----------------------------------------------- */
+.hdg-l4 {
+    margin: 63px 0 32px;
+    padding: 0 16px 16px;
+    border-bottom: 1px solid #707070;
+    font-size: 3.2rem;
+
+    .panel-02_msg & {
+        margin-top: 0;
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        margin: 32px 0 24px;
+        padding: 0 8px 8px;
+        font-size: 2.4rem;
+    }
+}
+
+/* .hdg-soon
+----------------------------------------------- */
+.hdg-soon {
+    font-size: 1.6rem;
+    font-weight: 400;
+    text-align: center;
+
+    > span {
+        display: block;
+        font-size: 3rem;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    &.-color-b {
+        color: #5b7e45;
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        font-size: 1.2rem;
+
+        > span {
+            font-size: 1.8rem;
+        }
+    }
+}

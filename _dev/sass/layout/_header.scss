@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+@use "../library/placeholder/centering";
+@use "../library/placeholder/pseudo-block";
+
+/* ----------------------------------------------------------------
+    Header (.header and .h-*)
+----------------------------------------------------------------- */
+/* .header
+----------------------------------------------- */
+.header {
+    padding: 30px 0;
+    background: #fff;
+
+    //===== Media Queries =====
+    @include mx.rwd(set.$width-content-bp) {
+        position: relative;
+        z-index: 10;
+        padding: 20px 0;
+
+        &.is-menu-show {
+            background: #f4f0e7;
+        }
+    }
+}
+
+/* .h-inner
+----------------------------------------------- */
+.h-inner {
+    display: flex;
+    max-width: set.$width-max;
+    width: 100%;
+    margin: 0 auto;
+
+    //===== Media Queries =====
+    @include mx.rwd(set.$width-content-bp) {
+        display: block;
+        padding-right: set.$gutter-content;
+        padding-left: set.$gutter-content;
+    }
+}
+
+/* .h-logo
+----------------------------------------------- */
+.h-logo {
+    position: relative;
+    z-index: 1;
+    flex: 0 0 1;
+    margin: 0 48px 0 0;
+
+    //===== Media Queries =====
+    @include mx.rwd(set.$width-content-bp) {
+        margin: 0;
+        width: 96px;
+    }
+}
+
+/* .h-menu
+----------------------------------------------- */
+.h-menu {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+
+    &_btn {
+        position: absolute;
+        top: -48px;
+        right: 24px;
+        display: block;
+        width: 35px;
+        height: 28px;
+        color: transparent;
+        overflow: hidden;
+
+        &[aria-expanded=true] {
+            &::before,
+            &::after {
+                top: 13px;
+            }
+
+            &::before {
+                transform: rotate(45deg);
+            }
+
+            &::after {
+                transform: rotate(-45deg);
+            }
+
+            > span {
+                &::before {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    &_btn::before,
+    &_btn::after,
+    &_btn > span::before {
+        @extend %pseudo-block;
+        position: absolute;
+        left: 0;
+        width: 35px;
+        height: 4px;
+        background: #505050;
+        border-radius: 100vh;
+        transition: transform .2s var.$ease-standard-curve;
+    }
+
+    &_btn::before {
+        top: 0;
+    }
+
+    &_btn::after {
+        top: 24px;
+    }
+
+    &_btn > span::before {
+        top: 12px;
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(set.$width-content-bp) {
+        margin: 0 (-(set.$gutter-content));
+
+        &_content {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+        }
+    }
+}

@@ -8,11 +8,27 @@
 @use "core/base";
 
 // レイアウト
+@use "layout/header";
+@use "layout/navigation";
+@use "layout/content";
+@use "layout/footer";
 
 // モジュール
+@use "module/heading";
+@use "module/text";
+@use "module/link";
+@use "module/table";
+@use "module/button";
+@use "module/panel";
+@use "module/grid";
+@use "module/layout";
+@use "module/list";
+@use "module/media";
 
 // JavaScript
-
+@use "js/menu";
+@use "js/tab";
+@use "js/modal";
 
 // コンテンツ
 

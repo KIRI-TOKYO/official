@@ -1,0 +1,142 @@
+@charset "UTF-8";
+
+@use "sass:math";
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+@use "../library/placeholder/centering";
+@use "../library/placeholder/pseudo-block";
+
+/* ----------------------------------------------------------------
+    Navigation (.n[-*])
+----------------------------------------------------------------- */
+/* .n-global
+----------------------------------------------- */
+.n-global {
+    width: 100%;
+    font-weight: 700;
+    line-height: calc(22 / 18);
+
+    &_inner {
+        display: flex;
+        margin: 0;
+    }
+
+    &_item {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 40px;
+
+        &:first-child {
+            padding-left: 0;
+        }
+
+        &:last-child {
+            padding-right: 0;
+        }
+
+        &:not(:last-child) {
+            // ボーダー
+            &::before {
+                @extend %pseudo-block;
+                position: absolute;
+                top: 50%;
+                right: 0;
+                height: 20px;
+                width: 1px;
+                margin-top: -10px;
+                background: #ccc;
+            }
+        }
+    }
+
+    &_link {
+        text-align: center;
+        transition: opacity .2s var.$ease-standard-curve;
+
+        > span {
+            display: block;
+        }
+
+        > b {
+            display: none;
+        }
+
+        @include mx.hover() {
+            color: set.$color-font;
+            opacity: .3;
+        }
+    }
+
+    &_btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100vh;
+        min-width: 200px;
+        min-height: 60px;
+        border: 2px solid #505050;
+        background: #505050;
+        color: #fff;
+        font-weight: 400;
+        transition: .2s var.$ease-standard-curve;
+
+        @include mx.hover() {
+            color: #505050;
+            background: #fff;
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(set.$width-content-bp) {
+        overflow-y: auto;
+        height: calc(100vh - 80px);
+        padding: 27px 0;
+        background: #f4f0e7;
+        font-size: 2.2rem;
+
+        &_inner {
+            flex-direction: column;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+
+        &_item {
+            justify-content: flex-start;
+            margin: 0 0 18px;
+            padding: 0;
+
+            &:not(:last-child) {
+                // ボーダー
+                &::before {
+                    display: none;
+                }
+            }
+        }
+
+        &_link {
+            text-align: left;
+
+            > span {
+                display: inline;
+            }
+
+            > b {
+                display: block;
+                margin: 10px 0 0;
+                font-size: 1.2rem;
+                font-weight: 400;
+                color: #999;
+                text-transform: uppercase;
+            }
+        }
+
+        &_btn {
+            width: 100%;
+            margin: 7px 0 0;
+            font-size: 1.8rem;
+        }
+    }
+}

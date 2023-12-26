@@ -10,19 +10,19 @@ $color-sub: #f8b500; // :サブ
 $color-important: $color-main; // :重要
 $color-font: #000; // :フォント
 $color-link: $color-font; // :リンク
-$color-link-hover: $color-main;
+$color-link-hover: #b3b3b3;
 $color-em: $color-font; // :強調
 $color-bg: #f1f1f1; // :背景
 $color-bg-02: #fcfcfc;
 $color-bg-03: #fff;
-$color-border: #bfbfbf;      // :ボーダー
+$color-border: #bfbfbf; // :ボーダー
 
 //* ----------------------------------------------------------------
 //    Font
 //----------------------------------------------------------------- *
-$font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Hiragino Kaku Gothic Pro", YuGothic, WinYuGothic, Meiryo, sans-serif;
+$font-family: "Noto Sans JP", "Hiragino Kaku Gothic Pro", Meiryo, sans-serif;
 $font-unit: "rem";
-$font-size: 1.6;
+$font-size: 1.8;
 
 //* ----------------------------------------------------------------
 //    Line Height
@@ -38,7 +38,7 @@ $line-height: 6px; // 行間
 $gutter: 32px; // ベースマージン
 $gutter-full: 30px; // line-heightなし要素 + line-heightなし要素の隣接時マージン
 $gutter-small: 24px; // スマホ幅のマージン
-$gutter-content: 23px; // スマホ幅の左右の余白
+$gutter-content: 20px; // スマホ幅の左右の余白
 $gutter-list: 40px;
 $gutter-list_ss: 32px;
 $gutter-lead: 40px;
@@ -56,16 +56,16 @@ $width-extra-small: 640px;
 $width-small: 767px;
 $width-medium: 860px;
 $width-wide: 910px;
-$width-max: 1280px;
+$width-max: 1500px;
 $width-header: $width-max;
-$width-content: 1080px;
+$width-content: 1200px;
 $width-content-bp: $width-content + ($gutter-content * 2); // コンテンツ幅ブレークポイント
 
 //* ----------------------------------------------------------------
 //    Other
 //----------------------------------------------------------------- *
 $design-font-size: $font-size * 10;
-$design-line-space: 28;
+$design-line-space: 30;
 $design-width: 1366px;
 $design-small-width: 375px;
 $design-line-height: math.div($design-line-space, $design-font-size);

@@ -1,0 +1,171 @@
+@charset "UTF-8";
+
+@use "../core/use-setting" as set;
+@use "../library/use-import-mixin" as mx;
+@use "../library/use-import-variable" as var;
+@use "../library/placeholder/pseudo-block";
+
+/* ----------------------------------------------------------------
+    JavaScript (Modal)
+----------------------------------------------------------------- */
+/* .modal
+----------------------------------------------- */
+.modal {
+    @at-root {
+        &_inner {
+            padding: 40px 20px;
+            min-height: calc(100vh - (40px * 2));
+        }
+
+        &_content {
+            position: relative;
+            border-radius: 30px;
+            padding: 140px 10px;
+            max-width: 1200px;
+            width: 100%;
+            background: #fff;
+            text-align: left;
+            transform: translateY(80px);
+            transition: transform .5s var.$ease-standard-curve .2s;
+
+            > :last-child {
+                margin-bottom: 0;
+            }
+
+            .is-animate & {
+                will-change: transform;
+            }
+
+            .is-show & {
+                transform: translateY(0);
+            }
+
+            .is-hide & {
+                transition-delay: 0s;
+            }
+        }
+
+        &_body {
+            margin: 0 auto;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        // 閉じるボタン
+        &_btn-close {
+            display: flex;
+            justify-content: center;
+            margin: 57px 0 0;
+        }
+
+        &_btn-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100vh;
+            max-width: 280px;
+            width: 100%;
+            border: 2px solid #505050;
+            min-height: 70px;
+            color: #505050;
+            background: #fff;
+            font-size: 2.2rem;
+            font-weight: 700;
+
+            @include mx.hover() {
+                background: #505050;
+                color: #fff;
+            }
+        }
+
+        // オーバーレイ
+        &_overlay {
+            background: rgba(0, 0, 0, .2);
+        }
+    }
+
+    //===== Media Queries =====
+    @include mx.rwd(ss) {
+        @at-root {
+            &_inner {
+                padding-right: set.$gutter-content;
+                padding-left: set.$gutter-content;
+            }
+
+            &_content {
+                padding: 50px 22px;
+            }
+
+            // 閉じるボタン
+            &_btn-close {
+                margin: 40px 0 0;
+            }
+
+            &_btn-item {
+                width: 100%;
+                min-height: 60px;
+                font-size: 1.8rem;
+            }
+        }
+    }
+}
+
+/* .fn-modal
+----------------------------------------------- */
+.fn-modal {
+    bottom: 0;
+    display: none;
+    left: 0;
+    opacity: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+
+    &.is-show {
+        opacity: 1;
+    }
+
+    &.is-render {
+        display: block;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    &.is-animate {
+        transition: opacity .5s var.$ease-standard-curve;
+    }
+
+    &_inner {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    &_overlay {
+        bottom: 0;
+        left: 0;
+        opacity: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+
+        &.is-overlay-animate {
+            transition: opacity .5s var.$ease-standard-curve;
+        }
+
+        &.is-overlay-show {
+            opacity: 1;
+            z-index: 150;
+        }
+    }
+}
+
+html {
+    &.is-modal-open {
+        overflow: hidden;
+    }
+}
