@@ -94,6 +94,11 @@ for i, it in enumerate(items):
                     if caps[c] and caps[c][-1]['e'] > it['s']: caps[c][-1]['e'] = it['s']
             caps[k].append({'s': it['s'], 'e': it['end'], 'lines': it['lines'], 'text': it['text']})
 
+# 文字起こしの時間は実際の声より少し早く出るので、全体を遅らせる（依頼者の確認で0.1秒）
+DELAY = 0.1
+for k in caps:
+    for c in caps[k]: c['s'] += DELAY; c['e'] += DELAY
+
 def ts(t):
     ms = int(round(t*1000)); return f"{ms//3600000:02d}:{ms//60000%60:02d}:{ms//1000%60:02d},{ms%1000:03d}"
 def write_srt(path, entries):
