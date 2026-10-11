@@ -1,7 +1,9 @@
-# 使い方: python3 build.py 台本.txt 文字起こし.json[,追加.json] 出力フォルダ
+# 使い方: python3 build.py 台本.txt 文字起こし.json[,追加.json] 出力フォルダ [再生速度=1.1]
+#   再生速度：CapCutで動画全体を速くする倍率。字幕の時間をそれに合わせて縮める
 # 台本（種類つき）＋文字起こし → 種類ごとのSRT、ふりがなSRT、手直しメモ、プレビュー用JSON
 import json, re, sys, difflib, os
 script, jsons, outdir = sys.argv[1], sys.argv[2].split(','), sys.argv[3]
+SPEED = float(sys.argv[4]) if len(sys.argv) > 4 else 1.1
 os.makedirs(outdir, exist_ok=True)
 PUNCT = set('、。，,.!?！？ 　「」ー〜~＝=/:：')
 
@@ -97,7 +99,7 @@ for i, it in enumerate(items):
 # 文字起こしの時間は実際の声より少し早く出るので、全体を遅らせる（依頼者の確認で0.1秒）
 DELAY = 0.1
 for k in caps:
-    for c in caps[k]: c['s'] += DELAY; c['e'] += DELAY
+    for c in caps[k]: c['s'] = c['s'] / SPEED + DELAY; c['e'] = c['e'] / SPEED + DELAY
 
 def ts(t):
     ms = int(round(t*1000)); return f"{ms//3600000:02d}:{ms//60000%60:02d}:{ms//1000%60:02d},{ms%1000:03d}"
