@@ -22,7 +22,7 @@ def draw_cap(img, kind, lines):
     fs, rs, cy, box, col, sc, sw, fp = STY[kind]
     d = ImageDraw.Draw(img)
     while True:
-        font, rfont = F(fp, fs), F(THIN, max(rs, 10))
+        font, rfont, rbold = F(fp, fs), F(THIN, max(rs, 10)), F(fp, max(rs, 10))
         widths = [d.textlength(''.join(b for b,_,_ in l), font=font) for l in lines]
         if max(widths) <= W - 80 or fs < 20: break
         fs = int(fs*0.92); rs = int(rs*0.92)
@@ -42,9 +42,11 @@ def draw_cap(img, kind, lines):
             fsw = 5 if c == 'yellow' else sw
             d.text((x, ty), b, font=font, fill=fc, stroke_width=fsw, stroke_fill=fsc)
             if r:
-                rw = d.textlength(r, font=rfont)
-                d.text((x+(bw-rw)/2, ty-rs-4), r, font=rfont, fill=fc if kind != 'CY' else (20,20,20),
-                       stroke_width=(2 if fsw else 0), stroke_fill=fsc if kind != 'CY' else None)
+                red = fc == RED   # 赤い文字のふりがなは太字のまま、それ以外は細字
+                rf = rbold if red else rfont
+                rw = d.textlength(r, font=rf)
+                d.text((x+(bw-rw)/2, ty-rs-4), r, font=rf, fill=fc if kind != 'CY' else (20,20,20),
+                       stroke_width=(3 if red and fsw else 2 if fsw else 0), stroke_fill=fsc if kind != 'CY' else None)
             x += bw
         y += rh + gap
 tmp = os.path.dirname(out) + '/frames2'; os.makedirs(tmp, exist_ok=True)
