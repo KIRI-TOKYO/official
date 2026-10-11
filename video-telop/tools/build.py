@@ -1,6 +1,6 @@
 # 使い方: python3 build.py 台本.txt 文字起こし.json[,追加.json] 出力フォルダ [再生速度=1.1]
 #   再生速度：CapCutで動画全体を速くする倍率。字幕の時間をそれに合わせて縮める
-# 台本（種類つき）＋文字起こし → 種類ごとのSRT、ふりがなSRT、手直しメモ、プレビュー用JSON
+# 台本（種類つき）＋文字起こし → 種類ごとのSRT、手直しメモ（色・ふりがなの場所）、プレビュー用JSON
 import json, re, sys, difflib, os
 script, jsons, outdir = sys.argv[1], sys.argv[2].split(','), sys.argv[3]
 SPEED = float(sys.argv[4]) if len(sys.argv) > 4 else 1.1
@@ -125,10 +125,7 @@ def ruby_text(lines):
 names = {'A': 'A_上_通常', 'B': 'B_上_キーワード', 'CY': 'C_胸元_黄色', 'CK': 'C_胸元_黒', 'D': 'D_締め'}
 for k, nm in names.items():
     write_srt(f"{outdir}/{nm}.srt", [(c['s'], c['e'], c['text']) for c in caps[k]])
-for k, nm in (('A', 'ふりがな_A_上'), ('B', 'ふりがな_B_キーワード')):
-    write_srt(f"{outdir}/{nm}.srt", [(c['s'], c['e'], r) for c in caps[k] if (r := ruby_text(c['lines']))])
-cc = sorted(caps['CY'] + caps['CK'], key=lambda c: c['s'])
-write_srt(f"{outdir}/ふりがな_C_胸元.srt", [(c['s'], c['e'], r) for c in cc if (r := ruby_text(c['lines']))])
+# ふりがなはSRTにしない（全角スペースでの位置合わせはCapCutでずれたり折り返されたりした）→ 手直しメモに一覧で書く
 
 with open(f"{outdir}/手直しメモ.txt", 'w', encoding='utf-8') as f:
     f.write("CapCutで文字の一部だけ色を変える場所\n\n")
@@ -142,6 +139,14 @@ with open(f"{outdir}/手直しメモ.txt", 'w', encoding='utf-8') as f:
                     else: runs.append([b, col, bool(col)])
                 for b, col, _ in runs:
                     if col: rows.append((c['s'], f"{ts(c['s'])[3:8]}  [{names[k]}] 「{c['text'].replace(chr(10),'')}」の「{b}」→ {'赤' if col=='red' else '黄色'}\n"))
+    for _, r in sorted(rows): f.write(r)
+    f.write("\n\nふりがなを付ける場所\n\n")
+    rows = []
+    for k in ('A', 'B', 'CY', 'CK', 'D'):
+        for c in caps[k]:
+            for l in c['lines']:
+                for b, r, _ in l:
+                    if r: rows.append((c['s'], f"{ts(c['s'])[3:8]}  [{names[k]}] 「{c['text'].replace(chr(10),'')}」の「{b}」→ {r}\n"))
     for _, r in sorted(rows): f.write(r)
 json.dump(caps, open(f"{outdir}/caps.json", 'w'), ensure_ascii=False, indent=1)
 for k in caps:
