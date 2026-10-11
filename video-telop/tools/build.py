@@ -9,6 +9,7 @@ chars = []
 for jp in jsons:
     for seg in json.load(open(jp)):
         for w in seg['words']:
+            if w['e'] - w['s'] < 0.001: continue   # 長さ0の言葉はWhisperの繰り返し（作文）なので使わない
             t = [c for c in w['w'] if c not in PUNCT]
             if not t: continue
             d = (w['e'] - w['s']) / len(t)
