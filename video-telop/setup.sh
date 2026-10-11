@@ -4,7 +4,7 @@ set -e
 cd "$(dirname "$0")"
 pip install --break-system-packages -q faster-whisper pillow numpy
 mkdir -p fonts
-for w in Bold Black; do
+for w in Regular Bold Black; do
   [ -f fonts/ZenMaruGothic-$w.ttf ] || curl -sSL -o fonts/ZenMaruGothic-$w.ttf \
     "https://raw.githubusercontent.com/google/fonts/main/ofl/zenmarugothic/ZenMaruGothic-$w.ttf"
 done

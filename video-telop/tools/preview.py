@@ -8,6 +8,7 @@ compare = '--compare' in sys.argv
 W, H = 720, 1280
 FONTS = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'fonts')
 BOLD, BLACK = f'{FONTS}/ZenMaruGothic-Bold.ttf', f'{FONTS}/ZenMaruGothic-Black.ttf'
+THIN = f'{FONTS}/ZenMaruGothic-Regular.ttf'   # ふりがなは細字（太いとつぶれて読みにくい）
 F = lambda p, s: ImageFont.truetype(p, s)
 RED, YEL, ORG = (232, 32, 42), (255, 230, 0), (255, 138, 0)
 STY = {  # 本文サイズ, ふりがなサイズ, 中心y, 箱, 文字色, フチ色, フチ幅, フォント
@@ -21,7 +22,7 @@ def draw_cap(img, kind, lines):
     fs, rs, cy, box, col, sc, sw, fp = STY[kind]
     d = ImageDraw.Draw(img)
     while True:
-        font, rfont = F(fp, fs), F(fp, max(rs, 10))
+        font, rfont = F(fp, fs), F(THIN, max(rs, 10))
         widths = [d.textlength(''.join(b for b,_,_ in l), font=font) for l in lines]
         if max(widths) <= W - 80 or fs < 20: break
         fs = int(fs*0.92); rs = int(rs*0.92)
@@ -31,7 +32,7 @@ def draw_cap(img, kind, lines):
     y = cy - total/2
     if box:
         bw = max(widths)
-        d.rounded_rectangle([(W-bw)/2-24, y-12, (W+bw)/2+24, y+total+14], radius=16, fill=(255,255,255,240))
+        d.rounded_rectangle([(W-bw)/2-24, y-14, (W+bw)/2+24, y+total+24], radius=16, fill=(255,255,255,240))
     for l, w, hr, rh in zip(lines, widths, has_r, rows_h):
         x = (W - w)/2; ty = y + (rs+4 if hr else 0)
         for b, r, c in l:
@@ -43,7 +44,7 @@ def draw_cap(img, kind, lines):
             if r:
                 rw = d.textlength(r, font=rfont)
                 d.text((x+(bw-rw)/2, ty-rs-4), r, font=rfont, fill=fc if kind != 'CY' else (20,20,20),
-                       stroke_width=(3 if fsw else 0), stroke_fill=fsc if kind != 'CY' else None)
+                       stroke_width=(2 if fsw else 0), stroke_fill=fsc if kind != 'CY' else None)
             x += bw
         y += rh + gap
 tmp = os.path.dirname(out) + '/frames2'; os.makedirs(tmp, exist_ok=True)
