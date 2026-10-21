@@ -78,8 +78,9 @@ for i, it in enumerate(items):
     elif k == 'B-':
         bs, be = items[b_open['first']]['s'], items[b_open['last']]['end']
         caps['B'].append({'s': bs, 'e': be, 'lines': b_open['lines'], 'text': b_open['text']})
-        for c in ('CY', 'CK'):   # Bが消えるまで胸元は残す
-            if caps[c] and caps[c][-1]['e'] >= items[b_open['last']]['s'] - 0.01: caps[c][-1]['e'] = be
+        # Bが消えるまで、最後に出た胸元のテロップだけ残す（前に出ていたものは延ばさない）
+        last_c = max((caps[c][-1] for c in ('CY', 'CK') if caps[c]), key=lambda x: x['s'], default=None)
+        if last_c and last_c['e'] >= items[b_open['last']]['s'] - 0.01: last_c['e'] = be
         b_open = None
     else:
         if b_open is not None:
