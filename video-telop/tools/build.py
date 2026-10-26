@@ -7,12 +7,17 @@ SPEED = float(sys.argv[4]) if len(sys.argv) > 4 else 1.1
 os.makedirs(outdir, exist_ok=True)
 PUNCT = set('、。，,.!?！？ 　「」ー〜~＝=/:：')
 
+# 台本でひらがなにした言葉を、文字起こし側もひらがなにして時間合わせできるようにする
+ALIASES = {'可愛': 'かわい', '子供': '子ども'}
+def ALIAS(s):
+    for k, v in ALIASES.items(): s = s.replace(k, v)
+    return s
 chars = []
 for jp in jsons:
     for seg in json.load(open(jp)):
         for w in seg['words']:
             if w['e'] - w['s'] < 0.001: continue   # 長さ0の言葉はWhisperの繰り返し（作文）なので使わない
-            t = [c for c in w['w'] if c not in PUNCT]
+            t = [c for c in ALIAS(w['w']) if c not in PUNCT]
             if not t: continue
             d = (w['e'] - w['s']) / len(t)
             for i, c in enumerate(t): chars.append((c, w['s']+i*d, w['s']+(i+1)*d))
