@@ -102,6 +102,15 @@ for i, it in enumerate(items):
                     if caps[c] and caps[c][-1]['e'] > it['s']: caps[c][-1]['e'] = it['s']
             caps[k].append({'s': it['s'], 'e': it['end'], 'lines': it['lines'], 'text': it['text']})
 
+# 短すぎて読めないテロップ（「じゃあ」など）は、前のテロップから時間をもらって0.5秒は出す
+MIN_SHOW = 0.5
+for k in caps:
+    lst = caps[k]
+    for prev, cur in zip(lst, lst[1:]):
+        lack = MIN_SHOW - (cur['e'] - cur['s'])
+        if lack > 0 and abs(prev['e'] - cur['s']) < 0.01 and prev['e'] - prev['s'] - lack >= 1.0:
+            cur['s'] -= lack; prev['e'] = cur['s']
+
 # 文字起こしの時間は実際の声より少し早く出るので、全体を遅らせる（依頼者の確認で0.1秒）
 DELAY = 0.1
 for k in caps:
