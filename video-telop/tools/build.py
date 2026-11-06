@@ -1,11 +1,31 @@
-# 使い方: python3 build.py 台本.txt 文字起こし.json[,追加.json] 出力フォルダ [再生速度=1.1]
+# 使い方: python3 build.py 台本.txt 文字起こし.json[,追加.json] 出力フォルダ [再生速度=1.1] [--audio 動画.mp4]
 #   再生速度：CapCutで動画全体を速くする倍率。字幕の時間をそれに合わせて縮める
+#   --audio：元の動画を渡すと、テロップの出始めを実際に声が出た瞬間に合わせる（おすすめ）
 # 台本（種類つき）＋文字起こし → 種類ごとのSRT、ふりがなSRT、手直しメモ（色・ふりがなの場所）、プレビュー用JSON
-import json, re, sys, difflib, os
-script, jsons, outdir = sys.argv[1], sys.argv[2].split(','), sys.argv[3]
-SPEED = float(sys.argv[4]) if len(sys.argv) > 4 else 1.1
+import json, re, sys, difflib, os, subprocess
+args = sys.argv[1:]
+AUDIO = None
+if '--audio' in args:
+    k = args.index('--audio'); AUDIO = args[k+1]; del args[k:k+2]
+script, jsons, outdir = args[0], args[1].split(','), args[2]
+SPEED = float(args[3]) if len(args) > 3 else 1.1
 os.makedirs(outdir, exist_ok=True)
 PUNCT = set('、。，,.!?！？ 　「」ー〜~＝=/:：')
+
+# 音の大きさから「無音→声」に変わる瞬間（話し始め）を探しておく
+onsets = []
+if AUDIO:
+    import numpy as np
+    pcm = subprocess.run(['ffmpeg', '-v', 'error', '-i', AUDIO, '-ac', '1', '-ar', '16000', '-f', 's16le', '-'],
+                         capture_output=True, check=True).stdout
+    au = np.frombuffer(pcm, np.int16).astype(np.float32) / 32768
+    n = len(au) // 160                       # 10ミリ秒ごとの音の大きさ
+    db = 20 * np.log10(np.sqrt((au[:n*160].reshape(n, 160) ** 2).mean(1)) + 1e-9)
+    on = db > db.max() - 38                  # 一番大きい声より38dB以上小さければ無音
+    # 0.08秒以上の無音のあとに、0.05秒以上声が続く所＝話し始め
+    onsets = [j / 100 for j in range(8, n - 5) if on[j:j+5].all() and not on[j-8:j].any()]
+def onset_after(s, upto=0.6):
+    return next((x for x in onsets if s - 0.05 < x <= s + upto), None)
 
 # 台本でひらがなにした言葉を、文字起こし側もひらがなにして時間合わせできるようにする
 ALIASES = {'可愛': 'かわい', '子供': '子ども'}
@@ -15,7 +35,11 @@ def ALIAS(s):
 chars = []
 for jp in jsons:
     for seg in json.load(open(jp)):
+        # Whisperは間（ま）のあとのまとまりを、まるごと0.3〜0.5秒早く記録しがち → 実際の話し始めに合わせてずらす
+        o = onset_after(seg['start']) if seg['words'] else None
+        shift = (o - seg['start']) if o is not None and o > seg['start'] else 0.0
         for w in seg['words']:
+            w = dict(w, s=w['s'] + shift, e=w['e'] + shift)
             if w['e'] - w['s'] < 0.001: continue   # 長さ0の言葉はWhisperの繰り返し（作文）なので使わない
             t = [c for c in ALIAS(w['w']) if c not in PUNCT]
             if not t: continue
@@ -63,6 +87,13 @@ for i in speech:
     if 's' not in it: it['s'] = prev_e; it['e'] = prev_e + 0.8
     prev_e = it['e']
 
+# まとまりの途中にあるテロップも、出始めの少しあとに話し始めがあれば合わせる
+sp = [items[i] for i in speech]
+for k, it in enumerate(sp):
+    nxt = sp[k+1]['s'] if k + 1 < len(sp) else 1e9
+    o = onset_after(it['s'])
+    if o is not None and o < nxt - 0.2 and o < it['e']: it['s'] = o
+
 def next_speech_start(i):
     for j in range(i+1, len(items)):
         if 's' in items[j] and items[j]['kind'] not in ('B+','B-'): return items[j]['s']
@@ -85,7 +116,7 @@ for i, it in enumerate(items):
         caps['B'].append({'s': bs, 'e': be, 'lines': b_open['lines'], 'text': b_open['text']})
         # Bが消えるまで、最後に出た胸元のテロップだけ残す（前に出ていたものは延ばさない）
         last_c = max((caps[c][-1] for c in ('CY', 'CK') if caps[c]), key=lambda x: x['s'], default=None)
-        if last_c and last_c['e'] >= items[b_open['last']]['s'] - 0.01: last_c['e'] = be
+        if last_c and last_c['s'] >= bs - 0.01 and last_c['e'] >= items[b_open['last']]['s'] - 0.01: last_c['e'] = be   # このBの間に出たものだけ
         b_open = None
     else:
         if b_open is not None:
@@ -102,14 +133,22 @@ for i, it in enumerate(items):
                     if caps[c] and caps[c][-1]['e'] > it['s']: caps[c][-1]['e'] = it['s']
             caps[k].append({'s': it['s'], 'e': it['end'], 'lines': it['lines'], 'text': it['text']})
 
-# 短すぎて読めないテロップ（「じゃあ」など）は、前のテロップから時間をもらって0.5秒は出す
+# 短すぎて読めないテロップ（「じゃあ」など）は、前のテロップから時間をもらって0.5秒は出す。
+# 前から足りなければ、次のテロップの出始めを最大0.3秒遅らせる
 MIN_SHOW = 0.5
 for k in caps:
     lst = caps[k]
-    for prev, cur in zip(lst, lst[1:]):
+    for i, cur in enumerate(lst):
         lack = MIN_SHOW - (cur['e'] - cur['s'])
-        if lack > 0 and abs(prev['e'] - cur['s']) < 0.01 and prev['e'] - prev['s'] - lack >= 1.0:
-            cur['s'] -= lack; prev['e'] = cur['s']
+        if lack <= 0: continue
+        prev = lst[i-1] if i > 0 else None
+        if prev and abs(prev['e'] - cur['s']) < 0.01:
+            take = min(lack, max(0, prev['e'] - prev['s'] - 1.0))
+            cur['s'] -= take; prev['e'] = cur['s']; lack -= take
+        nxt = lst[i+1] if i + 1 < len(lst) else None
+        if lack > 0 and nxt and abs(nxt['s'] - cur['e']) < 0.01:
+            take = min(lack, 0.3, max(0, nxt['e'] - nxt['s'] - 1.0))
+            cur['e'] += take; nxt['s'] = cur['e']
 
 # 文字起こしの時間は実際の声より少し早く出るので、全体を遅らせる（依頼者の確認で0.1秒）
 DELAY = 0.1

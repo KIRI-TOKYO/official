@@ -48,6 +48,7 @@ KIRI TOKYO にほんご のショート動画用に、CapCut Pro に読み込め
 ```bash
 ./setup.sh                                            # 最初に1回
 python3 -I tools/transcribe.py 動画.mp4 work/文字起こし.json
-python3 -I tools/build.py 台本.txt work/文字起こし.json work/out        # 1.1倍速用（最後に 1.0 を付けると等速）
+python3 -I tools/build.py 台本.txt work/文字起こし.json work/out --audio 動画.mp4   # 1.1倍速用（1.0 を付けると等速）
+python3 -I tools/check_timing.py work/out/caps.json 動画.mp4                       # 声より早いテロップがないか確認
 python3 -I tools/preview.py work/out/caps.json 1.1倍速にした動画.mp4 work/out/プレビュー.mp4
 ```
