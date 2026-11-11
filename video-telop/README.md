@@ -40,6 +40,7 @@ KIRI TOKYO にほんご のショート動画用に、CapCut Pro に読み込め
 | `[[文字]]` | 赤字 |
 | `((文字))` | 黄色字 |
 | `/` | 改行 |
+| 行の最後に ` @73.9` | その秒（元の動画の時間）から出す。ため息など、文字起こしと合わない声に使う |
 
 例：[examples/2026-10_運転見合わせ/台本.txt](examples/2026-10_運転見合わせ/台本.txt)
 
@@ -47,8 +48,9 @@ KIRI TOKYO にほんご のショート動画用に、CapCut Pro に読み込め
 
 ```bash
 ./setup.sh                                            # 最初に1回
-python3 -I tools/transcribe.py 動画.mp4 work/文字起こし.json
-python3 -I tools/build.py 台本.txt work/文字起こし.json work/out --audio 動画.mp4   # 1.1倍速用（1.0 を付けると等速）
+python3 -I tools/transcribe.py 動画.mp4 work/文字起こし.json          # 全体の文字起こし（台本を書く用）
+python3 -I tools/transcribe_chunks.py 動画.mp4 work/区切り.json      # 間ごとに区切った文字起こし（時間合わせ用・こちらを build に使う）
+python3 -I tools/build.py 台本.txt work/区切り.json work/out --audio 動画.mp4   # 1.1倍速用（1.0 を付けると等速）
 python3 -I tools/check_timing.py work/out/caps.json 動画.mp4                       # 声より早いテロップがないか確認
 python3 -I tools/preview.py work/out/caps.json 1.1倍速にした動画.mp4 work/out/プレビュー.mp4
 ```

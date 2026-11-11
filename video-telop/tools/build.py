@@ -45,7 +45,7 @@ def onset_after(s, upto=0.6):
     return next((x for x in onsets if s - 0.05 < x <= s + upto), None)
 
 # 台本でひらがなにした言葉を、文字起こし側もひらがなにして時間合わせできるようにする
-ALIASES = {'可愛': 'かわい', '子供': '子ども'}
+ALIASES = {'可愛': 'かわい', '子供': '子ども', 'カミ': '紙', 'はぁー': 'へー', 'ふぅぅぅぅぅぅ': 'うーん', 'えっ': 'え'}
 def ALIAS(s):
     for k, v in ALIASES.items(): s = s.replace(k, v)
     return s
@@ -84,7 +84,11 @@ for raw in open(script, encoding='utf-8'):
     raw = raw.rstrip('\n')
     if not raw.strip(): continue
     kind, _, body = raw.partition(' ')
-    items.append({'kind': kind, 'lines': parse(body) if body else [], 'body': body})
+    # 行の最後に「 @73.9」と書くと、その秒（元の動画の時間）から出す（ため息など、文字起こしと合わない声用）
+    m = re.search(r'\s@(\d+(?:\.\d+)?)$', body)
+    at = float(m.group(1)) if m else None
+    if m: body = body[:m.start()]
+    items.append({'kind': kind, 'lines': parse(body) if body else [], 'body': body, 'at': at})
     items[-1]['text'] = plain(items[-1]['lines'])
 
 # 音声に対応する行（A, C*, D, -）だけ時間合わせ
@@ -98,6 +102,11 @@ for a, b, n in sm.get_matching_blocks():
     for k in range(n):
         it = items[owner[a+k]]; _, s, e = chars[b+k]
         it['s'] = min(it.get('s', s), s); it['e'] = max(it.get('e', e), e)
+for i in speech:
+    it = items[i]
+    if it['at'] is not None:
+        d = it['e'] - it['s'] if 's' in it else 0.8
+        it['s'], it['e'] = it['at'], it['at'] + max(d, 0.8)
 prev_e = 0.0
 for i in speech:
     it = items[i]
