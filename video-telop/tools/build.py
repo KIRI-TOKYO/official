@@ -13,7 +13,7 @@ os.makedirs(outdir, exist_ok=True)
 PUNCT = set('、。，,.!?！？ 　「」ー〜~＝=/:：')
 
 # 音の大きさから「無音→声」に変わる瞬間（話し始め）を探しておく
-onsets = []
+onsets, pauses = [], []
 if AUDIO:
     import numpy as np
     pcm = subprocess.run(['ffmpeg', '-v', 'error', '-i', AUDIO, '-ac', '1', '-ar', '16000', '-f', 's16le', '-'],
@@ -24,7 +24,24 @@ if AUDIO:
     on = db > db.max() - 38                  # 一番大きい声より38dB以上小さければ無音
     # 0.08秒以上の無音のあとに、0.05秒以上声が続く所＝話し始め
     onsets = [j / 100 for j in range(8, n - 5) if on[j:j+5].all() and not on[j-8:j].any()]
+    # 0.3秒以上の「間」の（始まり, 終わり＝話し始め）
+    pauses, j = [], 0
+    while j < n:
+        if not on[j]:
+            k = j
+            while k < n and not on[k]: k += 1
+            # 間のすぐあとの小さな音（息など）は飛ばして、声が0.05秒続く所を話し始めにする
+            st = next((x for x in range(k, min(k + 20, n - 5)) if on[x:x+5].all()), None)
+            if k - j >= 30 and st is not None: pauses.append((j / 100, st / 100))
+            j = k
+        else: j += 1
+def silent_at(s):
+    return bool(AUDIO) and 0 <= int(s * 100) < n and not on[int(s * 100)]
 def onset_after(s, upto=0.6):
+    # テロップの出始めのすぐ近くで「間」が始まっていれば、間の終わり（1.3秒先まで）に合わせる
+    # （Whisperは間の時間を前の言葉にくっつけて記録することがある）
+    p = next((b for a, b in pauses if a <= s + 0.3 and s - 0.05 < b <= s + 1.3), None)
+    if p is not None: return p
     return next((x for x in onsets if s - 0.05 < x <= s + upto), None)
 
 # 台本でひらがなにした言葉を、文字起こし側もひらがなにして時間合わせできるようにする
@@ -91,7 +108,8 @@ for i in speech:
 sp = [items[i] for i in speech]
 for k, it in enumerate(sp):
     nxt = sp[k+1]['s'] if k + 1 < len(sp) else 1e9
-    o = onset_after(it['s'])
+    # 出始めの時点がまだ無音（話の途中の間）なら、少し遠くまで話し始めを探す
+    o = onset_after(it['s'], 1.2 if silent_at(it['s']) else 0.6)
     if o is not None and o < nxt - 0.2 and o < it['e']: it['s'] = o
 
 def next_speech_start(i):
