@@ -1,12 +1,16 @@
-# 使い方: python3 build.py 台本.txt 文字起こし.json[,追加.json] 出力フォルダ [再生速度=1.1] [--audio 動画.mp4]
+# 使い方: python3 build.py 台本.txt 文字起こし.json[,追加.json] 出力フォルダ [再生速度=1.1] [--audio 動画.mp4] [--gap 秒]
 #   再生速度：CapCutで動画全体を速くする倍率。字幕の時間をそれに合わせて縮める
 #   --audio：元の動画を渡すと、テロップの出始めを実際に声が出た瞬間に合わせる（おすすめ）
+#   --gap：次のテロップまでこの秒数より短ければ、消さずに出したままにする（ショートは1秒、横動画は3秒）
 # 台本（種類つき）＋文字起こし → 種類ごとのSRT、ふりがなSRT、手直しメモ（色・ふりがなの場所）、プレビュー用JSON
 import json, re, sys, difflib, os, subprocess
 args = sys.argv[1:]
 AUDIO = None
 if '--audio' in args:
     k = args.index('--audio'); AUDIO = args[k+1]; del args[k:k+2]
+GAP = 1.0
+if '--gap' in args:
+    k = args.index('--gap'); GAP = float(args[k+1]); del args[k:k+2]
 script, jsons, outdir = args[0], args[1].split(','), args[2]
 SPEED = float(args[3]) if len(args) > 3 else 1.1
 os.makedirs(outdir, exist_ok=True)
@@ -85,10 +89,12 @@ for raw in open(script, encoding='utf-8'):
     if not raw.strip(): continue
     kind, _, body = raw.partition(' ')
     # 行の最後に「 @73.9」と書くと、その秒（元の動画の時間）から出す（ため息など、文字起こしと合わない声用）
-    m = re.search(r'\s@(\d+(?:\.\d+)?)$', body)
+    # 「 @591.4-595.9」と書くと、声の終わりも指定できる（話した内容と違う文を出すとき用）
+    m = re.search(r'\s@(\d+(?:\.\d+)?)(?:-(\d+(?:\.\d+)?))?$', body)
     at = float(m.group(1)) if m else None
+    until = float(m.group(2)) if m and m.group(2) else None
     if m: body = body[:m.start()]
-    items.append({'kind': kind, 'lines': parse(body) if body else [], 'body': body, 'at': at})
+    items.append({'kind': kind, 'lines': parse(body) if body else [], 'body': body, 'at': at, 'until': until})
     items[-1]['text'] = plain(items[-1]['lines'])
 
 # 音声に対応する行（A, C*, D, -）だけ時間合わせ
@@ -107,6 +113,7 @@ for i in speech:
     if it['at'] is not None:
         d = it['e'] - it['s'] if 's' in it else 0.8
         it['s'], it['e'] = it['at'], it['at'] + max(d, 0.8)
+        if it['until'] is not None: it['e'] = it['until']
 prev_e = 0.0
 for i in speech:
     it = items[i]
@@ -126,13 +133,13 @@ def next_speech_start(i):
         if 's' in items[j] and items[j]['kind'] not in ('B+','B-'): return items[j]['s']
     return None
 
-# 表示の終わり：次のセリフの頭まで（1秒以上あいたら消す）
+# 表示の終わり：次のセリフの頭まで（GAP秒以上あいたら消す）
 for i in speech:
     it = items[i]; n = next_speech_start(i)
-    it['end'] = n if (n is not None and n - it['e'] < 1.0) else it['e'] + 0.3
+    it['end'] = n if (n is not None and n - it['e'] < GAP) else it['e'] + 0.3
 
 # キーワード(B)の期間と、胸元(C)の積み重ね
-caps = {'A': [], 'B': [], 'CY': [], 'CK': [], 'D': []}
+caps = {'A': [], 'B': [], 'CY': [], 'CK': [], 'D': [], 'H': [], 'S': []}
 b_open = None; c_stack = None
 for i, it in enumerate(items):
     k = it['kind']
@@ -158,7 +165,8 @@ for i, it in enumerate(items):
             if k in ('CY', 'CK'):   # 胸元は1か所なので、新しいものが出たら前のものは消す
                 for c in ('CY', 'CK'):
                     if caps[c] and caps[c][-1]['e'] > it['s']: caps[c][-1]['e'] = it['s']
-            caps[k].append({'s': it['s'], 'e': it['end'], 'lines': it['lines'], 'text': it['text']})
+            caps[k].append({'s': it['s'], 'e': it['end'], 'lines': it['lines'], 'text': it['text'],
+                            'voice_e': it['e']})   # 声の終わり（元の時間。確認用）
 
 # 短すぎて読めないテロップ（「じゃあ」など）は0.5秒は出す。
 # 声より早く出すのはよくないので、まず次のテロップの出始めを最大0.3秒遅らせ、
@@ -177,7 +185,8 @@ for k in caps:
             room = (nxt['s'] - cur['e']) if nxt else lack
             take = min(lack, room); cur['e'] += take; lack -= take
         prev = lst[i-1] if i > 0 else None
-        if lack > 0 and prev and abs(prev['e'] - cur['s']) < 0.01:
+        # 横動画（--gap が1秒より長い）は話し始めに正確に合わせたいので、出始めを前にずらさない
+        if GAP <= 1.0 and lack > 0 and prev and abs(prev['e'] - cur['s']) < 0.01:
             take = min(lack, 0.1, max(0, prev['e'] - prev['s'] - 1.0))
             cur['s'] -= take; prev['e'] = cur['s']
 
@@ -207,7 +216,8 @@ def ruby_text(lines):
     if not any(r for l in lines for _,r,_ in l): return None
     return '\n'.join(ruby_row(l) for l in lines)
 
-names = {'A': 'A_上_通常', 'B': 'B_上_キーワード', 'CY': 'C_胸元_黄色', 'CK': 'C_胸元_黒', 'D': 'D_締め'}
+names = {'A': 'A_上_通常', 'B': 'B_上_キーワード', 'CY': 'C_胸元_黄色', 'CK': 'C_胸元_黒', 'D': 'D_締め',
+         'H': '本人_下_オレンジ', 'S': 'スタッフ_下_水色'}   # H・Sは横動画用
 for k, nm in names.items():
     write_srt(f"{outdir}/{nm}.srt", [(c['s'], c['e'], c['text']) for c in caps[k]])
 # ふりがな（全角スペースで位置合わせ。CapCutでずれたら依頼者が調整する。手直しメモにも一覧を書く）
@@ -231,7 +241,7 @@ with open(f"{outdir}/手直しメモ.txt", 'w', encoding='utf-8') as f:
     for _, r in sorted(rows): f.write(r)
     f.write("\n\nふりがなを付ける場所\n\n")
     rows = []
-    for k in ('A', 'B', 'CY', 'CK', 'D'):
+    for k in ('A', 'B', 'CY', 'CK', 'D', 'H', 'S'):
         for c in caps[k]:
             for l in c['lines']:
                 for b, r, _ in l:
