@@ -132,7 +132,7 @@ for i in speech:
     it['end'] = n if (n is not None and n - it['e'] < 1.0) else it['e'] + 0.3
 
 # キーワード(B)の期間と、胸元(C)の積み重ね
-caps = {'A': [], 'B': [], 'CY': [], 'CK': [], 'D': []}
+caps = {'A': [], 'B': [], 'CY': [], 'CK': [], 'D': [], 'H': [], 'S': []}
 b_open = None; c_stack = None
 for i, it in enumerate(items):
     k = it['kind']
@@ -203,7 +203,8 @@ def ruby_text(lines):
     if not any(r for l in lines for _,r,_ in l): return None
     return '\n'.join(ruby_row(l) for l in lines)
 
-names = {'A': 'A_上_通常', 'B': 'B_上_キーワード', 'CY': 'C_胸元_黄色', 'CK': 'C_胸元_黒', 'D': 'D_締め'}
+names = {'A': 'A_上_通常', 'B': 'B_上_キーワード', 'CY': 'C_胸元_黄色', 'CK': 'C_胸元_黒', 'D': 'D_締め',
+         'H': '本人_下_オレンジ', 'S': 'スタッフ_下_水色'}   # H・Sは横動画用
 for k, nm in names.items():
     write_srt(f"{outdir}/{nm}.srt", [(c['s'], c['e'], c['text']) for c in caps[k]])
 # ふりがな（全角スペースで位置合わせ。CapCutでずれたら依頼者が調整する。手直しメモにも一覧を書く）
@@ -227,7 +228,7 @@ with open(f"{outdir}/手直しメモ.txt", 'w', encoding='utf-8') as f:
     for _, r in sorted(rows): f.write(r)
     f.write("\n\nふりがなを付ける場所\n\n")
     rows = []
-    for k in ('A', 'B', 'CY', 'CK', 'D'):
+    for k in ('A', 'B', 'CY', 'CK', 'D', 'H', 'S'):
         for c in caps[k]:
             for l in c['lines']:
                 for b, r, _ in l:
