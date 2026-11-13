@@ -45,7 +45,7 @@ def onset_after(s, upto=0.6):
     return next((x for x in onsets if s - 0.05 < x <= s + upto), None)
 
 # 台本でひらがなにした言葉を、文字起こし側もひらがなにして時間合わせできるようにする
-ALIASES = {'可愛': 'かわい', '子供': '子ども', 'カミ': '紙', 'はぁー': 'へー', 'ふぅぅぅぅぅぅ': 'うーん', 'えっ': 'え'}
+ALIASES = {'可愛': 'かわい', '子供': '子ども', 'カミ': '紙', 'はぁー': 'へー', 'ふぅぅぅぅぅぅ': 'うーん', 'えっ': 'え', '人参': 'にんじん'}
 def ALIAS(s):
     for k, v in ALIASES.items(): s = s.replace(k, v)
     return s
@@ -160,22 +160,26 @@ for i, it in enumerate(items):
                     if caps[c] and caps[c][-1]['e'] > it['s']: caps[c][-1]['e'] = it['s']
             caps[k].append({'s': it['s'], 'e': it['end'], 'lines': it['lines'], 'text': it['text']})
 
-# 短すぎて読めないテロップ（「じゃあ」など）は、前のテロップから時間をもらって0.5秒は出す。
-# 前から足りなければ、次のテロップの出始めを最大0.3秒遅らせる
+# 短すぎて読めないテロップ（「じゃあ」など）は0.5秒は出す。
+# 声より早く出すのはよくないので、まず次のテロップの出始めを最大0.3秒遅らせ、
+# それでも足りなければ前のテロップから最大0.1秒だけもらう
 MIN_SHOW = 0.5
 for k in caps:
     lst = caps[k]
     for i, cur in enumerate(lst):
         lack = MIN_SHOW - (cur['e'] - cur['s'])
         if lack <= 0: continue
-        prev = lst[i-1] if i > 0 else None
-        if prev and abs(prev['e'] - cur['s']) < 0.01:
-            take = min(lack, max(0, prev['e'] - prev['s'] - 1.0))
-            cur['s'] -= take; prev['e'] = cur['s']; lack -= take
         nxt = lst[i+1] if i + 1 < len(lst) else None
-        if lack > 0 and nxt and abs(nxt['s'] - cur['e']) < 0.01:
+        if nxt and abs(nxt['s'] - cur['e']) < 0.01:
             take = min(lack, 0.3, max(0, nxt['e'] - nxt['s'] - 1.0))
-            cur['e'] += take; nxt['s'] = cur['e']
+            cur['e'] += take; nxt['s'] = cur['e']; lack -= take
+        elif not nxt or nxt['s'] - cur['e'] > 0.01:   # 後ろが空いていれば、そのまま延ばす
+            room = (nxt['s'] - cur['e']) if nxt else lack
+            take = min(lack, room); cur['e'] += take; lack -= take
+        prev = lst[i-1] if i > 0 else None
+        if lack > 0 and prev and abs(prev['e'] - cur['s']) < 0.01:
+            take = min(lack, 0.1, max(0, prev['e'] - prev['s'] - 1.0))
+            cur['s'] -= take; prev['e'] = cur['s']
 
 # 文字起こしの時間は実際の声より少し早く出るので、全体を遅らせる（依頼者の確認で0.1秒）
 DELAY = 0.1
