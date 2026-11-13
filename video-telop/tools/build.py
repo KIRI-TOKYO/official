@@ -89,10 +89,12 @@ for raw in open(script, encoding='utf-8'):
     if not raw.strip(): continue
     kind, _, body = raw.partition(' ')
     # 行の最後に「 @73.9」と書くと、その秒（元の動画の時間）から出す（ため息など、文字起こしと合わない声用）
-    m = re.search(r'\s@(\d+(?:\.\d+)?)$', body)
+    # 「 @591.4-595.9」と書くと、声の終わりも指定できる（話した内容と違う文を出すとき用）
+    m = re.search(r'\s@(\d+(?:\.\d+)?)(?:-(\d+(?:\.\d+)?))?$', body)
     at = float(m.group(1)) if m else None
+    until = float(m.group(2)) if m and m.group(2) else None
     if m: body = body[:m.start()]
-    items.append({'kind': kind, 'lines': parse(body) if body else [], 'body': body, 'at': at})
+    items.append({'kind': kind, 'lines': parse(body) if body else [], 'body': body, 'at': at, 'until': until})
     items[-1]['text'] = plain(items[-1]['lines'])
 
 # 音声に対応する行（A, C*, D, -）だけ時間合わせ
@@ -111,6 +113,7 @@ for i in speech:
     if it['at'] is not None:
         d = it['e'] - it['s'] if 's' in it else 0.8
         it['s'], it['e'] = it['at'], it['at'] + max(d, 0.8)
+        if it['until'] is not None: it['e'] = it['until']
 prev_e = 0.0
 for i in speech:
     it = items[i]
