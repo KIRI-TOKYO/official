@@ -1,12 +1,16 @@
-# 使い方: python3 build.py 台本.txt 文字起こし.json[,追加.json] 出力フォルダ [再生速度=1.1] [--audio 動画.mp4]
+# 使い方: python3 build.py 台本.txt 文字起こし.json[,追加.json] 出力フォルダ [再生速度=1.1] [--audio 動画.mp4] [--gap 秒]
 #   再生速度：CapCutで動画全体を速くする倍率。字幕の時間をそれに合わせて縮める
 #   --audio：元の動画を渡すと、テロップの出始めを実際に声が出た瞬間に合わせる（おすすめ）
+#   --gap：次のテロップまでこの秒数より短ければ、消さずに出したままにする（ショートは1秒、横動画は3秒）
 # 台本（種類つき）＋文字起こし → 種類ごとのSRT、ふりがなSRT、手直しメモ（色・ふりがなの場所）、プレビュー用JSON
 import json, re, sys, difflib, os, subprocess
 args = sys.argv[1:]
 AUDIO = None
 if '--audio' in args:
     k = args.index('--audio'); AUDIO = args[k+1]; del args[k:k+2]
+GAP = 1.0
+if '--gap' in args:
+    k = args.index('--gap'); GAP = float(args[k+1]); del args[k:k+2]
 script, jsons, outdir = args[0], args[1].split(','), args[2]
 SPEED = float(args[3]) if len(args) > 3 else 1.1
 os.makedirs(outdir, exist_ok=True)
@@ -126,10 +130,10 @@ def next_speech_start(i):
         if 's' in items[j] and items[j]['kind'] not in ('B+','B-'): return items[j]['s']
     return None
 
-# 表示の終わり：次のセリフの頭まで（1秒以上あいたら消す）
+# 表示の終わり：次のセリフの頭まで（GAP秒以上あいたら消す）
 for i in speech:
     it = items[i]; n = next_speech_start(i)
-    it['end'] = n if (n is not None and n - it['e'] < 1.0) else it['e'] + 0.3
+    it['end'] = n if (n is not None and n - it['e'] < GAP) else it['e'] + 0.3
 
 # キーワード(B)の期間と、胸元(C)の積み重ね
 caps = {'A': [], 'B': [], 'CY': [], 'CK': [], 'D': [], 'H': [], 'S': []}
@@ -158,7 +162,8 @@ for i, it in enumerate(items):
             if k in ('CY', 'CK'):   # 胸元は1か所なので、新しいものが出たら前のものは消す
                 for c in ('CY', 'CK'):
                     if caps[c] and caps[c][-1]['e'] > it['s']: caps[c][-1]['e'] = it['s']
-            caps[k].append({'s': it['s'], 'e': it['end'], 'lines': it['lines'], 'text': it['text']})
+            caps[k].append({'s': it['s'], 'e': it['end'], 'lines': it['lines'], 'text': it['text'],
+                            'voice_e': it['e']})   # 声の終わり（元の時間。確認用）
 
 # 短すぎて読めないテロップ（「じゃあ」など）は、前のテロップから時間をもらって0.5秒は出す。
 # 前から足りなければ、次のテロップの出始めを最大0.3秒遅らせる
@@ -169,7 +174,8 @@ for k in caps:
         lack = MIN_SHOW - (cur['e'] - cur['s'])
         if lack <= 0: continue
         prev = lst[i-1] if i > 0 else None
-        if prev and abs(prev['e'] - cur['s']) < 0.01:
+        # 横動画（--gap が1秒より長い）は話し始めに正確に合わせたいので、出始めを前にずらさない
+        if GAP <= 1.0 and prev and abs(prev['e'] - cur['s']) < 0.01:
             take = min(lack, max(0, prev['e'] - prev['s'] - 1.0))
             cur['s'] -= take; prev['e'] = cur['s']; lack -= take
         nxt = lst[i+1] if i + 1 < len(lst) else None

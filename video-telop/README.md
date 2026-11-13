@@ -60,5 +60,8 @@ python3 -I tools/preview.py work/out/caps.json 1.1倍速にした動画.mp4 work
 [横動画ルール.md](横動画ルール.md) を参照。台本の種類は `H`（本人）と `S`（スタッフ）。カット・速度変更後の音声を使うので再生速度は `1.0`。
 
 ```bash
-python3 -I tools/build.py 台本.txt work/文字起こし.json work/out 1.0 --audio 音声.mp3
+python3 -I tools/transcribe_chunks.py 音声.mp3 work/文字起こし.json
+python3 -I tools/build.py 台本.txt work/文字起こし.json work/out 1.0 --audio 音声.mp3 --gap 3
+python3 -I tools/check_timing.py work/out/caps.json 音声.mp3 1.0   # 早すぎるテロップ
+python3 -I tools/check_late.py work/out/caps.json 音声.mp3 1.0     # 遅すぎるテロップ
 ```
