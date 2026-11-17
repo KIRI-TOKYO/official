@@ -58,7 +58,7 @@ chars = []
 for jp in jsons:
     for seg in json.load(open(jp)):
         # Whisperは間（ま）のあとのまとまりを、まるごと0.3〜0.5秒早く記録しがち → 実際の話し始めに合わせてずらす
-        o = onset_after(seg['start']) if seg['words'] else None
+        o = onset_after(seg['start']) if seg['words'] and silent_at(seg['start']) else None
         shift = (o - seg['start']) if o is not None and o > seg['start'] else 0.0
         for w in seg['words']:
             w = dict(w, s=w['s'] + shift, e=w['e'] + shift)
@@ -126,7 +126,9 @@ sp = [items[i] for i in speech]
 for k, it in enumerate(sp):
     nxt = sp[k+1]['s'] if k + 1 < len(sp) else 1e9
     # 出始めの時点がまだ無音（話の途中の間）なら、少し遠くまで話し始めを探す
-    o = onset_after(it['s'], 1.2 if silent_at(it['s']) else 0.6)
+    # 出始めの時点ですでに声が出ているなら動かさない（話の途中の息つぎを「間」とまちがえて遅らせてしまった）
+    if not silent_at(it['s']): continue
+    o = onset_after(it['s'], 1.2)
     if o is not None and o < nxt - 0.2 and o < it['e']: it['s'] = o
 
 def next_speech_start(i):
