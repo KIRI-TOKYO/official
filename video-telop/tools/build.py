@@ -24,6 +24,7 @@ if AUDIO:
                          capture_output=True, check=True).stdout
     au = np.frombuffer(pcm, np.int16).astype(np.float32) / 32768
     n = len(au) // 160                       # 10ミリ秒ごとの音の大きさ
+    NF = n
     db = 20 * np.log10(np.sqrt((au[:n*160].reshape(n, 160) ** 2).mean(1)) + 1e-9)
     on = db > db.max() - 38                  # 一番大きい声より38dB以上小さければ無音
     # 0.08秒以上の無音のあとに、0.05秒以上声が続く所＝話し始め
@@ -49,7 +50,7 @@ def onset_after(s, upto=0.6):
     return next((x for x in onsets if s - 0.05 < x <= s + upto), None)
 
 # 台本でひらがなにした言葉を、文字起こし側もひらがなにして時間合わせできるようにする
-ALIASES = {'可愛': 'かわい', '子供': '子ども', 'カミ': '紙', 'はぁー': 'へー', 'ふぅぅぅぅぅぅ': 'うーん', 'えっ': 'え', '人参': 'にんじん'}
+ALIASES = {'可愛': 'かわい', '子供': '子ども', 'カミ': '紙', 'はぁー': 'へー', 'ふぅぅぅぅぅぅ': 'うーん', 'えっ': 'え', '人参': 'にんじん', '東京駅': '東京行き', '登る': '上る', '他に': 'ほかに'}
 def ALIAS(s):
     for k, v in ALIASES.items(): s = s.replace(k, v)
     return s
@@ -133,10 +134,19 @@ def next_speech_start(i):
         if 's' in items[j] and items[j]['kind'] not in ('B+','B-'): return items[j]['s']
     return None
 
+# 文字起こしの言葉の終わりより実際の声が長く続いていたら、声が終わる所まで延ばす（「ありがとうございます」が一瞬で消えた）
+def voice_end(e, nxt=None):
+    if not AUDIO: return e
+    j = int(e * 100)
+    while j < NF and on[j:j+25].any(): j += 1          # 0.25秒より短い途切れは、声が続いているとみなす
+    end = max(e, j / 100)
+    if nxt is not None: end = min(end, nxt - 0.4)
+    return max(e, min(end, e + 2.0))
+
 # 表示の終わり：次のセリフの頭まで（GAP秒以上あいたら消す）
 for i in speech:
     it = items[i]; n = next_speech_start(i)
-    it['end'] = n if (n is not None and n - it['e'] < GAP) else it['e'] + 0.3
+    it['end'] = n if (n is not None and n - it['e'] < GAP) else voice_end(it['e'], n) + 0.3
 
 # キーワード(B)の期間と、胸元(C)の積み重ね
 caps = {'A': [], 'B': [], 'CY': [], 'CK': [], 'D': [], 'H': [], 'S': []}
