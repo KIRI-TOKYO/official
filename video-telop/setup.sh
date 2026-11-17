@@ -2,7 +2,8 @@
 # 作業環境の準備（新しいセッションで最初に1回だけ実行）
 set -e
 cd "$(dirname "$0")"
-pip install --break-system-packages -q faster-whisper pillow numpy
+pip install --break-system-packages -q faster-whisper pillow numpy pykakasi
+pip install --break-system-packages -q torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu
 mkdir -p fonts
 for w in Regular Bold Black; do
   [ -f fonts/ZenMaruGothic-$w.ttf ] || curl -sSL -o fonts/ZenMaruGothic-$w.ttf \

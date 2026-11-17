@@ -50,8 +50,10 @@ KIRI TOKYO にほんご のショート動画用に、CapCut Pro に読み込め
 ./setup.sh                                            # 最初に1回
 python3 -I tools/transcribe.py 動画.mp4 work/文字起こし.json          # 全体の文字起こし（台本を書く用）
 python3 -I tools/transcribe_chunks.py 動画.mp4 work/区切り.json      # 間ごとに区切った文字起こし（時間合わせ用・こちらを build に使う）
-python3 -I tools/build.py 台本.txt work/区切り.json work/out --audio 動画.mp4   # 1.1倍速用（1.0 を付けると等速）
+python3 -I tools/align.py 台本.txt 動画.mp4 work/台本の時間.json        # 台本と音声を直接対応させる（いちばん正確・こちらを使う）
+python3 -I tools/build.py 台本.txt work/台本の時間.json work/out --audio 動画.mp4   # 1.1倍速用（1.0 を付けると等速）
 python3 -I tools/check_timing.py work/out/caps.json 動画.mp4                       # 声より早いテロップがないか確認
+python3 -I tools/check_words.py work/out/caps.json work/台本の時間.json           # 話し始めより早すぎ・遅すぎがないか確認
 python3 -I tools/preview.py work/out/caps.json 1.1倍速にした動画.mp4 work/out/プレビュー.mp4
 ```
 

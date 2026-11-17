@@ -54,11 +54,14 @@ ALIASES = {'可愛': 'かわい', '子供': '子ども', 'カミ': '紙', 'は�
 def ALIAS(s):
     for k, v in ALIASES.items(): s = s.replace(k, v)
     return s
+# align.py（強制アラインメント）の時間は正確なので、音で出始めをずらさない
+# （「ちょっと」の「ち」のような小さい音を無音とまちがえて遅らせてしまうため）
+ALIGNED = any(seg.get('aligned') for jp in jsons for seg in json.load(open(jp)))
 chars = []
 for jp in jsons:
     for seg in json.load(open(jp)):
         # Whisperは間（ま）のあとのまとまりを、まるごと0.3〜0.5秒早く記録しがち → 実際の話し始めに合わせてずらす
-        o = onset_after(seg['start']) if seg['words'] and silent_at(seg['start']) else None
+        o = onset_after(seg['start']) if seg['words'] and silent_at(seg['start']) and not ALIGNED else None
         shift = (o - seg['start']) if o is not None and o > seg['start'] else 0.0
         for w in seg['words']:
             w = dict(w, s=w['s'] + shift, e=w['e'] + shift)
@@ -127,7 +130,7 @@ for k, it in enumerate(sp):
     nxt = sp[k+1]['s'] if k + 1 < len(sp) else 1e9
     # 出始めの時点がまだ無音（話の途中の間）なら、少し遠くまで話し始めを探す
     # 出始めの時点ですでに声が出ているなら動かさない（話の途中の息つぎを「間」とまちがえて遅らせてしまった）
-    if not silent_at(it['s']): continue
+    if ALIGNED or not silent_at(it['s']): continue
     o = onset_after(it['s'], 1.2)
     if o is not None and o < nxt - 0.2 and o < it['e']: it['s'] = o
 
