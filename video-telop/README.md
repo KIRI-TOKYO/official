@@ -67,3 +67,14 @@ python3 -I tools/build.py 台本.txt work/文字起こし.json work/out 1.0 --au
 python3 -I tools/check_timing.py work/out/caps.json 音声.mp3 1.0   # 早すぎるテロップ
 python3 -I tools/check_late.py work/out/caps.json 音声.mp3 1.0     # 遅すぎるテロップ
 ```
+
+## テロップ動画（CapCutに乗せるだけ）
+
+字幕ファイルの代わりに、プレビューと同じ見た目のテロップだけが入った**背景が透明な動画**を作れる。依頼者はCapCutで動画の上のトラックに置くだけ。
+
+```bash
+python3 -I tools/preview.py work/out/caps.json - work/out/テロップ動画.mov --overlay --size 1080x1920          # 透明（軽い）
+python3 -I tools/preview.py work/out/caps.json - work/out/テロップ動画_緑.mp4 --overlay --size 1080x1920 --green  # 緑の背景（クロマキー用）
+```
+
+キーワード（赤い大きな字）とそのふりがなは、コーポレート・ロゴ（Bold）で描く（setup.sh で入る）。
